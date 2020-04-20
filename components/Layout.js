@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
 
+import { GlobalProvider } from '../context/GlobalState';
+
 
 const Layout = (props) => (
-  <div>
+  <GlobalProvider>
     <Head>
       <title>CodeTunes</title>
       <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&display=swap" rel="stylesheet"></link>
@@ -42,7 +44,7 @@ const Layout = (props) => (
     `} 
     </style>
     
-  </div>
+  </GlobalProvider>
 )
 
 export default Layout;

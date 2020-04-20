@@ -1,6 +1,13 @@
 import Link from 'next/Link';
+import { useContext } from 'react';
+import { GlobalContext} from '../context/GlobalState';
 
-const Navbar = () => (
+
+const Navbar = () => {
+
+  const context = useContext(GlobalContext);
+
+  return (
   <nav id="navbar">
     <div className="container">
       <div id="nav-content">
@@ -23,9 +30,25 @@ const Navbar = () => (
         </div>
 
         <ul id="nav-menu">
-          <Link href="/about">
-            <a className="nav-link">About</a>
+          { !context.isLoggedIn && 
+            <Link href="/auth">
+              <a className="nav-link">Login</a>
             </Link>
+          }
+          { !context.isLoggedIn && 
+            <Link href="/auth">
+              <a className="nav-link">Register</a>
+            </Link>
+          }
+            <Link href="/about">
+              <a className="nav-link">About</a>
+            </Link>
+          { context.isLoggedIn && 
+            <Link href="/">
+              <a className="nav-link">Logout</a>
+            </Link>
+          }
+
         </ul>
       </div>
     </div>
@@ -36,6 +59,7 @@ const Navbar = () => (
       #navbar {
         padding: 1.5rem 0;
         border-bottom: 1px solid white;
+        margin-bottom: 2rem;
       }
     
       #nav-content {
@@ -52,6 +76,7 @@ const Navbar = () => (
 
       .nav-link {
         color: white;
+        margin: 0 1rem;
       }
 
       #search {
@@ -88,6 +113,7 @@ const Navbar = () => (
 
     `}</style>
   </nav>
-)
+  )
+};
 
 export default Navbar;
