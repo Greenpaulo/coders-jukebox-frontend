@@ -5,7 +5,7 @@ import { GlobalProvider } from '../context/GlobalState';
 
 
 const Layout = (props) => (
-  <GlobalProvider>
+  <div>
     <Head>
       <title>CodeTunes</title>
       <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&display=swap" rel="stylesheet"></link>
@@ -44,7 +44,7 @@ const Layout = (props) => (
     `} 
     </style>
     
-  </GlobalProvider>
+  </div>
 )
 
 export default Layout;

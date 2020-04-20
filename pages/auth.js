@@ -5,17 +5,16 @@ import Layout from '../components/Layout';
 const Auth = () => {
 
   // Connect to our global state
-  const context = useContext(GlobalContext);
-  
+  const context = useContext(GlobalContext); 
   console.log(context)
-
+  
   // Create refs
   const emailRef = useRef();
   const passwordRef = useRef();
-
+  
   const submitHandler = (e) => {
     e.preventDefault();
-
+    
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
@@ -23,8 +22,11 @@ const Auth = () => {
       return;
     }
 
+    // Call action creator to fetch a token from the API and change the global state using a reducer
+    login(email, password)
 
     console.log(email, password);
+
   };
   
   return (

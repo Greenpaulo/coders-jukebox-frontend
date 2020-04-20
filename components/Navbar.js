@@ -5,7 +5,7 @@ import { GlobalContext} from '../context/GlobalState';
 
 const Navbar = () => {
 
-  const context = useContext(GlobalContext);
+  const { authenticated } = useContext(GlobalContext);
 
   return (
   <nav id="navbar">
@@ -30,12 +30,12 @@ const Navbar = () => {
         </div>
 
         <ul id="nav-menu">
-          { !context.isLoggedIn && 
+          { !authenticated && 
             <Link href="/auth">
               <a className="nav-link">Login</a>
             </Link>
           }
-          { !context.isLoggedIn && 
+          { !authenticated && 
             <Link href="/auth">
               <a className="nav-link">Register</a>
             </Link>
@@ -43,7 +43,7 @@ const Navbar = () => {
             <Link href="/about">
               <a className="nav-link">About</a>
             </Link>
-          { context.isLoggedIn && 
+          { authenticated && 
             <Link href="/">
               <a className="nav-link">Logout</a>
             </Link>
