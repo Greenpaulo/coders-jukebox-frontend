@@ -478,23 +478,23 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// import { GlobalProvider } from '../context/GlobalState';
  // import { login } from '../context/Actions';
-// import { login } from '../context/Actions';
 
 
+ // import gql from 'graphql-tag';
 
-
-function MyApp({
+const App = ({
   Component,
   pageProps
-}) {
+}) => {
   const {
     0: authState,
     1: setAuthState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     authenticated: false,
-    authData: null
+    userId: null,
+    token: null,
+    tokenExpiration: null
   });
   const {
     0: userState,
@@ -515,13 +515,57 @@ function MyApp({
     comment: null
   }); // Auth actions
 
-  const login = (email, password) => {
-    console.log('login function called from actions');
-    setState(_objectSpread({}, state, {
-      authenticated: !state.authenticated
-    }));
-    console.log(state.authenticated); // Make a API query to get a token
-    // const LOGIN_QUERY = gql`
+  const login = async (email, password) => {
+    console.log('login action called in _app.js'); // Make a API query to get a token
+
+    const requestBody = {
+      query: `
+        query {
+          login(email: "${email}", password: "${password}") {
+            userId,
+            token
+          }
+        }
+      `
+    };
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(res.status); // if(res.status != 200 || res.status != 201) {
+      //   throw new Error('Login failed!');
+      // } 
+      // .json() is a method from fetch API that auto extracts & parses the res body
+
+      const data = await res.json(); // Check for errors array in response
+
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message);
+        });
+        return;
+      } // Set state with returned auth data
+
+
+      const {
+        userId,
+        token
+      } = data.data.login;
+      console.log(data.data.login);
+      setAuthState(_objectSpread({}, authState, {
+        authenticated: true,
+        userId,
+        token
+      }));
+      console.log(authState);
+    } catch (err) {
+      console.log(err);
+    } // const LOGIN_QUERY = gql`
     //   query LoginQuery{
     //     login(email: ${email}, password: ${password}) {
     //       userId,
@@ -530,37 +574,41 @@ function MyApp({
     //   }
     // `;
     // const { data } = useQuery(LOGIN_QUERY);
+
   };
 
   return __jsx(_context_GlobalState__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"].Provider, {
     value: {
-      // login: actions.login
+      authState,
+      userState,
+      videoState,
+      commentState,
       login
     },
-    __self: this,
+    __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55,
+      lineNumber: 107,
       columnNumber: 5
     }
   }, __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __self: this,
+    __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59,
+      lineNumber: 114,
       columnNumber: 7
     }
   }, __jsx(Component, _extends({}, pageProps, {
-    __self: this,
+    __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60,
+      lineNumber: 115,
       columnNumber: 9
     }
   }))));
-}
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (MyApp);
+/* harmony default export */ __webpack_exports__["default"] = (App);
 
 /***/ }),
 

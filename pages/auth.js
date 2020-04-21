@@ -3,36 +3,29 @@ import { GlobalContext } from '../context/GlobalState';
 // import withApollo from 'next-with-apollo';
 // import withApollo from '../lib/withApollo';
 
-
-
 const Auth = () => {
-
-  // Connect to our global state
-  // const { login } = useContext(GlobalContext);
-  // console.log(context)
   
   // Create refs
   const emailRef = useRef();
   const passwordRef = useRef();
   
+  // Handle login form submit
   const submitHandler = (e, context) => {
     e.preventDefault();
     console.log('submit handler called')
     console.log(context)
-    // console.log(context);
     
-    // const email = emailRef.current.value;
-    // const password = passwordRef.current.value;
+    // Get credentials from refs
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
 
-    // if (email.trim().length === 0 || password.trim().length === 0){
-    //   return;
-    // }
+    // Check if email or password is empty
+    if (email.trim().length === 0 || password.trim().length === 0){
+      return;
+    }
 
-    // Call action creator to fetch a token from the API and change the global state using a reducer
+    // Call login action to fetch a token from the API and change the global state
     context.login(email, password);
-
-    // console.log(email, password);
-
   };
   
   return (
