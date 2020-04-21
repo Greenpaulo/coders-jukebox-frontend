@@ -1,39 +1,47 @@
 import {useRef, useContext} from 'react';
 import { GlobalContext } from '../context/GlobalState';
-import Layout from '../components/Layout';
+// import withApollo from 'next-with-apollo';
+// import withApollo from '../lib/withApollo';
+
+
 
 const Auth = () => {
 
   // Connect to our global state
-  const context = useContext(GlobalContext); 
-  console.log(context)
+  // const { login } = useContext(GlobalContext);
+  // console.log(context)
   
   // Create refs
   const emailRef = useRef();
   const passwordRef = useRef();
   
-  const submitHandler = (e) => {
+  const submitHandler = (e, context) => {
     e.preventDefault();
+    console.log('submit handler called')
+    console.log(context)
+    // console.log(context);
     
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    // const email = emailRef.current.value;
+    // const password = passwordRef.current.value;
 
-    if (email.trim().length === 0 || password.trim().length === 0){
-      return;
-    }
+    // if (email.trim().length === 0 || password.trim().length === 0){
+    //   return;
+    // }
 
     // Call action creator to fetch a token from the API and change the global state using a reducer
-    login(email, password)
+    context.login(email, password);
 
-    console.log(email, password);
+    // console.log(email, password);
 
   };
   
   return (
-    <Layout>
+    <GlobalContext.Consumer>
+      {context => (
+
       <section id="auth" className="container">
         <h1>Login</h1>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={(e) => submitHandler(e, context)}>
           <div className="form-control">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" ref={emailRef}/>
@@ -45,9 +53,6 @@ const Auth = () => {
           <button type="submit">Login</button>
 
         </form>
-
-
-
 
 
         <style jsx>{`
@@ -87,8 +92,11 @@ const Auth = () => {
       `}</style>
       
       </section>
-    </Layout>
+      )}
+
+    </GlobalContext.Consumer>
   )
 };
 
+// export default withApollo(Auth);
 export default Auth;

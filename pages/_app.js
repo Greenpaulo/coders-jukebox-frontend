@@ -1,24 +1,66 @@
-// import App from 'next/app'
+// import { GlobalProvider } from '../context/GlobalState';
+import { GlobalContext, GlobalProvider } from '../context/GlobalState';
+// import { login } from '../context/Actions';
+// import { login } from '../context/Actions';
+import Layout from '../components/Layout';
+import { useState } from 'react';
 
-import { GlobalProvider } from "../context/GlobalState"
+
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <GlobalProvider>
-      <Component {...pageProps} />
-    </GlobalProvider>)
-}
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
+  const [authState, setAuthState] = useState({
+    authenticated: false,
+    authData: null
+  });
+
+  const [userState, setUserState] = useState({
+    user: null
+  });
+  const [videoState, setVideoState] = useState({
+    video: null
+  });
+  const [commentState, setCommentState] = useState({
+    comment: null
+  });
+
+
+  // Auth actions
+  const login = (email, password) => {
+
+    console.log('login function called from actions');
+    setState({...state, authenticated: !state.authenticated});
+    console.log(state.authenticated);
+
+
+    // Make a API query to get a token
+    // const LOGIN_QUERY = gql`
+    //   query LoginQuery{
+    //     login(email: ${email}, password: ${password}) {
+    //       userId,
+    //       token
+    //     }
+    //   }
+    // `;
+    // const { data } = useQuery(LOGIN_QUERY);
+
+  }
+
+  
+
+  
+  
+  
+  return (
+    <GlobalContext.Provider value={{
+      // login: actions.login
+      login
+    }}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </GlobalContext.Provider>
+  )
+}
 
 export default MyApp

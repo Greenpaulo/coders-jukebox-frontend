@@ -1,9 +1,6 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
 
-import { GlobalProvider } from '../context/GlobalState';
-
-
 const Layout = (props) => (
   <div>
     <Head>
@@ -42,8 +39,7 @@ const Layout = (props) => (
       }
     
     `} 
-    </style>
-    
+    </style> 
   </div>
 )
 
