@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 const App = ({ Component, pageProps }) => {
 
+  // State
   const [authState, setAuthState] = useState({
     authenticated: false,
     userId: null,
@@ -28,7 +29,10 @@ const App = ({ Component, pageProps }) => {
   });
 
 
+
   // Auth actions
+
+  // Login a user
   const login = async (email, password) => {
     console.log('login action called in _app.js')
 
@@ -55,9 +59,9 @@ const App = ({ Component, pageProps }) => {
 
       console.log(res.status);
 
-      // if(res.status != 200 || res.status != 201) {
-      //   throw new Error('Login failed!');
-      // } 
+      if(res.status !== 200 && res.status !== 201) {
+        throw new Error('Login failed!');
+      } 
 
       // .json() is a method from fetch API that auto extracts & parses the res body
       const data = await res.json();
@@ -76,16 +80,14 @@ const App = ({ Component, pageProps }) => {
 
       setAuthState({...authState, authenticated: true, userId, token});
       console.log(authState)
+
+      // Redirect to home page
+      
       
       
     } catch (err) {
       console.log(err);
     }
-
-
-    
-
-
     // const LOGIN_QUERY = gql`
     //   query LoginQuery{
     //     login(email: ${email}, password: ${password}) {
@@ -95,7 +97,59 @@ const App = ({ Component, pageProps }) => {
     //   }
     // `;
     // const { data } = useQuery(LOGIN_QUERY);
+  }
 
+  // Register a user
+  const register = async(firstName, lastName, email, password) => {
+    console.log('register action called in _app.js')
+
+    // Make a API query to get a token
+    const requestBody = {
+      query: `
+      mutation {
+        createUser(firstName: "${firstName}", lastName: "${lastName}", email: "${email}, password: "${password}") {
+          userId,
+          token
+        }
+      }
+    `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      console.log(res.status);
+
+      // if(res.status != 200 || res.status != 201) {
+      //   throw new Error('Login failed!');
+      // } 
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      const id = data.data.user;
+      console.log(id);
+
+
+
+    } catch (err) {
+      console.log(err);
+    }
+    
   }
 
   

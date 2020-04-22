@@ -1,10 +1,11 @@
 import {useRef, useContext} from 'react';
 import { GlobalContext } from '../context/GlobalState';
+import Router from 'next/router';
 // import withApollo from 'next-with-apollo';
 // import withApollo from '../lib/withApollo';
 
 const Auth = () => {
-  
+
   // Create refs
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -13,7 +14,7 @@ const Auth = () => {
   const submitHandler = (e, context) => {
     e.preventDefault();
     console.log('submit handler called')
-    console.log(context)
+    // console.log(context)
     
     // Get credentials from refs
     const email = emailRef.current.value;
