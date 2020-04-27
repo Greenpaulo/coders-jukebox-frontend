@@ -98,15 +98,13 @@ const App = ({ Component, pageProps }) => {
   
   // Register a user
   const register = async(firstName, lastName, email, password) => {
-    console.log('register action called in _app.js')
 
     // Make a API query to get a token
     const requestBody = {
       query: `
       mutation {
-        createUser(firstName: "${firstName}", lastName: "${lastName}", email: "${email}, password: "${password}") {
-          userId,
-          token
+        createUser(userInput: {firstName: "${firstName}", lastName: "${lastName}", email: "${email}", password: "${password}"}) {
+          email
         }
       }
     `
@@ -121,11 +119,9 @@ const App = ({ Component, pageProps }) => {
         }
       })
 
-      console.log(res.status);
-
-      // if(res.status != 200 || res.status != 201) {
-      //   throw new Error('Login failed!');
-      // } 
+      if(res.status !== 200 && res.status !== 201) {
+        throw new Error('Account creation failed!');
+      } 
 
       // .json() is a method from fetch API that auto extracts & parses the res body
       const data = await res.json();
@@ -138,9 +134,12 @@ const App = ({ Component, pageProps }) => {
         return
       }
 
-      const id = data.data.user;
-      console.log(id);
+      const newUserEmail = (data.data.createUser.email);
+      return newUserEmail;
 
+      // Flip the form to Sign In and prefill the email input with the email just used
+
+      // ***** TODO ***********
 
 
     } catch (err) {
@@ -169,7 +168,8 @@ const App = ({ Component, pageProps }) => {
       userState,
       videoState,
       commentState,
-      login, 
+      login,
+      register,
       logout
     }}>
       <Layout>
