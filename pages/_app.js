@@ -1,11 +1,19 @@
 import ContextProvider from '../context/ContextProvider';
 import Layout from '../components/Layout';
-import { useState } from 'react';
-
-// import gql from 'graphql-tag';
+import { useState, useEffect } from 'react';
 
 
 const App = ({ Component, pageProps }) => {
+
+  let token = null;
+
+  useEffect(() => {
+    // Check for token in local storage once the component mounts - i.e. code is now run in the browser (instead of on the server)
+    token = localStorage.getItem('token');
+    if (token) {
+      setAuthState({...authState, authenticated: true, token: token});
+    }
+  }, [])
 
   // State
   const [authState, setAuthState] = useState({
@@ -56,8 +64,6 @@ const App = ({ Component, pageProps }) => {
         }
       })
 
-      console.log(res.status);
-
       if(res.status !== 200 && res.status !== 201) {
         throw new Error('Login failed!');
       } 
@@ -80,6 +86,9 @@ const App = ({ Component, pageProps }) => {
       setAuthState({...authState, authenticated: true, userId, token});
       console.log(authState)
 
+      // Save token to local storage
+      localStorage.setItem('token', token)
+
       // Redirect to home page
       
       
@@ -87,17 +96,9 @@ const App = ({ Component, pageProps }) => {
     } catch (err) {
       console.log(err);
     }
-    // const LOGIN_QUERY = gql`
-    //   query LoginQuery{
-    //     login(email: ${email}, password: ${password}) {
-    //       userId,
-    //       token
-    //     }
-    //   }
-    // `;
-    // const { data } = useQuery(LOGIN_QUERY);
   }
 
+  
   // Register a user
   const register = async(firstName, lastName, email, password) => {
     console.log('register action called in _app.js')
