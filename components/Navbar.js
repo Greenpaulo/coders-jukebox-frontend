@@ -5,7 +5,11 @@ import { GlobalContext} from '../context/GlobalContext';
 
 const Navbar = () => {
 
-  const { authState } = useContext(GlobalContext);
+  const { authState, logout } = useContext(GlobalContext);
+
+  const logoutHandler = () => {
+    logout();
+  };
   
   return (    
       <nav id="navbar">
@@ -45,7 +49,7 @@ const Navbar = () => {
                 }
                 {authState.authenticated &&
                   <Link href="/">
-                    <a className="nav-link">Logout</a>
+                    <a className="nav-link" onClick={logoutHandler}>Logout</a>
                   </Link>
                 }
 

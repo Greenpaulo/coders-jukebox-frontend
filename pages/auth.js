@@ -13,7 +13,6 @@ const Auth = () => {
   // Handle login form submit
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('submit handler called')
     
     // Get credentials from refs
     const email = emailRef.current.value;

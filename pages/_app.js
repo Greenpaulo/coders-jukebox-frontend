@@ -1,6 +1,7 @@
 import ContextProvider from '../context/ContextProvider';
 import Layout from '../components/Layout';
 import { useState, useEffect } from 'react';
+import Router from 'next/router';
 
 
 const App = ({ Component, pageProps }) => {
@@ -41,7 +42,6 @@ const App = ({ Component, pageProps }) => {
 
   // Login a user
   const login = async (email, password) => {
-    console.log('login action called in _app.js')
 
     // Make a API query to get a token
     const requestBody = {
@@ -81,17 +81,14 @@ const App = ({ Component, pageProps }) => {
 
       // Set state with returned auth data
       const { userId, token} = data.data.login;
-      console.log(data.data.login);
 
       setAuthState({...authState, authenticated: true, userId, token});
-      console.log(authState)
 
       // Save token to local storage
       localStorage.setItem('token', token)
 
       // Redirect to home page
-      
-      
+      Router.push('/');
       
     } catch (err) {
       console.log(err);
@@ -152,6 +149,16 @@ const App = ({ Component, pageProps }) => {
     
   }
 
+  // Logout a user
+  const logout = () => {
+    // Clear the authState
+    setAuthState({
+      authData: null
+    })
+    // Remove token from localStorage
+    localStorage.removeItem('token');
+  }
+
   
   
   
@@ -162,7 +169,8 @@ const App = ({ Component, pageProps }) => {
       userState,
       videoState,
       commentState,
-      login
+      login, 
+      logout
     }}>
       <Layout>
         <Component {...pageProps} />
