@@ -8,7 +8,8 @@ const initialState = {
   authData: null,
   user: null,
   video: null,
-  comment: null
+  comment: null,
+  // login: () => {}
 }
 
 // Create context

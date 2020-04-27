@@ -1,20 +1,19 @@
 import {useRef, useContext} from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import { GlobalContext } from '../context/GlobalContext';
 import Router from 'next/router';
-// import withApollo from 'next-with-apollo';
-// import withApollo from '../lib/withApollo';
 
 const Auth = () => {
+
+  const context = useContext(GlobalContext);
 
   // Create refs
   const emailRef = useRef();
   const passwordRef = useRef();
   
   // Handle login form submit
-  const submitHandler = (e, context) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     console.log('submit handler called')
-    // console.log(context)
     
     // Get credentials from refs
     const email = emailRef.current.value;
@@ -25,17 +24,14 @@ const Auth = () => {
       return;
     }
 
-    // Call login action to fetch a token from the API and change the global state
+    // Call login action to fetch token from API and change the global state
     context.login(email, password);
   };
   
   return (
-    <GlobalContext.Consumer>
-      {context => (
-
       <section id="auth" className="container">
         <h1>Login</h1>
-        <form onSubmit={(e) => submitHandler(e, context)}>
+        <form onSubmit={(e) => submitHandler(e)}>
           <div className="form-control">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" ref={emailRef}/>
@@ -86,11 +82,7 @@ const Auth = () => {
       `}</style>
       
       </section>
-      )}
-
-    </GlobalContext.Consumer>
   )
 };
 
-// export default withApollo(Auth);
 export default Auth;

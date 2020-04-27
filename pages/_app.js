@@ -1,5 +1,4 @@
-import { GlobalContext, GlobalProvider } from '../context/GlobalState';
-// import { login } from '../context/Actions';
+import ContextProvider from '../context/ContextProvider';
 import Layout from '../components/Layout';
 import { useState } from 'react';
 
@@ -153,12 +152,11 @@ const App = ({ Component, pageProps }) => {
   }
 
   
-
   
   
   
   return (
-    <GlobalContext.Provider value={{
+    <ContextProvider value={{
       authState,
       userState,
       videoState,
@@ -168,7 +166,7 @@ const App = ({ Component, pageProps }) => {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </GlobalContext.Provider>
+    </ContextProvider>
   )
 }
 

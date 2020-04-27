@@ -1,13 +1,13 @@
 import Link from 'next/Link';
 import { useContext } from 'react';
-import { GlobalContext} from '../context/GlobalState';
+import { GlobalContext} from '../context/GlobalContext';
 
 
 const Navbar = () => {
-  return (
-  <GlobalContext.Consumer>
-    { context => (
-      
+
+  const { authState } = useContext(GlobalContext);
+  
+  return (    
       <nav id="navbar">
         <div className="container">
           <div id="nav-content">
@@ -33,7 +33,7 @@ const Navbar = () => {
                 <Link href="/about">
                   <a className="nav-link">About</a>
                 </Link>
-              { !context.authState.token &&
+                {!authState.authenticated && 
                 <>
                   <Link href="/auth">
                     <a className="nav-link">Login</a>
@@ -42,12 +42,12 @@ const Navbar = () => {
                     <a className="nav-link">Register</a>
                   </Link>
                 </>
-              }
-              { context.authState.token && 
-                <Link href="/">
-                  <a className="nav-link">Logout</a>
-                </Link>
-              }
+                }
+                {authState.authenticated &&
+                  <Link href="/">
+                    <a className="nav-link">Logout</a>
+                  </Link>
+                }
 
             </ul>
           </div>
@@ -113,8 +113,8 @@ const Navbar = () => {
 
         `}</style>
       </nav>
-    )}
-    </GlobalContext.Consumer>
+    // )}
+    // </GlobalContext.Consumer>
   )
 };
 
