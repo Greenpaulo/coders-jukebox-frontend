@@ -1,49 +1,63 @@
-// import gql from 'graphql-tag';
-// import { useQuery } from '@apollo/react-hooks';
-// import withApollo from '../../lib/withApollo';
+import { useContext, useState } from 'react';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router'
+import { GlobalContext } from '../../context/GlobalContext';
+
 import VideoItem from '../../components/VideoItem';
 
 
-
 const Profile = () => {
-  // const router = useRouter()
-  // const { userId } = router.query
 
-  // const USER_QUERY = gql`
-  //   query UserQuery{
-  //     user(id:"${userId}") {
-  //       firstName,
-  //       lastName,
-  //       _id,
-  //       ownedVideos {
-  //         thumbnailURL,
-  //         title,
-  //         videoURL
-  //       },
-  //       playlistComments{
-  //         content
-  //       }
-  //     }
-  //   }
-  // `;
+  // Local state holding the current profiles user data
+  const [ profileUser, setProfileUser ] = useState({
+    id: '',
+    firstName: '',
+    lastName: '',
+    ownedVideos: [],
+    userComments: [],
+    playlistComments: []
+  })
 
-  // const { loading, data } = useQuery(USER_QUERY);
+  const context = useContext(GlobalContext);
+  
+  // Get the userId from the URL
+  const router = useRouter()
+  const { userId } = router.query
 
-  // if (loading || !data) {
-  //   return <h1>loading...</h1>;
-  // }
+  const fetchProfileUser = async () => {
 
-  // const renderAddToPlayList = () => {
-  //   if (data.user._id === )
-  // }
+    // Only fetch data if profileUser isn't populated
+    if(profileUser.firstName !== ''){
+      return
+    }
+    // console.log('fetchProfileUser called with userId', userId)
+    // Only fetch data if the userId has been parsed from the URL
+    if(userId === undefined){
+      return
+    }
+    // Get the profile user's data using the userId from the URL
+    const user = await context.getUserData(userId);
+    
+    // Set the local state
+    setProfileUser({
+      id: userId,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      ownedVideos: user.ownedVideos,
+      userComments: user.userComments,
+      playlistComments: user.playlistComments
+    })
+  }
+  
+  
+  fetchProfileUser();
+
+
 
   return (
-    <Layout>
       <div className="container">
         <section id="user-info">
-          {/* <h2>{data.user.firstName} {data.user.lastName}</h2> */}
+          <h2>{profileUser.firstName} {profileUser.lastName}</h2>
         </section>
 
         <section id="playlist">
@@ -54,7 +68,6 @@ const Profile = () => {
         </section>
 
         {/* {renderAddToPlayList} */}
-      </div>
 
 
 
@@ -71,9 +84,10 @@ const Profile = () => {
         
         `}</style>
 
-    </Layout>
+      </div>
   )
 }
 
-// export default withApollo(Profile);
+// Profile.getInitialProps
+
 export default Profile;
