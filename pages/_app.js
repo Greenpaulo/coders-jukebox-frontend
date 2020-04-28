@@ -14,6 +14,9 @@ const App = ({ Component, pageProps }) => {
     token = localStorage.getItem('token');
     if (token) {
       setAuthState({...authState, authenticated: true, token: token});
+      
+      // Get the logged in user's data
+      getUserDataByToken(token)
     }
   }, [])
 
@@ -26,7 +29,12 @@ const App = ({ Component, pageProps }) => {
   });
 
   const [userState, setUserState] = useState({
-    user: null
+    id: null,
+    firstName: null,
+    lastName: null,
+    ownedVideos: null,
+    userComments: null,
+    playlistComments: null
   });
 
   const [videoState, setVideoState] = useState({
@@ -174,14 +182,13 @@ const App = ({ Component, pageProps }) => {
   }
 
   // Data fetching
-  const getUserData = async (userId) => {
-    console.log('getUserData called with id:', userId)
+  const getUserDataById = async (userId) => {
+    // console.log('getUserData called with id:', userId)
 
-    // Make a API query to get a token
     const requestBody = {
       query: `
         query {
-          user(id:"${userId}") {
+          userById(id:"${userId}") {
             firstName,
             lastName,
             _id,
@@ -195,8 +202,12 @@ const App = ({ Component, pageProps }) => {
             }
           }
         }
-    `
-    }
+      `
+      }
+    
+
+    // console.log(requestBody)
+    // console.log(authState.token)
 
     try {
       const res = await fetch('http://localhost:5000/graphql', {
@@ -223,8 +234,78 @@ const App = ({ Component, pageProps }) => {
         return
       }
 
-      const user = (data.data.user);
+      const user = (data.data.userById);
       return user;
+
+    } catch (err) {
+      console.log(err);
+    }
+    
+  }
+  
+  
+  // Get logged in user's data
+  const getUserDataByToken = async (token) => {
+
+    let requestBody;
+
+    // If no userId then query the current logged in user by token
+    requestBody = {
+      query: `
+        query {
+          userByToken{
+            firstName,
+            lastName,
+            _id,
+            ownedVideos {
+              thumbnailURL,
+              title,
+              videoURL
+            },
+            playlistComments{
+              content
+            }
+          }
+        }
+      `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      const user = (data.data.userByToken);
+      console.log(user.firstName)
+      
+      setUserState({
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        ownedVideos: user.ownedVideos,
+        userComments: user.userComments,
+        playlistComments: user.playlistComments
+      })  
 
     } catch (err) {
       console.log(err);
@@ -245,7 +326,8 @@ const App = ({ Component, pageProps }) => {
       login,
       register,
       logout,
-      getUserData
+      getUserDataById,
+      getUserDataByToken
     }}>
       <Layout>
         <Component {...pageProps} />

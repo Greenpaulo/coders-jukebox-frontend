@@ -30,13 +30,12 @@ const Profile = () => {
     if(profileUser.firstName !== ''){
       return
     }
-    // console.log('fetchProfileUser called with userId', userId)
     // Only fetch data if the userId has been parsed from the URL
     if(userId === undefined){
       return
     }
     // Get the profile user's data using the userId from the URL
-    const user = await context.getUserData(userId);
+    const user = await context.getUserDataById(userId);
     
     // Set the local state
     setProfileUser({
@@ -48,8 +47,6 @@ const Profile = () => {
       playlistComments: user.playlistComments
     })
   }
-  
-  
   fetchProfileUser();
 
 
@@ -74,7 +71,7 @@ const Profile = () => {
         <style jsx>{`
         
           #user-info {
-            margin-top: 2rem
+            margin-top: 1rem
           }
           
           

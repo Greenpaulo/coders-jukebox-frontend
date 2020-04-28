@@ -5,7 +5,7 @@ import { GlobalContext} from '../context/GlobalContext';
 
 const Navbar = () => {
 
-  const { authState, logout } = useContext(GlobalContext);
+  const { authState, userState, logout } = useContext(GlobalContext);
 
   const logoutHandler = () => {
     logout();
@@ -34,24 +34,29 @@ const Navbar = () => {
             </div>
 
             <ul id="nav-menu">
-                <Link href="/about">
-                  <a className="nav-link">About</a>
-                </Link>
-                {!authState.authenticated && 
-                <>
-                  <Link href="/auth">
-                    <a className="nav-link">Login</a>
-                  </Link>
-                  <Link href="/auth">
-                    <a className="nav-link">Register</a>
-                  </Link>
-                </>
-                }
-                {authState.authenticated &&
-                  <Link href="/">
-                    <a className="nav-link" onClick={logoutHandler}>Logout</a>
-                  </Link>
-                }
+            {authState.authenticated &&
+            <Link href="/profile/[userId]" as={`/profile/${userState.id}`}>
+              <a className="nav-item">Hi, {userState.firstName}</a>
+            </Link>
+            }
+            <Link href="/about">
+              <a className="nav-item">About</a>
+            </Link>
+            {!authState.authenticated && 
+            <>
+              <Link href="/auth">
+                <a className="nav-item">Login</a>
+              </Link>
+              <Link href="/auth">
+                <a className="nav-item">Register</a>
+              </Link>
+            </>
+            }
+            {authState.authenticated &&
+              <Link href="/">
+                <a className="nav-item" onClick={logoutHandler}>Logout</a>
+              </Link>
+            }
 
             </ul>
           </div>
@@ -72,15 +77,21 @@ const Navbar = () => {
             align-items: center;
           }
 
+          #nav-menu {
+            display: flex;
+            justify-content: space-between;
+          }
+
           #logo h1 {
             color: white;
             font-size: 2rem;
             text-transform: uppercase;
           }
 
-          .nav-link {
+          .nav-item {
             color: white;
             margin: 0 1rem;
+            font-weight: 400;
           }
 
           #search {
