@@ -1,11 +1,12 @@
 import Link from 'next/Link';
 import { useContext } from 'react';
 import { GlobalContext} from '../context/GlobalContext';
+import SearchBar from './Searchbar';
 
 
 const Navbar = () => {
 
-  const { authState, userState, logout } = useContext(GlobalContext);
+  const { authState, currentUser, logout } = useContext(GlobalContext);
 
   const logoutHandler = () => {
     logout();
@@ -24,19 +25,13 @@ const Navbar = () => {
             </div>
 
             <div id="search">
-              <div id="main-searchbar">
-                <label htmlFor="search-input">
-                  {/* <i class="fa fa-search" aria-hidden="true"></i> */}
-                  <svg id="search-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" /><path d="M0 0h24v24H0z" fill="none" /></svg>
-                </label>
-                <input type="text" name="search-input" placeholder="Search User" />
-              </div>
+              <SearchBar placeholder='Search for user'/>
             </div>
 
             <ul id="nav-menu">
             {authState.authenticated &&
-            <Link href="/profile/[userId]" as={`/profile/${userState.id}`}>
-              <a className="nav-item">Hi, {userState.firstName}</a>
+            <Link href="/profile/[userId]" as={`/profile/${currentUser.id}`}>
+              <a className="nav-item">Hi, {currentUser.firstName}</a>
             </Link>
             }
             <Link href="/about">
@@ -69,6 +64,9 @@ const Navbar = () => {
             padding: 1.5rem 0;
             border-bottom: 1px solid white;
             margin-bottom: 2rem;
+            /* background-color: #44fff8; */
+            /* background-color: #93fffb; */
+
           }
         
           #nav-content {
@@ -86,6 +84,7 @@ const Navbar = () => {
             color: white;
             font-size: 2rem;
             text-transform: uppercase;
+            letter-spacing: 0.3rem;
           }
 
           .nav-item {

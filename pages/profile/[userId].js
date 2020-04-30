@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { GlobalContext } from '../../context/GlobalContext';
 
 import VideoItem from '../../components/VideoItem';
+import SearchBar from '../../components/Searchbar';
 
 
 const Profile = () => {
@@ -18,7 +19,7 @@ const Profile = () => {
     playlistComments: []
   })
 
-  const context = useContext(GlobalContext);
+  const { getUserDataById, currentUser } = useContext(GlobalContext);
   
   // Get the userId from the URL
   const router = useRouter()
@@ -35,7 +36,7 @@ const Profile = () => {
       return
     }
     // Get the profile user's data using the userId from the URL
-    const user = await context.getUserDataById(userId);
+    const user = await getUserDataById(userId);
     
     // Set the local state
     setProfileUser({
@@ -52,10 +53,23 @@ const Profile = () => {
 
 
   return (
-      <div className="container">
+      <div className="container" id="profile">
         <section id="user-info">
-          <h2>{profileUser.firstName} {profileUser.lastName}</h2>
+          <h1>{profileUser.firstName} {profileUser.lastName}</h1>
+          <h2>Job Title: </h2>
+          <h2>Location: </h2>
         </section>
+
+        {profileUser.id === currentUser.id && 
+          
+          <section id="addToPlaylist">
+            <h2>Add To Playlist</h2>
+            <SearchBar placeholder='Search for music'/>
+          
+          </section>
+        
+        }
+
 
         <section id="playlist">
           <h2>Playlist</h2>
@@ -70,11 +84,37 @@ const Profile = () => {
 
         <style jsx>{`
         
-          #user-info {
-            margin-top: 1rem
+          
+          #profile {
+            color: white;
           }
           
+          section {
+            padding: 3rem;
+            border: 1px solid white;
+            border-radius: 10px; 
+
+          }
           
+          #user-info {
+            margin-top: 1rem;
+            
+          }
+
+          #user-info h1 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+          }
+          
+          #user-info h2 {
+            margin-bottom: 1rem;
+          }
+          
+          #addToPlaylist {
+            display: flex;
+            margin-top: 4rem;
+          }
+
           #playlist {
             margin-top: 4rem;
           }

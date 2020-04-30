@@ -28,7 +28,8 @@ const App = ({ Component, pageProps }) => {
     tokenExpiration: null
   });
 
-  const [userState, setUserState] = useState({
+  // Logged in User's Data
+  const [currentUser, setCurrentUser] = useState({
     id: null,
     firstName: null,
     lastName: null,
@@ -244,7 +245,7 @@ const App = ({ Component, pageProps }) => {
   }
   
   
-  // Get logged in user's data
+  // Get logged in user's data and sets it in the userState
   const getUserDataByToken = async (token) => {
 
     let requestBody;
@@ -298,7 +299,7 @@ const App = ({ Component, pageProps }) => {
       const user = (data.data.userByToken);
       console.log(user.firstName)
       
-      setUserState({
+      setCurrentUser({
         id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -320,7 +321,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <ContextProvider value={{
       authState,
-      userState,
+      currentUser,
       videoState,
       commentState,
       login,
