@@ -25,7 +25,8 @@ const Layout = (props) => (
         font-size: 16px;
         font-weight: 400;
         line-height: 1.8em;
-        background-color: purple;
+        /* background-color: purple; */
+        background-color: #dd00ff;
       }
 
       .container {

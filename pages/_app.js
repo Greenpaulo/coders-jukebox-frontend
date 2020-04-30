@@ -314,6 +314,59 @@ const App = ({ Component, pageProps }) => {
     
   }
 
+
+  // Add a video to a user's playlist
+  const addVideoToPlaylist = async (video) => {
+    console.log(video)
+    console.log(currentUser.id)
+
+  // Send an API request to save the video
+    const requestBody = {
+      query: `
+        mutation {
+          createVideo(videoInput: {title: "${video.title}", thumbnailURL: "${video.thumbnailURL}", videoURL: "${video.videoURL}", userID: "${currentUser.id}"}) {
+            _id
+          }
+        }
+      `
+    }
+
+    console.log(requestBody)
+    console.log(authState.token)
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to create video!');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      const user = (data.data);
+      console.log(user)
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   
   
   
@@ -328,7 +381,8 @@ const App = ({ Component, pageProps }) => {
       register,
       logout,
       getUserDataById,
-      getUserDataByToken
+      getUserDataByToken,
+      addVideoToPlaylist
     }}>
       <Layout>
         <Component {...pageProps} />

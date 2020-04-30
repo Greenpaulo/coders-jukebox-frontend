@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { GlobalContext } from '../../context/GlobalContext';
 
 import VideoItem from '../../components/VideoItem';
-import SearchBar from '../../components/Searchbar';
+import AddToPlaylist from '../../components/AddToPlaylist';
 
 
 const Profile = () => {
@@ -61,15 +61,8 @@ const Profile = () => {
         </section>
 
         {profileUser.id === currentUser.id && 
-          
-          <section id="addToPlaylist">
-            <h2>Add To Playlist</h2>
-            <SearchBar placeholder='Search for music'/>
-          
-          </section>
-        
+         <AddToPlaylist/> 
         }
-
 
         <section id="playlist">
           <h2>Playlist</h2>
@@ -93,7 +86,6 @@ const Profile = () => {
             padding: 3rem;
             border: 1px solid white;
             border-radius: 10px; 
-
           }
           
           #user-info {
@@ -110,10 +102,6 @@ const Profile = () => {
             margin-bottom: 1rem;
           }
           
-          #addToPlaylist {
-            display: flex;
-            margin-top: 4rem;
-          }
 
           #playlist {
             margin-top: 4rem;

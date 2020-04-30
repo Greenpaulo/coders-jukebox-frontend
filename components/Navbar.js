@@ -12,6 +12,10 @@ const Navbar = () => {
     logout();
   };
   
+  const searchUserHandler = () => {
+    console.log('searchUserHandler called');
+  }
+  
   return (    
       <nav id="navbar">
         <div className="container">
@@ -25,7 +29,7 @@ const Navbar = () => {
             </div>
 
             <div id="search">
-              <SearchBar placeholder='Search for user'/>
+              <SearchBar placeholder='Search for user' mode='user' submitHandler={searchUserHandler}/>
             </div>
 
             <ul id="nav-menu">
