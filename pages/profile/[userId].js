@@ -4,56 +4,22 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 import VideoPlayer from '../../components/VideoPlayer';
 import AddToPlaylist from '../../components/AddToPlaylist';
-import VideoItem from '../../components/VideoItem';
+import Playlist from '../../components/PlayList';
 
 
 const Profile = () => {
 
-  // Local state holding the current profiles user data
-  const [ profileUser, setProfileUser ] = useState({
-    id: '',
-    firstName: '',
-    lastName: '',
-    ownedVideos: [],
-    userComments: [],
-    playlistComments: []
-  })
-
-  const { getUserDataById, currentUser } = useContext(GlobalContext);
+  const { currentUser, profileUser, fetchProfileUser } = useContext(GlobalContext);
   
-  // Get the userId from the URL
+  // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
   const { userId } = router.query
-
-  const fetchProfileUser = async () => {
-
-    // Only fetch data if profileUser isn't populated
-    if(profileUser.firstName !== ''){
-      return
-    }
-    // Only fetch data if the userId has been parsed from the URL
-    if(userId === undefined){
-      return
-    }
-    // Get the profile user's data using the userId from the URL
-    const user = await getUserDataById(userId);
-    
-    // Set the local state
-    setProfileUser({
-      id: userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      ownedVideos: user.ownedVideos,
-      userComments: user.userComments,
-      playlistComments: user.playlistComments
-    })
-  }
-  fetchProfileUser();
-
+  fetchProfileUser(userId, true);
 
 
   return (
       <div className="container" id="profile">
+        
         <section id="user-info">
           <h1>{profileUser.firstName} {profileUser.lastName}</h1>
           <h2>Job Title: </h2>
@@ -66,20 +32,12 @@ const Profile = () => {
          <AddToPlaylist/> 
         }
 
-        <section id="playlist">
-          <h2>Playlist</h2>
-          {/* {data.user.ownedVideos.map(video => (
-            <VideoItem video={video} />
-          ))} */}
-        </section>
-
-        {/* {renderAddToPlayList} */}
+        <Playlist profileUser={profileUser}/>
 
 
 
         <style jsx>{`
-        
-          
+                  
           #profile {
             color: white;
           }

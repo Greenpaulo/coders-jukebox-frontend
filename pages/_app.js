@@ -38,9 +38,19 @@ const App = ({ Component, pageProps }) => {
     playlistComments: null
   });
 
+  // Current profiles user data
+  const [profileUser, setProfileUser] = useState({
+    id: '',
+    firstName: '',
+    lastName: '',
+    ownedVideos: [],
+    userComments: [],
+    playlistComments: []
+  });
+
   const [videoState, setVideoState] = useState({
     title: '',
-    description:'',
+    // description:'',
     videoId: ''
   });
 
@@ -262,8 +272,8 @@ const App = ({ Component, pageProps }) => {
             lastName,
             _id,
             ownedVideos {
-              thumbnailURL,
               title,
+              thumbnailURL,
               videoURL
             },
             playlistComments{
@@ -300,7 +310,7 @@ const App = ({ Component, pageProps }) => {
       }
 
       const user = (data.data.userByToken);
-      console.log(user.firstName)
+      // console.log(user.firstName)
       
       setCurrentUser({
         id: user._id,
@@ -320,22 +330,20 @@ const App = ({ Component, pageProps }) => {
 
   // Add a video to a user's playlist
   const addVideoToPlaylist = async (video) => {
-    console.log(video)
-    console.log(currentUser.id)
 
   // Send an API request to save the video
     const requestBody = {
       query: `
         mutation {
-          createVideo(videoInput: {title: "${video.title}", thumbnailURL: "${video.thumbnailURL}", videoURL: "${video.videoURL}", userID: "${currentUser.id}"}) {
+          createVideo(videoInput: {title: "${video.title}", thumbnailURL: "${video.thumbnailURL}", videoURL: "${video.videoId}", userID: "${currentUser.id}"}) {
             _id
           }
         }
       `
     }
 
-    console.log(requestBody)
-    console.log(authState.token)
+    // console.log(requestBody)
+    // console.log(authState.token)
 
     try {
       const res = await fetch('http://localhost:5000/graphql', {
@@ -362,22 +370,60 @@ const App = ({ Component, pageProps }) => {
         return
       }
 
-      const user = (data.data);
-      console.log(user)
+      // Refresh the profile with the new user data - to update the playlist
+      fetchProfileUser(currentUser.id, false)
 
     } catch (err) {
       console.log(err);
     }
   }
 
+  const fetchProfileUser = async (userId, initialFetch) => {
+
+    if (initialFetch === true){
+      // Only fetch data if profileUser isn't populated
+      if (profileUser.firstName !== '') {
+        return
+      }
+      // Only fetch data if the userId has been parsed from the URL
+      if (userId === undefined) {
+        return
+      }
+    }
+    // Get the profile user's data using the userId from the URL
+    const user = await getUserDataById(userId);
+
+    // Set the state
+    setProfileUser({
+      id: userId,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      ownedVideos: user.ownedVideos,
+      userComments: user.userComments,
+      playlistComments: user.playlistComments
+    })
+  }
+
+
+
+
   // Set a video as the current video for the video player
   const setCurrentVideo = (video) => {
     setVideoState({
       title: video.title,
-      description: video.description,
+      // description: video.description,
       videoId: video.videoId
     })
   }
+
+
+  // Update the 
+  // Update the profileUser when video is added to playlist
+  // const updateOwnedVideos = (videos) => {
+  //   setProfileUser({
+  //     ...profileUser, ownedVideos: videos
+  //   });
+  // }
 
   
   
@@ -387,6 +433,8 @@ const App = ({ Component, pageProps }) => {
     <ContextProvider value={{
       authState,
       currentUser,
+      profileUser,
+      setProfileUser,
       videoState,
       commentState,
       login,
@@ -395,6 +443,7 @@ const App = ({ Component, pageProps }) => {
       getUserDataById,
       getUserDataByToken,
       addVideoToPlaylist,
+      fetchProfileUser,
       setCurrentVideo
     }}>
       <Layout>

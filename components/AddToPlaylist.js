@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import SearchBar from './Searchbar';
 import { youtube, KEY } from '../apis/youtube';
-import YouTubeVideoItem from './YouTubeVideoItem';
+import VideoItem from './VideoItem';
 
 const AddToPlaylist = () => {
 
@@ -201,7 +201,7 @@ const AddToPlaylist = () => {
 
       {videos.map(video => {
         return (
-          <YouTubeVideoItem video={video} key={video.id.videoId}/>
+          <VideoItem video={video} mode="youtube" key={video.id.videoId}/>
         )
       })}
 
