@@ -3,7 +3,7 @@ import {useContext} from 'react';
 
 const YouTubeVideoItem = ({video}) => {
 
-  const { addVideoToPlaylist } = useContext(GlobalContext);
+  const { addVideoToPlaylist, setCurrentVideo } = useContext(GlobalContext);
 
   const addVideoClickHandler = () => {
 
@@ -15,6 +15,19 @@ const YouTubeVideoItem = ({video}) => {
     addVideoToPlaylist(videoToSave);
   }
 
+  const playButtonHandler = () => {
+
+    const videoToSet = {
+      title: video.snippet.title,
+      description: video.snippet.description,
+      videoId: video.id.videoId,
+    }
+    // console.log(video)
+    // console.log(videoToSet);
+
+    setCurrentVideo(videoToSet);
+  }
+
   // console.log(video.snippet.thumbnails.title);
 
   return (
@@ -22,7 +35,7 @@ const YouTubeVideoItem = ({video}) => {
       <img src={video.snippet.thumbnails.default.url} alt="youtube video"/>
       <h3 className="video-title">{video.snippet.title}</h3>
       <div id="buttons">
-        <button>Play</button>
+        <button onClick={playButtonHandler}>Play</button>
         <button onClick={addVideoClickHandler}>Add To Playlist</button>
       </div>
 

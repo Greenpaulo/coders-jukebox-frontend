@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Router from 'next/router';
 import cookie from 'react-cookies';
 
-
 const App = ({ Component, pageProps }) => {
 
   let token = null;
@@ -19,6 +18,7 @@ const App = ({ Component, pageProps }) => {
       getUserDataByToken(token)
     }
   }, [])
+
 
   // State
   const [authState, setAuthState] = useState({
@@ -39,7 +39,9 @@ const App = ({ Component, pageProps }) => {
   });
 
   const [videoState, setVideoState] = useState({
-    video: null
+    title: '',
+    description:'',
+    videoId: ''
   });
 
   const [commentState, setCommentState] = useState({
@@ -47,9 +49,7 @@ const App = ({ Component, pageProps }) => {
   });
 
 
-
   // Auth actions
-
   // Login a user
   const login = async (email, password) => {
 
@@ -74,15 +74,15 @@ const App = ({ Component, pageProps }) => {
         }
       })
 
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Login failed!');
-      } 
+      }
 
       // .json() is a method from fetch API that auto extracts & parses the res body
       const data = await res.json();
 
       // Check for errors array in response
-      if (data.errors){
+      if (data.errors) {
         data.errors.map(error => {
           console.log(error.message)
         })
@@ -90,9 +90,9 @@ const App = ({ Component, pageProps }) => {
       }
 
       // Set state with returned auth data
-      const { userId, token} = data.data.login;
+      const { userId, token } = data.data.login;
 
-      setAuthState({...authState, authenticated: true, userId, token});
+      setAuthState({ ...authState, authenticated: true, userId, token });
 
       // Save token to local storage
       localStorage.setItem('token', token)
@@ -113,15 +113,15 @@ const App = ({ Component, pageProps }) => {
 
       // Redirect to home page
       Router.push('/');
-      
+
     } catch (err) {
       console.log(err);
     }
   }
 
-  
+
   // Register a user
-  const register = async(firstName, lastName, email, password) => {
+  const register = async (firstName, lastName, email, password) => {
 
     // Make a API query to get a token
     const requestBody = {
@@ -143,9 +143,9 @@ const App = ({ Component, pageProps }) => {
         }
       })
 
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Account creation failed!');
-      } 
+      }
 
       // .json() is a method from fetch API that auto extracts & parses the res body
       const data = await res.json();
@@ -169,11 +169,12 @@ const App = ({ Component, pageProps }) => {
     } catch (err) {
       console.log(err);
     }
-    
+
   }
 
   // Logout a user
   const logout = () => {
+    console.log('logout called')
     // Clear the authState
     setAuthState({
       authData: null
@@ -181,6 +182,8 @@ const App = ({ Component, pageProps }) => {
     // Remove token from localStorage
     localStorage.removeItem('token');
   }
+
+
 
   // Data fetching
   const getUserDataById = async (userId) => {
@@ -204,8 +207,8 @@ const App = ({ Component, pageProps }) => {
           }
         }
       `
-      }
-    
+    }
+
 
     // console.log(requestBody)
     // console.log(authState.token)
@@ -241,7 +244,7 @@ const App = ({ Component, pageProps }) => {
     } catch (err) {
       console.log(err);
     }
-    
+
   }
   
   
@@ -367,6 +370,15 @@ const App = ({ Component, pageProps }) => {
     }
   }
 
+  // Set a video as the current video for the video player
+  const setCurrentVideo = (video) => {
+    setVideoState({
+      title: video.title,
+      description: video.description,
+      videoId: video.videoId
+    })
+  }
+
   
   
   
@@ -382,7 +394,8 @@ const App = ({ Component, pageProps }) => {
       logout,
       getUserDataById,
       getUserDataByToken,
-      addVideoToPlaylist
+      addVideoToPlaylist,
+      setCurrentVideo
     }}>
       <Layout>
         <Component {...pageProps} />

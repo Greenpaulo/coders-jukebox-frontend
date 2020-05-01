@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
-import Layout from '../../components/Layout';
 import { useRouter } from 'next/router'
 import { GlobalContext } from '../../context/GlobalContext';
 
-import VideoItem from '../../components/VideoItem';
+import VideoPlayer from '../../components/VideoPlayer';
 import AddToPlaylist from '../../components/AddToPlaylist';
+import VideoItem from '../../components/VideoItem';
 
 
 const Profile = () => {
@@ -59,6 +59,8 @@ const Profile = () => {
           <h2>Job Title: </h2>
           <h2>Location: </h2>
         </section>
+
+        <VideoPlayer />
 
         {profileUser.id === currentUser.id && 
          <AddToPlaylist/> 
