@@ -207,6 +207,7 @@ const App = ({ Component, pageProps }) => {
             lastName,
             _id,
             ownedVideos {
+              _id,
               thumbnailURL,
               title,
               videoURL
@@ -272,6 +273,7 @@ const App = ({ Component, pageProps }) => {
             lastName,
             _id,
             ownedVideos {
+              _id,
               title,
               thumbnailURL,
               videoURL
@@ -309,7 +311,7 @@ const App = ({ Component, pageProps }) => {
         return
       }
 
-      const user = (data.data.userByToken);
+      const user = data.data.userByToken;
       // console.log(user.firstName)
       
       setCurrentUser({
@@ -331,7 +333,7 @@ const App = ({ Component, pageProps }) => {
   // Add a video to a user's playlist
   const addVideoToPlaylist = async (video) => {
 
-  // Send an API request to save the video
+    // Send an API request to save the video
     const requestBody = {
       query: `
         mutation {
@@ -377,6 +379,76 @@ const App = ({ Component, pageProps }) => {
       console.log(err);
     }
   }
+
+
+  // Remove a video from a user's playlist
+  const removeVideoFromPlaylist = async (id) => {
+
+  // Send an API request to save the video
+    const requestBody = {
+      query: `
+        mutation {
+          removeVideo(id: "${id}") {
+            ownedVideos {
+              _id,
+              thumbnailURL,
+              title,
+              videoURL
+            }
+          }
+        }
+      `
+    }
+
+    // console.log(requestBody)
+    // console.log(authState.token)
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to remove video!');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      console.log(data.data.removeVideo)
+
+      const videos = data.data.removeVideo.ownedVideos;
+      console.log(videos);
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      // Refresh the profile with the new user data - to update the playlist
+    updateProfileUserVideos(videos)
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const updateProfileUserVideos = (videos) => {
+
+    // Update the profile user's ownedVideo in th global state
+    setProfileUser({...profileUser, ownedVideos: videos})
+    
+  }
+
+  
 
   const fetchProfileUser = async (userId, initialFetch) => {
 
@@ -443,6 +515,7 @@ const App = ({ Component, pageProps }) => {
       getUserDataById,
       getUserDataByToken,
       addVideoToPlaylist,
+      removeVideoFromPlaylist,
       fetchProfileUser,
       setCurrentVideo
     }}>

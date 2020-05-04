@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 const VideoItem = ({video, mode}) => {
 
-  const { addVideoToPlaylist, setCurrentVideo } = useContext(GlobalContext);
+  const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo } = useContext(GlobalContext);
 
   const addVideoClickHandler = () => {
 
@@ -13,6 +13,15 @@ const VideoItem = ({video, mode}) => {
       videoId: video.id.videoId,
     }
     addVideoToPlaylist(videoToSave);
+  }
+
+  const removeVideoClickHandler = () => {
+
+    console.log(video._id)
+    removeVideoFromPlaylist(video._id);
+
+
+
   }
 
   const playButtonHandler = () => {
@@ -56,6 +65,7 @@ const VideoItem = ({video, mode}) => {
           <h3 className="video-title">{video.title}</h3>
           <div id="buttons">
             <button onClick={playButtonHandler}>Play</button>
+            <button onClick={removeVideoClickHandler}>X</button>
           </div>
         </>
       }
