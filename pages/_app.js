@@ -30,12 +30,12 @@ const App = ({ Component, pageProps }) => {
 
   // Logged in User's Data
   const [currentUser, setCurrentUser] = useState({
-    id: null,
-    firstName: null,
-    lastName: null,
-    ownedVideos: null,
-    userComments: null,
-    playlistComments: null
+    id: '',
+    firstName: '',
+    lastName: '',
+    ownedVideos: [],
+    userComments: [],
+    playlistComments: []
   });
 
   // Current profiles user data
@@ -59,7 +59,11 @@ const App = ({ Component, pageProps }) => {
   });
 
 
-  // Auth actions
+
+
+
+  // AUTHENTICATION *******************************************************************
+  
   // Login a user
   const login = async (email, password) => {
 
@@ -120,6 +124,9 @@ const App = ({ Component, pageProps }) => {
       //     httpOnly: false
       //   }
       // )
+
+      // Fetch the user data and set currentUser state
+      await getUserDataByToken(token);
 
       // Redirect to home page
       Router.push('/');
@@ -184,18 +191,43 @@ const App = ({ Component, pageProps }) => {
 
   // Logout a user
   const logout = () => {
-    console.log('logout called')
+    // Redirect to home page
+    Router.push('/');
     // Clear the authState
     setAuthState({
       authData: null
     })
     // Remove token from localStorage
     localStorage.removeItem('token');
+    // Clear the current user
+    setCurrentUser({
+      id: '',
+      firstName: '',
+      lastName: '',
+      ownedVideos: [],
+      userComments: [],
+      playlistComments: []
+    });
+
+    setProfileUser({
+      id: '',
+      firstName: '',
+      lastName: '',
+      ownedVideos: [],
+      userComments: [],
+      playlistComments: []
+    });
+    
+    // Redirect to home page
+    // Router.push('/');
+    console.log('currentUser', currentUser);
+    console.log('profileUser', profileUser);
   }
 
 
 
-  // Data fetching
+  // DATA FETCHING *******************************************************************
+
   const getUserDataById = async (userId) => {
     // console.log('getUserData called with id:', userId)
 
@@ -262,6 +294,8 @@ const App = ({ Component, pageProps }) => {
   // Get logged in user's data and sets it in the userState
   const getUserDataByToken = async (token) => {
 
+    console.log('called')
+
     let requestBody;
 
     // If no userId then query the current logged in user by token
@@ -313,6 +347,7 @@ const App = ({ Component, pageProps }) => {
 
       const user = data.data.userByToken;
       // console.log(user.firstName)
+      console.log(user);
       
       setCurrentUser({
         id: user._id,
@@ -328,6 +363,61 @@ const App = ({ Component, pageProps }) => {
     }
     
   }
+
+
+  const fetchProfileUser = async (userId, initialFetch) => {
+
+    console.log('fetchProfileUser called');
+
+    if (initialFetch === true) {
+      // Only fetch data if profileUser isn't populated
+      if (profileUser.firstName !== '') {
+        return
+      }
+      // Only fetch data if the userId has been parsed from the URL
+      if (userId === undefined) {
+        return
+      }
+    }
+    // Get the profile user's data using the userId from the URL
+    const user = await getUserDataById(userId);
+
+    // Set the state
+    setProfileUser({
+      id: userId,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      ownedVideos: user.ownedVideos,
+      userComments: user.userComments,
+      playlistComments: user.playlistComments
+    })
+  }
+
+  const clearProfileUser = () => {
+    setProfileUser({
+      id: '',
+      firstName: '',
+      lastName: '',
+      ownedVideos: [],
+      userComments: [],
+      playlistComments: []
+    });
+  }
+
+
+  const getCommentData = () => {
+
+  }
+
+  const getCommentUser = () => {
+
+  }
+
+
+
+
+
+  // VIDEOS **************************************************************************
 
 
   // Add a video to a user's playlist
@@ -400,9 +490,6 @@ const App = ({ Component, pageProps }) => {
       `
     }
 
-    // console.log(requestBody)
-    // console.log(authState.token)
-
     try {
       const res = await fetch('http://localhost:5000/graphql', {
         method: 'POST',
@@ -434,7 +521,7 @@ const App = ({ Component, pageProps }) => {
       }
 
       // Refresh the profile with the new user data - to update the playlist
-    updateProfileUserVideos(videos)
+      updateProfileUserVideos(videos)
 
     } catch (err) {
       console.log(err);
@@ -442,42 +529,9 @@ const App = ({ Component, pageProps }) => {
   }
 
   const updateProfileUserVideos = (videos) => {
-
     // Update the profile user's ownedVideo in th global state
-    setProfileUser({...profileUser, ownedVideos: videos})
-    
+    setProfileUser({...profileUser, ownedVideos: videos}) 
   }
-
-  
-
-  const fetchProfileUser = async (userId, initialFetch) => {
-
-    if (initialFetch === true){
-      // Only fetch data if profileUser isn't populated
-      if (profileUser.firstName !== '') {
-        return
-      }
-      // Only fetch data if the userId has been parsed from the URL
-      if (userId === undefined) {
-        return
-      }
-    }
-    // Get the profile user's data using the userId from the URL
-    const user = await getUserDataById(userId);
-
-    // Set the state
-    setProfileUser({
-      id: userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      ownedVideos: user.ownedVideos,
-      userComments: user.userComments,
-      playlistComments: user.playlistComments
-    })
-  }
-
-
-
 
   // Set a video as the current video for the video player
   const setCurrentVideo = (video) => {
@@ -489,13 +543,60 @@ const App = ({ Component, pageProps }) => {
   }
 
 
-  // Update the 
-  // Update the profileUser when video is added to playlist
-  // const updateOwnedVideos = (videos) => {
-  //   setProfileUser({
-  //     ...profileUser, ownedVideos: videos
-  //   });
-  // }
+  
+  
+  // COMMENTS ***********************************************************************
+
+  // Add a comment
+  const addComment = async (content) => {
+
+    // Send an API request to save the comment
+    const requestBody = {
+      query: `
+        mutation {
+          createComment(commentInput: {content: "${content}", commenterID: "${currentUser.id}", playlistOwnerID: "${profileUser.id}"}) {
+            _id
+          }
+        }
+      `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to create comment!');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      // Refresh the profile with the new user data - to update the comment section
+      fetchProfileUser(profileUser.id, false)
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  
+  
+
 
   
   
@@ -514,10 +615,14 @@ const App = ({ Component, pageProps }) => {
       logout,
       getUserDataById,
       getUserDataByToken,
-      addVideoToPlaylist,
-      removeVideoFromPlaylist,
       fetchProfileUser,
-      setCurrentVideo
+      getCommentData,
+      getCommentUser,
+      addVideoToPlaylist,
+      clearProfileUser,
+      removeVideoFromPlaylist,
+      setCurrentVideo,
+      addComment,
     }}>
       <Layout>
         <Component {...pageProps} />

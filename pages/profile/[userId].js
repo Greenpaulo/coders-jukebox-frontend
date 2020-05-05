@@ -1,20 +1,44 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router'
+import Router from 'next/router'
 import { GlobalContext } from '../../context/GlobalContext';
 
 import VideoPlayer from '../../components/VideoPlayer';
 import AddToPlaylist from '../../components/AddToPlaylist';
 import Playlist from '../../components/PlayList';
+import CommentSection from '../../components/CommentSection';
 
 
 const Profile = () => {
 
-  const { currentUser, profileUser, fetchProfileUser } = useContext(GlobalContext);
+  const { currentUser, profileUser, fetchProfileUser, clearProfileUser } = useContext(GlobalContext);
+
+  console.log('profile page read');
+
+  // console.log('profileUser', profileUser)
   
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
   const { userId } = router.query
   fetchProfileUser(userId, true);
+  
+  // useEffect(() => {
+    //   return () => clearProfileUser()
+    // }, [])
+    
+    
+  //   useEffect(() => {
+  //     const handleRouteChange = url => {
+  //       // console.log('App is changing to: ', url)
+  //       // console.log(Router.query.userId)
+  //       fetchProfileUser(Router.queryuserId, true);
+  //   }
+
+  //   Router.events.on('routeChangeStart', handleRouteChange)
+  //   return () => {
+  //     Router.events.off('routeChangeStart', handleRouteChange)
+  //   }
+  // }, [])
 
 
   return (
@@ -33,6 +57,8 @@ const Profile = () => {
         }
 
         <Playlist profileUser={profileUser}/>
+
+        <CommentSection profileUser={profileUser}/>
 
 
 

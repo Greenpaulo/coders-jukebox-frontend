@@ -1,4 +1,5 @@
 import Link from 'next/Link';
+import Router from 'next/router';
 import { useContext } from 'react';
 import { GlobalContext} from '../context/GlobalContext';
 import SearchBar from './Searchbar';
@@ -6,7 +7,7 @@ import SearchBar from './Searchbar';
 
 const Navbar = () => {
 
-  const { authState, currentUser, logout } = useContext(GlobalContext);
+  const { authState, currentUser, fetchProfileUser, logout } = useContext(GlobalContext);
 
   const logoutHandler = () => {
     logout();
@@ -15,7 +16,12 @@ const Navbar = () => {
   const searchUserHandler = () => {
     console.log('searchUserHandler called');
   }
+
+  const profileNavClickHandler = () => {
+    fetchProfileUser(currentUser.id, false);
+  }
   
+
   return (    
       <nav id="navbar">
         <div className="container">
@@ -33,9 +39,9 @@ const Navbar = () => {
             </div>
 
             <ul id="nav-menu">
-            {authState.authenticated &&
+            {authState.authenticated && currentUser !== null &&
             <Link href="/profile/[userId]" as={`/profile/${currentUser.id}`}>
-              <a className="nav-item">Hi, {currentUser.firstName}</a>
+              <a className="nav-item" onClick={profileNavClickHandler}>Hi, {currentUser.firstName}</a>
             </Link>
             }
             <Link href="/about">

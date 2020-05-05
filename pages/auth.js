@@ -31,6 +31,8 @@ const Auth = () => {
       return;
     }
 
+    // console.log(email, password)
+
     // Call login action to fetch token from API and change the global state
     context.login(email, password);
   };
