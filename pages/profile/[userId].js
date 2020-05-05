@@ -13,7 +13,7 @@ const Profile = () => {
 
   const { currentUser, profileUser, fetchProfileUser, clearProfileUser } = useContext(GlobalContext);
 
-  console.log('profile page read');
+  // console.log('profile page read');
 
   // console.log('profileUser', profileUser)
   

@@ -245,7 +245,13 @@ const App = ({ Component, pageProps }) => {
               videoURL
             },
             playlistComments{
-              content
+              _id,
+              content,
+              commenter {
+                _id
+              },
+              createdAt,
+              updatedAt
             }
           }
         }
@@ -294,7 +300,7 @@ const App = ({ Component, pageProps }) => {
   // Get logged in user's data and sets it in the userState
   const getUserDataByToken = async (token) => {
 
-    console.log('called')
+    // console.log('called')
 
     let requestBody;
 
@@ -313,7 +319,13 @@ const App = ({ Component, pageProps }) => {
               videoURL
             },
             playlistComments{
-              content
+              _id,
+              content,
+              commenter {
+              _id 
+              },  
+              createdAt,
+              updatedAt
             }
           }
         }
@@ -347,7 +359,7 @@ const App = ({ Component, pageProps }) => {
 
       const user = data.data.userByToken;
       // console.log(user.firstName)
-      console.log(user);
+      // console.log(user);
       
       setCurrentUser({
         id: user._id,
@@ -367,7 +379,7 @@ const App = ({ Component, pageProps }) => {
 
   const fetchProfileUser = async (userId, initialFetch) => {
 
-    console.log('fetchProfileUser called');
+    // console.log('fetchProfileUser called');
 
     if (initialFetch === true) {
       // Only fetch data if profileUser isn't populated

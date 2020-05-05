@@ -3,7 +3,7 @@ import VideoItem from './VideoItem';
 
 const PlayList = ({profileUser}) => {
 
-  console.log(profileUser.ownedVideos)
+  // console.log(profileUser.ownedVideos)
 
   return (
     <section id="playlist">
