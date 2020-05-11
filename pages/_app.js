@@ -220,8 +220,8 @@ const App = ({ Component, pageProps }) => {
     
     // Redirect to home page
     // Router.push('/');
-    console.log('currentUser', currentUser);
-    console.log('profileUser', profileUser);
+    // console.log('currentUser', currentUser);
+    // console.log('profileUser', profileUser);
   }
 
 
@@ -403,8 +403,13 @@ const App = ({ Component, pageProps }) => {
       userComments: user.userComments,
       playlistComments: user.playlistComments
     })
+
+    return user;
   }
 
+  
+  
+  // Reset the ProfileUser state
   const clearProfileUser = () => {
     setProfileUser({
       id: '',
@@ -416,13 +421,9 @@ const App = ({ Component, pageProps }) => {
     });
   }
 
-
-  const getCommentData = () => {
-
-  }
-
-  const getCommentUser = () => {
-
+  const getCommentUser = async (userId) => {
+    const commentUser = await getUserDataById(userId);
+    return commentUser;
   }
 
 
@@ -628,7 +629,6 @@ const App = ({ Component, pageProps }) => {
       getUserDataById,
       getUserDataByToken,
       fetchProfileUser,
-      getCommentData,
       getCommentUser,
       addVideoToPlaylist,
       clearProfileUser,

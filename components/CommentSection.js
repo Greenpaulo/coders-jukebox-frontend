@@ -24,22 +24,27 @@ const CommentSection = ({ profileUser }) => {
 
   return (
     <section id="comment-section">
-      <h2>Comments</h2>
-      <form onSubmit={(e) => commentSubmitHandler(e)}>
-        <label htmlFor="comment-input">Add a comment</label>
-        <textarea name="comment-input" id="comment-input" value={content} cols="30" rows="5" onChange={handleChange}></textarea>
-        <button type="submit">Submit</button>
-      </form>
+      <h2>Comments</h2> 
 
-      {profileUser.playlistComments.length === 0 && 
-        <h3>Be the first to add a comment!</h3>
-      }
+      <section id="comments">
+        {profileUser.playlistComments.length === 0 && 
+          <h3>Be the first to add a comment!</h3>
+        }
+
+        {profileUser.playlistComments.map(comment => (
+          <Comment comment={comment} key={comment._id}/>
+        )
+        )}
+      </section>
 
 
-      {profileUser.playlistComments.map(comment => (
-        <Comment comment={comment} />
-      )
-      )}
+      <section id="add-comment">
+        <form onSubmit={(e) => commentSubmitHandler(e)}>
+          <label htmlFor="comment-input">Add a comment</label>
+          <textarea name="comment-input" id="comment-input" value={content} cols="30" rows="3" onChange={handleChange}></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
 
 
       <style jsx>{`
@@ -51,13 +56,30 @@ const CommentSection = ({ profileUser }) => {
         border-radius: 10px; 
       }
 
+      section#comments {
+        margin-top: 1rem;
+      }
+
       form {
         margin: 1rem 0;
       }
 
       textarea {
         width: 100%;
+        font: inherit;
+        font-size: 1.1rem;
       }
+
+      button {
+      background-color: #5e00ff;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      margin: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
     
     `}</style>
 
