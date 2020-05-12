@@ -8,7 +8,7 @@ const Comment = ({comment}) => {
 
   const commenterId = comment.commenter._id 
 
-  const { getCommentUser, removeCommentFromPlaylist, currentUser } = useContext(GlobalContext);
+  const { getCommentUser, removeCommentFromPlaylist, currentUser, fetchProfileUser } = useContext(GlobalContext);
   
   const [commentUser, setCommentUser] = useState({
     firstName: '',

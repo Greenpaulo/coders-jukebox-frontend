@@ -3,8 +3,9 @@ import { useContext } from 'react';
 
 const VideoItem = ({video, mode}) => {
 
-  const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo } = useContext(GlobalContext);
-
+  
+  const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo, currentUser, profileUser } = useContext(GlobalContext);
+  
   const addVideoClickHandler = () => {
 
     const videoToSave = {
@@ -60,7 +61,9 @@ const VideoItem = ({video, mode}) => {
           <h3 className="video-title">{video.title}</h3>
           <div id="buttons">
             <button onClick={playButtonHandler}>Play</button>
-            <button onClick={removeVideoClickHandler}>X</button>
+            { currentUser.id === profileUser.id &&
+              <button onClick={removeVideoClickHandler}>X</button>
+            }
           </div>
         </>
       }

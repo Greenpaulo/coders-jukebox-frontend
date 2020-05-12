@@ -379,8 +379,6 @@ const App = ({ Component, pageProps }) => {
 
   const fetchProfileUser = async (userId, initialFetch) => {
 
-    // console.log('fetchProfileUser called');
-
     if (initialFetch === true) {
       // Only fetch data if profileUser isn't populated
       if (profileUser.firstName !== '') {
@@ -407,8 +405,6 @@ const App = ({ Component, pageProps }) => {
     return user;
   }
 
-  
-  
   // Reset the ProfileUser state
   const clearProfileUser = () => {
     setProfileUser({
