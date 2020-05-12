@@ -128,8 +128,8 @@ const App = ({ Component, pageProps }) => {
       // Fetch the user data and set currentUser state
       await getUserDataByToken(token);
 
-      // Redirect to home page
-      Router.push('/');
+      // Redirect to user's profile page
+      Router.push(`/profile/${userId}`);
 
     } catch (err) {
       console.log(err);

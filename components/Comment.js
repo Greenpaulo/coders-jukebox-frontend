@@ -1,10 +1,14 @@
+import Link from 'next/Link';
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 
+
 const Comment = ({comment}) => {
 
-  const { getCommentUser, removeCommentFromPlaylist } = useContext(GlobalContext);
+  const commenterId = comment.commenter._id 
+
+  const { getCommentUser, removeCommentFromPlaylist, currentUser } = useContext(GlobalContext);
   
   const [commentUser, setCommentUser] = useState({
     firstName: '',
@@ -17,8 +21,11 @@ const Comment = ({comment}) => {
   }
 
   const removeCommentClickHandler = () => {
-    // console.log(comment._id);
     removeCommentFromPlaylist(comment._id);
+  }
+
+  const commenterClickHandler = () => {
+    fetchProfileUser(commenterId, false);
   }
 
   useEffect(() => {
@@ -33,22 +40,24 @@ const Comment = ({comment}) => {
   }, [])
 
 
-
-  // console.log(comment.createdAt.toISOString());
-
   return (
     <div className="comment" key={comment._id}>
       <div className="content">
         <h4>Avatar</h4>
 
-        <h3>{commentUser.firstName} {commentUser.lastName}</h3>
-
+        <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
+          <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
+        </Link>
+        
         <p>{comment.content}</p>
 
         <h4 className="date">{convertDate(comment.createdAt)}</h4>
       </div>
 
-      <button onClick={removeCommentClickHandler}>X</button>
+      {currentUser.id === commenterId && 
+        <button onClick={removeCommentClickHandler}>X</button>
+      }
+
 
 
 
