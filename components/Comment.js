@@ -4,7 +4,7 @@ import { GlobalContext } from '../context/GlobalContext';
 
 const Comment = ({comment}) => {
 
-  const { getCommentUser } = useContext(GlobalContext);
+  const { getCommentUser, removeCommentFromPlaylist } = useContext(GlobalContext);
   
   const [commentUser, setCommentUser] = useState({
     firstName: '',
@@ -17,8 +17,8 @@ const Comment = ({comment}) => {
   }
 
   const removeCommentClickHandler = () => {
-    console.log(comment._id);
-    // removeCommentFromPlaylist(comment._id);
+    // console.log(comment._id);
+    removeCommentFromPlaylist(comment._id);
   }
 
   useEffect(() => {

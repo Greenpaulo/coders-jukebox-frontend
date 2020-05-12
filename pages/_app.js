@@ -616,8 +616,14 @@ const App = ({ Component, pageProps }) => {
       query: `
         mutation {
           removeComment(id: "${id}", playlistOwnerId: "${profileUser.id}") {
-            playlistComments {
-              _id
+            playlistComments{
+              _id,
+              content,
+              commenter {
+                _id
+              },
+              createdAt,
+              updatedAt
             }
           }
         }
@@ -641,8 +647,9 @@ const App = ({ Component, pageProps }) => {
       // .json() is a method from fetch API that auto extracts & parses the res body
       const data = await res.json();
 
+      console.log(data)
+
       const comments = data.data.removeComment.playlistComments;
-      console.log(comments);
 
       // Check for errors array in response
       if (data.errors) {
@@ -693,6 +700,7 @@ const App = ({ Component, pageProps }) => {
       removeVideoFromPlaylist,
       setCurrentVideo,
       addComment,
+      removeCommentFromPlaylist
     }}>
       <Layout>
         <Component {...pageProps} />
