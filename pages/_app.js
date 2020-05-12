@@ -440,7 +440,7 @@ const App = ({ Component, pageProps }) => {
     const requestBody = {
       query: `
         mutation {
-          createVideo(videoInput: {title: "${video.title}", thumbnailURL: "${video.thumbnailURL}", videoURL: "${video.videoId}", userID: "${currentUser.id}"}) {
+          createVideo(videoInput: {title: "${video.title}", thumbnailURL: "${video.thumbnailURL}", videoURL: "${video.videoId}", userId: "${currentUser.id}"}) {
             _id
           }
         }
@@ -567,7 +567,7 @@ const App = ({ Component, pageProps }) => {
     const requestBody = {
       query: `
         mutation {
-          createComment(commentInput: {content: "${content}", commenterID: "${currentUser.id}", playlistOwnerID: "${profileUser.id}"}) {
+          createComment(commentInput: {content: "${content}", commenterId: "${currentUser.id}", playlistOwnerId: "${profileUser.id}"}) {
             _id
           }
         }
@@ -605,6 +605,64 @@ const App = ({ Component, pageProps }) => {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  
+  // Remove a video from a user's playlist
+  const removeCommentFromPlaylist = async (id) => {
+
+    // Send an API request to delete the comment
+    const requestBody = {
+      query: `
+        mutation {
+          removeComment(id: "${id}", playlistOwnerId: "${profileUser.id}") {
+            playlistComments {
+              _id
+            }
+          }
+        }
+      `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to remove comment!');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      const comments = data.data.removeComment.playlistComments;
+      console.log(comments);
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      // Refresh the profile with the new user data - to update the playlist
+      updateProfileUserComments(comments);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const updateProfileUserComments = (comments) => {
+    // Update the profile user's playlistComments in th global state
+    setProfileUser({ ...profileUser, playlistComments: comments })
   }
 
   

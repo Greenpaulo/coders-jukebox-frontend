@@ -6,7 +6,7 @@ import { GlobalContext } from '../context/GlobalContext';
 
 const CommentSection = ({ profileUser }) => {
 
-  console.log(profileUser)
+  // console.log(profileUser)
 
   const { addComment} = useContext(GlobalContext);
 

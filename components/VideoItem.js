@@ -16,12 +16,7 @@ const VideoItem = ({video, mode}) => {
   }
 
   const removeVideoClickHandler = () => {
-
-    console.log(video._id)
     removeVideoFromPlaylist(video._id);
-
-
-
   }
 
   const playButtonHandler = () => {

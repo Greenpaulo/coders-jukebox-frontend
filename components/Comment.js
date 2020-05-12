@@ -16,6 +16,11 @@ const Comment = ({comment}) => {
     return d.toLocaleString();
   }
 
+  const removeCommentClickHandler = () => {
+    console.log(comment._id);
+    // removeCommentFromPlaylist(comment._id);
+  }
+
   useEffect(() => {
     async function fetchData() {
       const user = await getCommentUser(comment.commenter._id);
@@ -33,19 +38,30 @@ const Comment = ({comment}) => {
 
   return (
     <div className="comment" key={comment._id}>
-      <h4>Avatar</h4>
+      <div className="content">
+        <h4>Avatar</h4>
 
-      <h3>{commentUser.firstName} {commentUser.lastName}</h3>
+        <h3>{commentUser.firstName} {commentUser.lastName}</h3>
 
-      <p>{comment.content}</p>
+        <p>{comment.content}</p>
 
-      <h4 className="date">{convertDate(comment.createdAt)}</h4>
+        <h4 className="date">{convertDate(comment.createdAt)}</h4>
+      </div>
+
+      <button onClick={removeCommentClickHandler}>X</button>
+
 
 
     <style jsx>{`
 
       .comment {
         display: flex;
+        justify-content: flex-end;
+      }
+      
+      .content {
+        display: flex;
+        width: 100%;
         padding: 1.2rem;
         border: 1px solid green;
         border-radius: 5px;
@@ -64,6 +80,17 @@ const Comment = ({comment}) => {
       .date {
         margin-left: auto;
       }
+
+      button {
+      background-color: #5e00ff;
+      color: white;
+      padding: 0 1rem;
+      border-radius: 10px;
+      margin: 1rem 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
   
     `}</style>
 
