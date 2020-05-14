@@ -2,7 +2,7 @@ import Link from 'next/Link';
 import Router from 'next/router';
 import { useContext } from 'react';
 import { GlobalContext} from '../context/GlobalContext';
-import SearchBar from './Searchbar';
+import UserSearch from './UserSearch';
 
 
 const Navbar = () => {
@@ -34,9 +34,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div id="search">
-              <SearchBar placeholder='Search for user' mode='user' submitHandler={searchUserHandler}/>
-            </div>
+            <UserSearch />
 
             <ul id="nav-menu">
             {authState.authenticated && currentUser !== null &&

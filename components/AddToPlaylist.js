@@ -196,7 +196,7 @@ const AddToPlaylist = () => {
     <section id="addToPlaylist">
       <div id="header">
         <h2>Add To Playlist</h2>
-        <SearchBar placeholder='Search for music' mode="video" submitHandler={searchVideoHandler}/>
+        <SearchBar placeholder='Search for music' searchMode="video" submitHandler={searchVideoHandler}/>
       </div>
 
       {videos.map(video => {

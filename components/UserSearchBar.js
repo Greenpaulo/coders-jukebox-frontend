@@ -1,9 +1,24 @@
-import { useState} from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 
-const Searchbar = ({ placeholder, submitHandler }) => {
+const UserSearchbar = ({ placeholder, submitHandler }) => {
+
+  const { allUsers } = useContext(GlobalContext);
 
   const [searchInput, setSearchInput] = useState('');
 
+  const [filteredUsers, setFilteredUsers] = useState([])
+
+  useEffect(() => {
+    // action on update of searchInput
+      const users = allUsers.filter(user => {
+        return user.name.substr(0, searchInput.length).toUpperCase() === searchInput.toUpperCase()
+      })
+
+      setFilteredUsers(users)
+    
+
+  }, [searchInput]);
 
   const onChangeHandler = (e) => {
     setSearchInput(e.target.value);
@@ -38,6 +53,11 @@ const Searchbar = ({ placeholder, submitHandler }) => {
             margin: auto;
             display: flex;
             position: relative;
+            width: 75%;
+          }
+
+          #main-searchbar form {
+            width: 100%
           }
 
           #main-searchbar input {
@@ -59,4 +79,4 @@ const Searchbar = ({ placeholder, submitHandler }) => {
   )
 }
 
-export default Searchbar;
+export default UserSearchbar;

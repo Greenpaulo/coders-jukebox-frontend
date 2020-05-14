@@ -16,6 +16,9 @@ const App = ({ Component, pageProps }) => {
       
       // Get the logged in user's data
       getUserDataByToken(token)
+
+      //Get all users - for the searchbar user search
+      getAllUsers();
     }
   }, [])
 
@@ -58,8 +61,7 @@ const App = ({ Component, pageProps }) => {
     comment: null
   });
 
-
-
+  const [allUsers, setAllUsers] = useState([]);
 
 
   // AUTHENTICATION *******************************************************************
@@ -228,6 +230,67 @@ const App = ({ Component, pageProps }) => {
 
   // DATA FETCHING *******************************************************************
 
+  const getAllUsers = async () => {
+
+    const requestBody = {
+      query: `
+        query {
+          users {
+            _id,
+            firstName,
+            lastName
+          }
+        }
+      `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      const users = (data.data.users);
+
+      // Get full name for use in searchbar
+      const usersWithFullName = users.map(user => {
+        return {
+          id: user._id,
+          name: user.firstName + ' ' + user.lastName
+        }
+      })
+
+      setAllUsers(usersWithFullName);
+
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+  
+  
+  
+  
+  
   const getUserDataById = async (userId) => {
     // console.log('getUserData called with id:', userId)
 
@@ -684,6 +747,7 @@ const App = ({ Component, pageProps }) => {
       setProfileUser,
       videoState,
       commentState,
+      allUsers,
       login,
       register,
       logout,
