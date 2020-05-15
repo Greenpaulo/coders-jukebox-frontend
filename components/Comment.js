@@ -20,6 +20,10 @@ const Comment = ({comment}) => {
     return d.toLocaleString();
   }
 
+  const editCommentClickHandler = () => {
+    
+  }
+
   const removeCommentClickHandler = () => {
     removeCommentFromPlaylist(comment._id);
   }
@@ -55,7 +59,10 @@ const Comment = ({comment}) => {
       </div>
 
       {currentUser.id === commenterId && 
+        <>
+        <button onClick={editCommentClickHandler}>EDIT</button>
         <button onClick={removeCommentClickHandler}>X</button>
+        </>
       }
 
 

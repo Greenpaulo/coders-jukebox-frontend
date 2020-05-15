@@ -36,6 +36,8 @@ const App = ({ Component, pageProps }) => {
     id: '',
     firstName: '',
     lastName: '',
+    jobTitle: '',
+    location: '',
     ownedVideos: [],
     userComments: [],
     playlistComments: []
@@ -46,6 +48,8 @@ const App = ({ Component, pageProps }) => {
     id: '',
     firstName: '',
     lastName: '',
+    jobTitle: '',
+    location: '',
     ownedVideos: [],
     userComments: [],
     playlistComments: []
@@ -226,6 +230,56 @@ const App = ({ Component, pageProps }) => {
     // console.log('profileUser', profileUser);
   }
 
+  // USER *****************************************************************************
+  const updateUser = async (firstName, lastName, jobTitle, location) => {
+    
+    // Make a API query to get a token
+    const requestBody = {
+      query: `
+      mutation {
+        updateUser(profileInput: {firstName: "${firstName}", lastName: "${lastName}", jobTitle: "${jobTitle}", location: "${location}"}) {
+          firstName,
+          lastName,
+          jobTitle,
+          location
+        }
+      }
+    `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('User update failed!');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      // const newUserEmail = (data.data.createUser.email);
+      console.log(data.data)
+      // return newUserEmail;
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
 
   // DATA FETCHING *******************************************************************
@@ -300,6 +354,8 @@ const App = ({ Component, pageProps }) => {
           userById(id:"${userId}") {
             firstName,
             lastName,
+            jobTitle,
+            location,
             _id,
             ownedVideos {
               _id,
@@ -374,6 +430,8 @@ const App = ({ Component, pageProps }) => {
           userByToken{
             firstName,
             lastName,
+            jobTitle,
+            location,
             _id,
             ownedVideos {
               _id,
@@ -428,6 +486,8 @@ const App = ({ Component, pageProps }) => {
         id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
+        jobTitle: user.jobTitle,
+        location: user.location,
         ownedVideos: user.ownedVideos,
         userComments: user.userComments,
         playlistComments: user.playlistComments
@@ -460,6 +520,8 @@ const App = ({ Component, pageProps }) => {
       id: userId,
       firstName: user.firstName,
       lastName: user.lastName,
+      jobTitle: user.jobTitle,
+      location: user.location,
       ownedVideos: user.ownedVideos,
       userComments: user.userComments,
       playlistComments: user.playlistComments
@@ -474,6 +536,8 @@ const App = ({ Component, pageProps }) => {
       id: '',
       firstName: '',
       lastName: '',
+      jobTitle: '',
+      location: '',
       ownedVideos: [],
       userComments: [],
       playlistComments: []
@@ -751,6 +815,7 @@ const App = ({ Component, pageProps }) => {
       login,
       register,
       logout,
+      updateUser,
       getUserDataById,
       getUserDataByToken,
       fetchProfileUser,

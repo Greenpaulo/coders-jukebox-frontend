@@ -145,21 +145,6 @@ const Auth = () => {
           font-size: 1.2rem;
         }
 
-        button {
-          color: white;
-          padding: 0.5rem 1rem ;
-          border-radius: 5px;
-          font-size: 1rem;
-          background-color: #3cbc3e;
-          border: none;
-          cursor: pointer;
-        }
-
-        button:hover {
-          background-color: #42af44;
-        }
-        
-
       `}</style>
       
       </section>

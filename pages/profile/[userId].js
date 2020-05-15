@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 // import Router from 'next/router'
 import { GlobalContext } from '../../context/GlobalContext';
@@ -8,16 +8,13 @@ import VideoPlayer from '../../components/VideoPlayer';
 import AddToPlaylist from '../../components/AddToPlaylist';
 import Playlist from '../../components/PlayList';
 import CommentSection from '../../components/CommentSection';
+import ProfileEdit from '../../components/ProfileEdit';
 
 
 const Profile = () => {
 
   const { currentUser, profileUser, fetchProfileUser, clearProfileUser } = useContext(GlobalContext);
 
-  // console.log('profile page read');
-
-  // console.log('profileUser', profileUser)
-  
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
   const { userId } = router.query
@@ -42,15 +39,28 @@ const Profile = () => {
   //   // }
   // }, [])
 
+  const [editMode, setEditMode] = useState(false)
+
+  const showProfileEditSection = () => {
+    setEditMode(true)
+  }
+
 
   return (
       <div className="container" id="profile">
         
         <section id="user-info">
-          <h1>{profileUser.firstName} {profileUser.lastName}</h1>
-          <h2>Job Title: </h2>
-          <h2>Location: </h2>
+          <div>
+            <h1>{profileUser.firstName} {profileUser.lastName}</h1>
+            <h2>Job Title: {profileUser.jobTitle}</h2>
+            <h2>Location: {profileUser.location}</h2>
+          </div>
+        <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
         </section>
+
+        {editMode &&
+          <ProfileEdit setEditMode={setEditMode}/>
+        }
 
         <VideoPlayer />
 
@@ -73,12 +83,14 @@ const Profile = () => {
           section {
             padding: 3rem;
             border: 1px solid white;
-            border-radius: 10px; 
+            border-radius: 10px;
+            margin-top: 1rem; 
           }
           
           #user-info {
             margin-top: 1rem;
-            
+            display: flex;
+            justify-content: space-between;
           }
 
           #user-info h1 {
@@ -90,6 +102,15 @@ const Profile = () => {
             margin-bottom: 1rem;
           }
           
+          button#profile-edit-btn {
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 10%;
+          }
 
           #playlist {
             margin-top: 4rem;
