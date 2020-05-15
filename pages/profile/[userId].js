@@ -55,7 +55,9 @@ const Profile = () => {
             <h2>Job Title: {profileUser.jobTitle}</h2>
             <h2>Location: {profileUser.location}</h2>
           </div>
-        <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
+        {profileUser.id === currentUser.id &&
+          <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
+        }
         </section>
 
         {editMode &&

@@ -1,10 +1,18 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 
 const ProfileEdit = ({setEditMode}) => {
 
-  const { updateUser } = useContext(GlobalContext);
+  const { updateUser, currentUser } = useContext(GlobalContext);
+
+  // Prefill the form with the current info
+  const [ profileInfo, setProfileInfo ] = useState({
+    firstName: currentUser.firstName,
+    lastName: currentUser.lastName,
+    jobTitle: currentUser.jobTitle,
+    location: currentUser.location
+  })
   
   
   // Create refs
@@ -44,19 +52,19 @@ const ProfileEdit = ({setEditMode}) => {
       <form onSubmit={(e) => updateProfileHandler(e)}>
         <div className="form-control">
           <label htmlFor="firstName">First Name: </label>
-          <input type="text" id="firstName" ref={firstNameRef} />
+          <input type="text" id="firstName" defaultValue={profileInfo.firstName}  ref={firstNameRef} />
         </div>
         <div className="form-control">
           <label htmlFor="lastName">Last Name:</label>
-          <input type="text" id="lastName" ref={lastNameRef} />
+          <input type="text" id="lastName" defaultValue={profileInfo.lastName} ref={lastNameRef} />
         </div>
         <div className="form-control">
           <label htmlFor="JobTitle">Job Title:</label>
-          <input type="text" id="jobTitle" ref={jobTitleRef} />
+          <input type="text" id="jobTitle" defaultValue={profileInfo.jobTitle} ref={jobTitleRef} />
         </div>
         <div className="form-control">
           <label htmlFor="location">Location:</label>
-          <input type="text" id="location" ref={locationRef} />
+          <input type="text" id="location" defaultValue={profileInfo.location} ref={locationRef} />
         </div>
         <button type="submit">Update</button>
       </form>

@@ -342,9 +342,6 @@ const App = ({ Component, pageProps }) => {
   }
   
   
-  
-  
-  
   const getUserDataById = async (userId) => {
     // console.log('getUserData called with id:', userId)
 
@@ -526,6 +523,15 @@ const App = ({ Component, pageProps }) => {
       userComments: user.userComments,
       playlistComments: user.playlistComments
     })
+
+    //Set video state to be first video in profile user's playlist
+    if (user.ownedVideos.length > 0){
+      const video = user.ownedVideos[0]
+      setCurrentVideo({
+        title: video.title,
+        videoId: video.videoURL
+      })
+    }
 
     return user;
   }
