@@ -876,69 +876,62 @@ const App = ({ Component, pageProps }) => {
   }
 
 
-  // // Remove a video from a user's playlist
-  // const removeCommentFromPlaylist = async (id) => {
+  // Remove a favourite from a users profile
+  const removeFavourite = async (id) => {
 
-  //   // Send an API request to delete the comment
-  //   const requestBody = {
-  //     query: `
-  //       mutation {
-  //         removeComment(id: "${id}", playlistOwnerId: "${profileUser.id}") {
-  //           playlistComments{
-  //             _id,
-  //             content,
-  //             commenter {
-  //               _id
-  //             },
-  //             createdAt,
-  //             updatedAt
-  //           }
-  //         }
-  //       }
-  //     `
-  //   }
+    // Send an API request to delete the comment
+    const requestBody = {
+      query: `
+        mutation {
+          removeFavourite(id: "${id}") {
+            favourites
+          }
+        }
+      `
+    }
 
-  //   try {
-  //     const res = await fetch('http://localhost:5000/graphql', {
-  //       method: 'POST',
-  //       body: JSON.stringify(requestBody),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${authState.token}`
-  //       }
-  //     })
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
 
-  //     if (res.status !== 200 && res.status !== 201) {
-  //       throw new Error('Failed to remove comment!');
-  //     }
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to remove favourite!');
+      }
 
-  //     // .json() is a method from fetch API that auto extracts & parses the res body
-  //     const data = await res.json();
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
 
-  //     console.log(data)
+      console.log(data)
 
-  //     const comments = data.data.removeComment.playlistComments;
+      const favourites = data.data.removeFavourite.favourites;
+      console.log(favourites)
 
-  //     // Check for errors array in response
-  //     if (data.errors) {
-  //       data.errors.map(error => {
-  //         console.log(error.message)
-  //       })
-  //       return
-  //     }
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
 
-  //     // Refresh the profile with the new user data - to update the playlist
-  //     updateProfileUserComments(comments);
+      // Refresh the profile with the new user data - to update the favourites
+      updateProfileUserFavourites(favourites);
 
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  // const updateProfileUserComments = (comments) => {
-  //   // Update the profile user's playlistComments in th global state
-  //   setProfileUser({ ...profileUser, playlistComments: comments })
-  // }
+  const updateProfileUserFavourites = (favourites) => {
+    // Update the profile user's favourites in th global state
+    setProfileUser({ ...profileUser, favourites })
+  }
   
 
 
@@ -970,7 +963,8 @@ const App = ({ Component, pageProps }) => {
       setCurrentVideo,
       addComment,
       removeCommentFromPlaylist,
-      addFavourite
+      addFavourite,
+      removeFavourite
     }}>
       <Layout>
         <Component {...pageProps} />

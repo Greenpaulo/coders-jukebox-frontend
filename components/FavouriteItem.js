@@ -7,12 +7,16 @@ const FavouriteItem = ({id}) => {
 
   console.log(id)
 
-  const { getFavouriteUser, fetchProfileUser } = useContext(GlobalContext);
+  const { getFavouriteUser, fetchProfileUser, removeFavourite } = useContext(GlobalContext);
   
   const [favUser, setFavUser] = useState({});
 
   const favUserClickHandler = () => {
     fetchProfileUser(id, false);
+  }
+
+  const removeFavHandler = () => {
+    removeFavourite(id);
   }
 
   useEffect(() => {
@@ -36,6 +40,8 @@ const FavouriteItem = ({id}) => {
       <Link href="/profile/[userId]" as={`/profile/${id}`}>
         <a onClick={favUserClickHandler}><h3>{favUser.firstName} {favUser.lastName}</h3></a>
       </Link>
+
+      <button onClick={removeFavHandler}>Remove</button>
     </div>
   )
 }
