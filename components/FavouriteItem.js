@@ -5,7 +5,6 @@ import { GlobalContext } from '../context/GlobalContext';
 
 const FavouriteItem = ({id}) => {
 
-  console.log(id)
 
   const { getFavouriteUser, fetchProfileUser, removeFavourite } = useContext(GlobalContext);
   
@@ -20,7 +19,6 @@ const FavouriteItem = ({id}) => {
   }
 
   useEffect(() => {
-    console.log(id)
     const fetchData = async () => {
       const userData = await getFavouriteUser(id);
       setFavUser({

@@ -1,5 +1,5 @@
 import Link from 'next/Link';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 
@@ -8,22 +8,42 @@ const Comment = ({comment}) => {
 
   const commenterId = comment.commenter._id 
 
-  const { getCommentUser, removeCommentFromPlaylist, currentUser, fetchProfileUser } = useContext(GlobalContext);
+  const { getCommentUser, removeCommentFromPlaylist, currentUser, fetchProfileUser, editComment } = useContext(GlobalContext);
   
   const [commentUser, setCommentUser] = useState({
     firstName: '',
     lastName:''
   });
 
+  const [editMode, setEditMode] = useState(false)
+
+  // const [content, setContent] = useState('');
+
+  // const handleChange = (e) => {
+  //   setContent(e.target.value);
+  // }
+
+  const editedContentRef = useRef();
+  
+  const editCommentClickHandler = () => {
+    //Show the edit comment textarea
+    setEditMode(true); 
+  }
+
+  const editCommentSubmitHandler = (e) => {
+    e.preventDefault();
+    editComment(comment._id, editedContentRef.current.value);
+    // Exit edit mode
+    setEditMode(false);
+  }
+
+
+  
+  
   const convertDate= (millisecs) => {
     const d = new Date(+millisecs);
     return d.toLocaleString();
   }
-
-  const editCommentClickHandler = () => {
-    
-  }
-
   const removeCommentClickHandler = () => {
     removeCommentFromPlaylist(comment._id);
   }
@@ -45,30 +65,47 @@ const Comment = ({comment}) => {
 
 
   return (
-    <div className="comment" key={comment._id}>
-      <div className="content">
-        <h4>Avatar</h4>
+    <>
+    <>
+      <div className="comment" key={comment._id}>
+        <div className="content">
+          <h4>Avatar</h4>
 
-        <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
-          <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
-        </Link>
-        
-        <p>{comment.content}</p>
+          <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
+            <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
+          </Link>
+          
+          {!editMode && 
+          <>
+            <p>{comment.content}</p>
 
-        <h4 className="date">{convertDate(comment.createdAt)}</h4>
+            <h4 className="date">{convertDate(comment.createdAt)}</h4>
+          </>
+          }
+
+          {editMode &&
+            <section id="edit-comment">
+              <form onSubmit={(e) => editCommentSubmitHandler(e)}>
+                <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="3" ref={editedContentRef}></textarea>
+                <button type="submit">Submit</button>
+              </form>
+            </section>
+          }
+
+        </div>
+
+        {currentUser.id === commenterId && 
+          <>
+          <button onClick={editCommentClickHandler}>EDIT</button>
+          <button onClick={removeCommentClickHandler}>X</button>
+          </>
+        }
       </div>
+    </>
 
-      {currentUser.id === commenterId && 
-        <>
-        <button onClick={editCommentClickHandler}>EDIT</button>
-        <button onClick={removeCommentClickHandler}>X</button>
-        </>
-      }
+    
 
-
-
-
-    <style jsx>{`
+      <style jsx>{`
 
       .comment {
         display: flex;
@@ -110,7 +147,7 @@ const Comment = ({comment}) => {
   
     `}</style>
 
-    </div>
+  </>
   )
 }
 

@@ -83,7 +83,7 @@ const Profile = () => {
 
         <CommentSection profileUser={profileUser}/>
 
-        <Favourites />
+        <Favourites profileUser={profileUser}/>
 
 
 

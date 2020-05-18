@@ -566,7 +566,6 @@ const App = ({ Component, pageProps }) => {
   }
 
   const getFavouriteUser = async (userId) => {
-    console.log(userId)
     let requestBody = {
       query: `
           query {
@@ -763,7 +762,7 @@ const App = ({ Component, pageProps }) => {
   }
 
   
-  // Remove a video from a user's playlist
+  // Remove a comment from a user's playlist
   const removeCommentFromPlaylist = async (id) => {
 
     // Send an API request to delete the comment
@@ -814,7 +813,7 @@ const App = ({ Component, pageProps }) => {
         return
       }
 
-      // Refresh the profile with the new user data - to update the playlist
+      // Refresh the profile with the new user data - to update the comments
       updateProfileUserComments(comments);
 
     } catch (err) {
@@ -823,8 +822,58 @@ const App = ({ Component, pageProps }) => {
   }
 
   const updateProfileUserComments = (comments) => {
-    // Update the profile user's playlistComments in th global state
+    // Update the profile user's playlistComments in the global state
     setProfileUser({ ...profileUser, playlistComments: comments })
+  }
+
+  const editComment = async (id, content) => {
+
+    // Make a API query to get a token
+    const requestBody = {
+      query: `
+      mutation {
+        editComment(id: "${id}", content: "${content}") {
+          content
+        }
+      }
+    `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('User update failed!');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      console.log(data.data)
+
+      // Refresh the profile with the new user data - to update the comments
+      fetchProfileUser(profileUser.id, false)
+
+
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 
 
@@ -962,6 +1011,7 @@ const App = ({ Component, pageProps }) => {
       removeVideoFromPlaylist,
       setCurrentVideo,
       addComment,
+      editComment,
       removeCommentFromPlaylist,
       addFavourite,
       removeFavourite
