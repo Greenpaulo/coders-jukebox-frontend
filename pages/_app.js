@@ -40,7 +40,8 @@ const App = ({ Component, pageProps }) => {
     location: '',
     ownedVideos: [],
     userComments: [],
-    playlistComments: []
+    playlistComments: [],
+    favourites: []
   });
 
   // Current profiles user data
@@ -52,7 +53,8 @@ const App = ({ Component, pageProps }) => {
     location: '',
     ownedVideos: [],
     userComments: [],
-    playlistComments: []
+    playlistComments: [],
+    favourites: []
   });
 
   const [videoState, setVideoState] = useState({
@@ -212,7 +214,8 @@ const App = ({ Component, pageProps }) => {
       lastName: '',
       ownedVideos: [],
       userComments: [],
-      playlistComments: []
+      playlistComments: [],
+      favourites: []
     });
 
     setProfileUser({
@@ -221,7 +224,8 @@ const App = ({ Component, pageProps }) => {
       lastName: '',
       ownedVideos: [],
       userComments: [],
-      playlistComments: []
+      playlistComments: [],
+      favourites: []
     });
     
     // Redirect to home page
@@ -342,36 +346,39 @@ const App = ({ Component, pageProps }) => {
   }
   
   
-  const getUserDataById = async (userId) => {
+  const getUserDataById = async (userId, requestBody={}) => {
     // console.log('getUserData called with id:', userId)
 
-    const requestBody = {
-      query: `
-        query {
-          userById(id:"${userId}") {
-            firstName,
-            lastName,
-            jobTitle,
-            location,
-            _id,
-            ownedVideos {
+    if (requestBody = {}){
+      requestBody = {
+        query: `
+          query {
+            userById(id:"${userId}") {
+              firstName,
+              lastName,
+              jobTitle,
+              location,
               _id,
-              thumbnailURL,
-              title,
-              videoURL
-            },
-            playlistComments{
-              _id,
-              content,
-              commenter {
-                _id
+              ownedVideos {
+                _id,
+                thumbnailURL,
+                title,
+                videoURL
               },
-              createdAt,
-              updatedAt
+              playlistComments{
+                _id,
+                content,
+                commenter {
+                  _id
+                },
+                createdAt,
+                updatedAt
+              },
+              favourites
             }
           }
+          `
         }
-      `
     }
 
 
@@ -444,7 +451,8 @@ const App = ({ Component, pageProps }) => {
               },  
               createdAt,
               updatedAt
-            }
+            },
+            favourites
           }
         }
       `
@@ -487,7 +495,8 @@ const App = ({ Component, pageProps }) => {
         location: user.location,
         ownedVideos: user.ownedVideos,
         userComments: user.userComments,
-        playlistComments: user.playlistComments
+        playlistComments: user.playlistComments,
+        favourites: user.favourites
       })  
 
     } catch (err) {
@@ -495,7 +504,6 @@ const App = ({ Component, pageProps }) => {
     }
     
   }
-
 
   const fetchProfileUser = async (userId, initialFetch) => {
 
@@ -521,7 +529,8 @@ const App = ({ Component, pageProps }) => {
       location: user.location,
       ownedVideos: user.ownedVideos,
       userComments: user.userComments,
-      playlistComments: user.playlistComments
+      playlistComments: user.playlistComments,
+      favourites: user.favourites
     })
 
     //Set video state to be first video in profile user's playlist
@@ -546,13 +555,30 @@ const App = ({ Component, pageProps }) => {
       location: '',
       ownedVideos: [],
       userComments: [],
-      playlistComments: []
+      playlistComments: [],
+      favourites: []
     });
   }
 
   const getCommentUser = async (userId) => {
     const commentUser = await getUserDataById(userId);
     return commentUser;
+  }
+
+  const getFavouriteUser = async (userId) => {
+    console.log(userId)
+    let requestBody = {
+      query: `
+          query {
+            userById(id:"${userId}") {
+              firstName,
+              lastName,
+            }
+          }
+          `
+    }
+    const favouriteUser = await getUserDataById(userId, requestBody)
+    return favouriteUser;
   }
 
 
@@ -801,7 +827,118 @@ const App = ({ Component, pageProps }) => {
     setProfileUser({ ...profileUser, playlistComments: comments })
   }
 
-  
+
+  // Favourites *******************************************************************
+  const addFavourite = async (id) => {
+
+    // Send an API request to add the favourite
+    const requestBody = {
+      query: `
+        mutation {
+          addFavourite(id: "${id}") {
+            _id
+          }
+        }
+      `
+    }
+
+    try {
+      const res = await fetch('http://localhost:5000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authState.token}`
+        }
+      })
+
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed to add favourite!');
+      }
+
+      // .json() is a method from fetch API that auto extracts & parses the res body
+      const data = await res.json();
+
+      // Check for errors array in response
+      if (data.errors) {
+        data.errors.map(error => {
+          console.log(error.message)
+        })
+        return
+      }
+
+      // Refresh the profile with the new user data - to update the favourites section
+      fetchProfileUser(id, false)
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
+  // // Remove a video from a user's playlist
+  // const removeCommentFromPlaylist = async (id) => {
+
+  //   // Send an API request to delete the comment
+  //   const requestBody = {
+  //     query: `
+  //       mutation {
+  //         removeComment(id: "${id}", playlistOwnerId: "${profileUser.id}") {
+  //           playlistComments{
+  //             _id,
+  //             content,
+  //             commenter {
+  //               _id
+  //             },
+  //             createdAt,
+  //             updatedAt
+  //           }
+  //         }
+  //       }
+  //     `
+  //   }
+
+  //   try {
+  //     const res = await fetch('http://localhost:5000/graphql', {
+  //       method: 'POST',
+  //       body: JSON.stringify(requestBody),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${authState.token}`
+  //       }
+  //     })
+
+  //     if (res.status !== 200 && res.status !== 201) {
+  //       throw new Error('Failed to remove comment!');
+  //     }
+
+  //     // .json() is a method from fetch API that auto extracts & parses the res body
+  //     const data = await res.json();
+
+  //     console.log(data)
+
+  //     const comments = data.data.removeComment.playlistComments;
+
+  //     // Check for errors array in response
+  //     if (data.errors) {
+  //       data.errors.map(error => {
+  //         console.log(error.message)
+  //       })
+  //       return
+  //     }
+
+  //     // Refresh the profile with the new user data - to update the playlist
+  //     updateProfileUserComments(comments);
+
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  // const updateProfileUserComments = (comments) => {
+  //   // Update the profile user's playlistComments in th global state
+  //   setProfileUser({ ...profileUser, playlistComments: comments })
+  // }
   
 
 
@@ -826,12 +963,14 @@ const App = ({ Component, pageProps }) => {
       getUserDataByToken,
       fetchProfileUser,
       getCommentUser,
+      getFavouriteUser,
       addVideoToPlaylist,
       clearProfileUser,
       removeVideoFromPlaylist,
       setCurrentVideo,
       addComment,
-      removeCommentFromPlaylist
+      removeCommentFromPlaylist,
+      addFavourite
     }}>
       <Layout>
         <Component {...pageProps} />

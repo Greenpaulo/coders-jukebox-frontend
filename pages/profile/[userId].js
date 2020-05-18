@@ -9,11 +9,12 @@ import AddToPlaylist from '../../components/AddToPlaylist';
 import Playlist from '../../components/PlayList';
 import CommentSection from '../../components/CommentSection';
 import ProfileEdit from '../../components/ProfileEdit';
+import Favourites from '../../components/Favourites';
 
 
 const Profile = () => {
 
-  const { currentUser, profileUser, fetchProfileUser, clearProfileUser } = useContext(GlobalContext);
+  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite } = useContext(GlobalContext);
 
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
@@ -45,6 +46,10 @@ const Profile = () => {
     setEditMode(true)
   }
 
+  const addFavouriteHandler = () => {
+    addFavourite(userId);
+  }
+
 
   return (
       <div className="container" id="profile">
@@ -58,6 +63,10 @@ const Profile = () => {
         {profileUser.id === currentUser.id &&
           <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
         }
+        {profileUser.id !== currentUser.id &&
+          <button id="add-favourite" onClick={addFavouriteHandler}>Add Favourite</button>
+        }
+
         </section>
 
         {editMode &&
@@ -73,6 +82,8 @@ const Profile = () => {
         <Playlist profileUser={profileUser}/>
 
         <CommentSection profileUser={profileUser}/>
+
+        <Favourites />
 
 
 
@@ -104,7 +115,7 @@ const Profile = () => {
             margin-bottom: 1rem;
           }
           
-          button#profile-edit-btn {
+          button#profile-edit-btn, button#add-favourite {
             cursor: pointer;
             padding: 0.5rem 0.75rem;
             background: blue;

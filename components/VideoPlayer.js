@@ -11,7 +11,7 @@ const VideoPlayer = () => {
 
     <div id="video-container">
       <div id="video-player">
-        <iframe width="765" height="472.5" frameBorder="0" allowFullScreen allow="autoplay"src={videoSrc}></iframe>
+        <iframe width="765" height="472.5" frameBorder="0" allowFullScreen allow="autoplay" src={videoSrc}></iframe>
         {/* <VideoInfo /> */}
         <div id="video-info">
           <h3>{videoState.title}</h3>
