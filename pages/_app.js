@@ -58,6 +58,22 @@ const App = ({ Component, pageProps }) => {
     favourites: []
   });
 
+  const [profilePhoto, setProfilePhoto] = useState({ 
+    fieldname: "file", 
+    originalname: "29683766_10156269106213029_3005960630240035598_n.jpg", 
+    encoding: "7bit", 
+    mimetype: "image/jpeg", 
+    id: "5ec663c8bd8b4e11d44221ee", 
+    filename: "a12a1db6683056bc88b64e9eb7f43978.jpg", 
+    metadata: null, 
+    bucketName: "uploads", 
+    chunkSize: 261120, 
+    size: 52864, 
+    md5: "d371e2ba251ff3ebaf87a1d77dd6ddde", 
+    uploadDate: "2020-05-21T11:19:37.012Z", 
+    contentType: "image/jpeg" 
+  });
+  
   const [videoState, setVideoState] = useState({
     title: '',
     // description:'',
@@ -70,7 +86,6 @@ const App = ({ Component, pageProps }) => {
 
   const [allUsers, setAllUsers] = useState([]);
 
-  const [profilePhoto, setProfilePhoto] = useState(null);
 
 
   // AUTHENTICATION *******************************************************************

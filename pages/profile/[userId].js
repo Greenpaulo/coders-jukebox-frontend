@@ -41,7 +41,10 @@ const Profile = () => {
   // }, [])
 
   const [editMode, setEditMode] = useState(false)
-  // const [imageString, setImageString] = useState('')
+  const [imageString, setImageString] = useState(
+    `http://localhost:5000/image/${profilePhoto.filename}`
+    );
+
 
   // if (profilePhoto !== null){
   //   setImageString(profilePhoto.filename);
@@ -61,19 +64,23 @@ const Profile = () => {
       <div className="container" id="profile">
         
         <section id="user-info">
+        
+        <img src={imageString} alt="profile-photo"/>
+
           <div>
             <h1>{profileUser.firstName} {profileUser.lastName}</h1>
             <h2>Job Title: {profileUser.jobTitle}</h2>
             <h2>Location: {profileUser.location}</h2>
           </div>
+
+
         {profileUser.id === currentUser.id &&
           <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
         }
         {profileUser.id !== currentUser.id &&
           <button id="add-favourite" onClick={addFavouriteHandler}>Add Favourite</button>
         }
-
-        <img src="image/2e42308758163c17d171519f136c0594.jpg" alt=""/>
+            
 
         </section>
 
@@ -138,7 +145,8 @@ const Profile = () => {
           }
 
           img {
-            width: 50%;
+            width: 25%;
+            border-radius: 50%;
           }
         
         `}</style>
