@@ -32,6 +32,10 @@ const Comment = ({comment}) => {
 
   const editCommentSubmitHandler = (e) => {
     e.preventDefault();
+    // Check if the content is empty
+    if (editedContentRef.current.value.trim().length === 0) {
+      return;
+    }
     editComment(comment._id, editedContentRef.current.value);
     // Exit edit mode
     setEditMode(false);

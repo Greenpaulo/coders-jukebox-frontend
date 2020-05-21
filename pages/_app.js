@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import { useState, useEffect } from 'react';
 import Router from 'next/router';
 import cookie from 'react-cookies';
+import axios from 'axios';
 
 const App = ({ Component, pageProps }) => {
 
@@ -68,6 +69,8 @@ const App = ({ Component, pageProps }) => {
   });
 
   const [allUsers, setAllUsers] = useState([]);
+
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
 
   // AUTHENTICATION *******************************************************************
@@ -981,7 +984,31 @@ const App = ({ Component, pageProps }) => {
     // Update the profile user's favourites in th global state
     setProfileUser({ ...profileUser, favourites })
   }
+
+
+  // PHOTO ***********************************************************************
   
+  const uploadFile = async (formData) => {
+
+    try {
+      const res = await axios.post('http://localhost:5000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      console.log(res.data);
+
+      
+      const photo = res.data;
+      
+      setProfilePhoto(photo)
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
 
   
@@ -997,6 +1024,7 @@ const App = ({ Component, pageProps }) => {
       videoState,
       commentState,
       allUsers,
+      profilePhoto,
       login,
       register,
       logout,
@@ -1014,7 +1042,8 @@ const App = ({ Component, pageProps }) => {
       editComment,
       removeCommentFromPlaylist,
       addFavourite,
-      removeFavourite
+      removeFavourite,
+      uploadFile
     }}>
       <Layout>
         <Component {...pageProps} />

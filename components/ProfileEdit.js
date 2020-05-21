@@ -1,10 +1,11 @@
 import { useContext, useRef, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import FileUpload from './FileUpload';
 
 
 const ProfileEdit = ({setEditMode}) => {
 
-  const { updateUser, currentUser } = useContext(GlobalContext);
+  const { updateUser, currentUser, uploadPhoto } = useContext(GlobalContext);
 
   // Prefill the form with the current info
   const [ profileInfo, setProfileInfo ] = useState({
@@ -45,11 +46,14 @@ const ProfileEdit = ({setEditMode}) => {
   }
 
 
+
   return (
     <section id="profile-edit">
       <h2>Update Profile:</h2>
 
-      <form onSubmit={(e) => updateProfileHandler(e)}>
+      <div id="edit-container">
+
+      <form onSubmit={(e) => updateProfileHandler(e)} id="profile-info-edit">
         <div className="form-control">
           <label htmlFor="firstName">First Name: </label>
           <input type="text" id="firstName" defaultValue={profileInfo.firstName}  ref={firstNameRef} />
@@ -69,6 +73,14 @@ const ProfileEdit = ({setEditMode}) => {
         <button type="submit">Update</button>
       </form>
 
+      <FileUpload />
+
+      </div>
+
+     
+      
+
+
       <style jsx>{`
       
         section {
@@ -76,6 +88,19 @@ const ProfileEdit = ({setEditMode}) => {
           border: 1px solid white;
           border-radius: 10px;
           margin-top: 1rem; 
+        }
+
+        #edit-container {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        #profile-info-edit {
+          margin: 2rem 0;
+        }
+
+        button {
+          margin-top: 1rem;
         }
       
       

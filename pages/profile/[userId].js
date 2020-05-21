@@ -14,7 +14,7 @@ import Favourites from '../../components/Favourites';
 
 const Profile = () => {
 
-  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite } = useContext(GlobalContext);
+  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite, profilePhoto } = useContext(GlobalContext);
 
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
@@ -41,6 +41,12 @@ const Profile = () => {
   // }, [])
 
   const [editMode, setEditMode] = useState(false)
+  // const [imageString, setImageString] = useState('')
+
+  // if (profilePhoto !== null){
+  //   setImageString(profilePhoto.filename);
+  // }
+  
 
   const showProfileEditSection = () => {
     setEditMode(true)
@@ -66,6 +72,8 @@ const Profile = () => {
         {profileUser.id !== currentUser.id &&
           <button id="add-favourite" onClick={addFavouriteHandler}>Add Favourite</button>
         }
+
+        <img src="image/2e42308758163c17d171519f136c0594.jpg" alt=""/>
 
         </section>
 
@@ -127,6 +135,10 @@ const Profile = () => {
 
           #playlist {
             margin-top: 4rem;
+          }
+
+          img {
+            width: 50%;
           }
         
         `}</style>
