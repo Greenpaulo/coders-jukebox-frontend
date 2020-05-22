@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalContext';
 const FileUpload = () => {
 
   const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('Upload photo - max size 55 KB');
+  const [filename, setFilename] = useState('Upload photo - max size 70 KB');
 
   const { uploadFile } = useContext(GlobalContext);
 
@@ -13,7 +13,7 @@ const FileUpload = () => {
     e.preventDefault();
 
     // Check for max size
-    if (file.size > 55000) {
+    if (file.size > 70000) {
       return;
     }
 
@@ -26,7 +26,6 @@ const FileUpload = () => {
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
-
   }
 
 

@@ -14,7 +14,7 @@ import Favourites from '../../components/Favourites';
 
 const Profile = () => {
 
-  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite, profilePhoto } = useContext(GlobalContext);
+  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite} = useContext(GlobalContext);
 
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
@@ -41,9 +41,17 @@ const Profile = () => {
   // }, [])
 
   const [editMode, setEditMode] = useState(false)
-  const [imageString, setImageString] = useState(
-    `http://localhost:5000/image/${profilePhoto.filename}`
-    );
+  // const [imageString, setImageString] = useState('http://localhost:5000/image/3cae4585ddf4cc55c72b174c0726f266.jpg');
+
+  // if (profilePhoto !== null) {
+  //   setImageString(`http://localhost:5000/image/${.filename}`)
+  // }
+  // console.log(imageString)
+  // if (profileUser.profilePhotoFilename !== null) {
+  //   const filename = profileUser.profilePhotoFilename;
+      
+  //   setImageString(`http://localhost:5000/image/${filename}`);
+  // }
 
 
   // if (profilePhoto !== null){
@@ -65,7 +73,9 @@ const Profile = () => {
         
         <section id="user-info">
         
-        <img src={imageString} alt="profile-photo"/>
+        { profileUser.profilePhotoFilename != null &&
+          <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo"/>
+        }
 
           <div>
             <h1>{profileUser.firstName} {profileUser.lastName}</h1>
