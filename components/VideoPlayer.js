@@ -5,7 +5,11 @@ const VideoPlayer = () => {
 
   const { videoState } = useContext(GlobalContext);
 
-  const videoSrc = `https://www.youtube.com/embed/${videoState.videoId}?autoplay=1`;
+  // Autoplay on
+  // const videoSrc = `https://www.youtube.com/embed/${videoState.videoId}?autoplay=1`;
+  
+  // Autoplay off
+  const videoSrc = `https://www.youtube.com/embed/${videoState.videoId}`;
 
   return (
 

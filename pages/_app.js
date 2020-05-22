@@ -951,8 +951,12 @@ const App = ({ Component, pageProps }) => {
         return
       }
 
+      
+      // Refresh the currentUser's data to update the add favourite profile button
+      // getUserDataById(currentUser.id)
       // Refresh the profile with the new user data - to update the favourites section
-      fetchProfileUser(id, false)
+      // fetchProfileUser(id, false)
+      getUserDataByToken(authState.token);
 
     } catch (err) {
       console.log(err);
@@ -991,10 +995,19 @@ const App = ({ Component, pageProps }) => {
       // .json() is a method from fetch API that auto extracts & parses the res body
       const data = await res.json();
 
-      console.log(data)
+      // console.log(data)
 
       const favourites = data.data.removeFavourite.favourites;
-      console.log(favourites)
+      // console.log(favourites)
+
+      // Refresh the profile with the new user data - to update the favourites section
+      // fetchProfileUser(id, false)
+
+      // Refresh the currentUser's data to update the add favourite profile button
+      // getUserDataById(currentUser.id)
+
+      getUserDataByToken(authState.token);
+
 
       // Check for errors array in response
       if (data.errors) {
@@ -1031,11 +1044,8 @@ const App = ({ Component, pageProps }) => {
         }
       });
 
-      console.log(res.data);
-
       // refresh the profile
       fetchProfileUser(currentUser.id)
-
 
     } catch (error) {
       console.log(error);

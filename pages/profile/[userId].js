@@ -14,12 +14,14 @@ import Favourites from '../../components/Favourites';
 
 const Profile = () => {
 
-  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite} = useContext(GlobalContext);
+  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite, removeFavourite} = useContext(GlobalContext);
 
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
   const { userId } = router.query
   fetchProfileUser(userId, true);
+
+  const [isFavourite, setIsFavourite] = useState(false)
   
   
   // useEffect(() => {
@@ -67,6 +69,10 @@ const Profile = () => {
     addFavourite(userId);
   }
 
+  const removeFavouriteHandler = () => {
+    removeFavourite(profileUser.id);
+  }
+
 
   return (
       <div className="container" id="profile">
@@ -87,8 +93,11 @@ const Profile = () => {
         {profileUser.id === currentUser.id &&
           <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
         }
-        {profileUser.id !== currentUser.id &&
+        {profileUser.id !== currentUser.id && !(currentUser.favourites.includes(profileUser.id)) &&
           <button id="add-favourite" onClick={addFavouriteHandler}>Add Favourite</button>
+        }
+        {currentUser.favourites.includes(profileUser.id) &&
+          <button id="remove-favourite" onClick={removeFavouriteHandler}>Remove Favourite</button>
         }
             
 
@@ -140,7 +149,7 @@ const Profile = () => {
             margin-bottom: 1rem;
           }
           
-          button#profile-edit-btn, button#add-favourite {
+          button#profile-edit-btn, button#add-favourite, button#remove-favourite {
             cursor: pointer;
             padding: 0.5rem 0.75rem;
             background: blue;
