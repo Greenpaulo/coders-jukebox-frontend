@@ -19,6 +19,7 @@ const CommentSection = ({ profileUser }) => {
   const commentSubmitHandler = (e) => {
     e.preventDefault();
     addComment(content);
+    setContent('');
   }
 
 

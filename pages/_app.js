@@ -836,8 +836,6 @@ const App = ({ Component, pageProps }) => {
       // .json() is a method from fetch API that auto extracts & parses the res body
       const data = await res.json();
 
-      console.log(data)
-
       const comments = data.data.removeComment.playlistComments;
 
       // Check for errors array in response

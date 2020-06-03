@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
-const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers}) => {
+const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers, checkSearchMode}) => {
 
   const { allUsers } = useContext(GlobalContext);
 
@@ -19,6 +19,7 @@ const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers}) => {
 
   const onChangeHandler = (e) => {
     setSearchInput(e.target.value);
+    checkSearchMode(e.target.value);
   }
 
   const onFormSubmit = (e) => {

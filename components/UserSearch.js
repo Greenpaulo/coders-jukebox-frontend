@@ -6,7 +6,9 @@ import { GlobalContext } from '../context/GlobalContext';
 
 const UserSearch = () => {
   
-  const [filteredUsers, setFilteredUsers] = useState([])
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  const [searchMode, setSearchMode] = useState(false);
   
   const { fetchProfileUser } = useContext(GlobalContext);
   
@@ -18,9 +20,22 @@ const UserSearch = () => {
     // document.getElementById('dropdown').style.display = "none";
   }
 
+  const checkSearchMode = (input) => {
+    console.log(input)
+    if (input !== '') {
+      setSearchMode(true);
+    } else {
+      setSearchMode(false);
+    }
+
+    console.log(searchMode);
+  }
+
+
   return (
     <div id="user-search">
-      <UserSearchBar placeholder='Search for user' searchMode='user' setFilteredUsers={setFilteredUsers}/>
+      <UserSearchBar checkSearchMode={checkSearchMode} placeholder='Search for user' searchMode='user' setFilteredUsers={setFilteredUsers}/>
+      { searchMode &&
       <div id="dropdown">
         <div id="search-results">
           <ul>
@@ -36,6 +51,7 @@ const UserSearch = () => {
           </ul>
         </div>
       </div>
+      }
 
       <style jsx>{`
       
@@ -45,8 +61,9 @@ const UserSearch = () => {
         }
 
         #dropdown {
-          width: 100%;
+          width: 50%;
           /* position: relative; */
+          margin: auto;
         }
         
         #search-results {
@@ -59,6 +76,7 @@ const UserSearch = () => {
           border-radius: 5px;
           box-shadow: 10px 10px 45px -10px rgba(66,9,66,0.74);
           position: absolute;
+
           /* left: 410px; */
 
 

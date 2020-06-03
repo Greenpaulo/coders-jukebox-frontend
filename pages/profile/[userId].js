@@ -79,7 +79,7 @@ const Profile = () => {
         
         <section id="user-info">
         
-        { profileUser.profilePhotoFilename != null &&
+        {profileUser.profilePhotoFilename !== null && profileUser.profilePhotoFilename !== '' &&
           <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo"/>
         }
 
