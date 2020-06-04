@@ -1,5 +1,6 @@
 import { GlobalContext } from '../context/GlobalContext';
 import { useContext } from 'react';
+import colors from '../css-variables/colors'
 
 const VideoItem = ({video, mode}) => {
 
@@ -75,13 +76,13 @@ const VideoItem = ({video, mode}) => {
       align-items: center;
       justify-content: space-between;
       /* background-color: #e129e8; */
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid black;
       padding: 1rem;
-      margin: 1rem 0;
+      margin-bottom: 1rem;
     }
 
     button {
-      background-color: #5e00ff;
+      background-color: ${colors.primary};
       color: white;
       padding: 0.75rem 1rem;
       border-radius: 10px;

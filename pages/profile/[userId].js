@@ -148,7 +148,7 @@ const Profile = () => {
 
           #user h1 {
             font-size: 3rem;
-            margin-bottom: 4rem;
+            margin: 1rem 0 4rem 0;
           }
           
           #user h2 {

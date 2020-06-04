@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SearchBar from './Searchbar';
 import { youtube, KEY } from '../apis/youtube';
 import VideoItem from './VideoItem';
+import colors from '../css-variables/colors';
 
 const AddToPlaylist = () => {
 
@@ -199,25 +200,41 @@ const AddToPlaylist = () => {
         <SearchBar placeholder='Search for music' searchMode="video" submitHandler={searchVideoHandler}/>
       </div>
 
-      {videos.map(video => {
-        return (
-          <VideoItem video={video} mode="youtube" key={video.id.videoId}/>
-        )
-      })}
+      <div id="videos">
+        {videos.map(video => {
+          return (
+            <VideoItem video={video} mode="youtube" key={video.id.videoId}/>
+          )
+        })}
+      </div>
 
   <style jsx>{`
 
     section {
       margin-top: 3rem;
-      padding: 3rem;
-      border: 1px solid black;
+      /* padding: 3rem; */
+      /* border: 1px solid black; */
       border-radius: 10px;
       color: black;
     }
   
     #header {
       display: flex;
-      margin: 2rem 0;
+      background: ${colors.gradient};
+      /* margin: 2rem 0; */
+      /* height: 100%; */
+      padding: 2rem;
+      border-radius: 10px 10px 0 0;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    #videos {
+      padding: 1rem;
+      border: 1px solid black;
+      border-top: none;
     }
   
   `}</style>
