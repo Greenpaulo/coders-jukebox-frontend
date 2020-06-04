@@ -46,6 +46,7 @@ const Searchbar = ({ placeholder, submitHandler }) => {
             padding: 0.6rem 0.5rem 0.5rem 2.3rem;
             font-size: 1.1rem;
             border: none;
+            background-color: #eee;
           }
 
           #main-searchbar input :focus {

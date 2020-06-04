@@ -21,12 +21,15 @@ const PlayList = ({profileUser}) => {
 
 
     <style jsx>{`
+
+
     
       section#playlist {
         margin: 3rem 0;
         padding: 3rem;
-        border: 1px solid white;
-        border-radius: 10px; 
+        border: 1px solid black;
+        border-radius: 10px;
+        color: black;
       }
     
     `}</style>

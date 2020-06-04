@@ -31,7 +31,7 @@ const VideoPlayer = () => {
     
     #video-player {
       width: 75%;
-      margin: auto;
+      margin: 4rem auto;
     }
 
     #video-info {

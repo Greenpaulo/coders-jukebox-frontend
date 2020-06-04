@@ -1,10 +1,14 @@
-import {useRef, useContext, useState} from 'react';
+import {useRef, useContext, useState, useEffect} from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Router from 'next/router';
 
 const Auth = () => {
   
   const [ newUserEmail, setNewUserEmail ] = useState('');
+
+  useEffect(() => {
+    // const container = document.getElementById('container');
+  }, [])
 
 
   const context = useContext(GlobalContext);
@@ -74,75 +78,300 @@ const Auth = () => {
     document.getElementById('password').value = '';
     document.getElementById('passwordConfirm').value = '';
   };
+
+
+  // console.log(container)
+
+  const signUpButtonHandler = () => {
+    // console.log('click')
+    container.classList.add("right-panel-active");
+  }
+
+  const signInButtonHandler = () => {
+    // console.log('click')
+    container.classList.remove("right-panel-active");
+  }
+
   
   return (
-      <section id="auth" className="container">
-        <div className="form-container">
-          <h1>Sign In</h1>
-          <form onSubmit={(e) => loginHandler(e)}>
-            <div className="form-control">
-              <label htmlFor="loginEmail">Email</label>
-              <input type="email" id="loginEmail" defaultValue= {newUserEmail} ref={loginEmailRef}/>
-            </div>
-            <div className="form-control">
-              <label htmlFor="loginPassword">Password</label>
-              <input type="password" id="loginPassword" ref={loginPasswordRef}/>
-            </div>
-            <button type="submit">Login</button>
-          </form>
-        </div>
+    <section id="auth">
 
-        <div className="form-container">
-          <h1>Create Account</h1>
+    
+    <div className="container" id="container">
+      <div className="form-container sign-up-container">
           <form onSubmit={(e) => registerHandler(e)}>
-            <div className="form-control">
-              <label htmlFor="firstName">First Name </label>
-              <input type="text" id="firstName" ref={firstNameRef}/>
-            </div>
-            <div className="form-control">
-              <label htmlFor="lastName">Last Name</label>
-              <input type="text" id="lastName" ref={lastNameRef}/>
-            </div>
-            <div className="form-control">
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" ref={emailRef}/>
-            </div>
-            <div className="form-control">
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" ref={passwordRef}/>
-            </div>
-            <div className="form-control">
-              <label htmlFor="passwordConfirm">Confirm Password</label>
-              <input type="password" id="passwordConfirm" ref={passwordConfirmRef}/>
-            </div>
+          <h1>Create Account</h1>
+          {/* <div className="social-container">
+            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
+            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
+            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your email for registration</span> */}
+          <input type="text" id="firstName" ref={firstNameRef} placeholder="First Name"/>
+          <input type="text" id="lastName" ref={lastNameRef} placeholder="Last Name"/>
+          <input type="email" id="email" ref={emailRef} placeholder="Email"/>
+          <input type="password" id="password" ref={passwordRef} placeholder="Password"/>
+          <input type="password" id="passwordConfirm" ref={passwordConfirmRef} placeholder="Confirm Password"/>
             <button type="submit">Sign Up</button>
-          </form>
+        </form>
+      </div>
+      <div className="form-container sign-in-container">
+        <form onSubmit={(e) => loginHandler(e)}>
+          <h1>Sign in</h1>
+          {/* <div className="social-container">
+            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
+            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
+            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your account</span> */}
+          <input type="email" id="loginEmail" defaultValue={newUserEmail} ref={loginEmailRef} placeholder="Email"/>
+          <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />
+
+          <a href="#">Forgot your password?</a>
+          <button type="submit">Sign In</button>
+        </form>
+      </div>
+      <div className="overlay-container">
+        <div className="overlay">
+          <div className="overlay-panel overlay-left">
+            <h1>Welcome Back!</h1>
+            <p>To keep connected with us please login with your personal info</p>
+              <button className="ghost" id="signIn" onClick={signInButtonHandler}>Sign In</button>
+          </div>
+          <div className="overlay-panel overlay-right">
+            <h1>Hello, Friend!</h1>
+            <p>Enter your personal details and start journey with us</p>
+            <button className="ghost" id="signUp" onClick={signUpButtonHandler}>Sign Up</button>
+          </div>
         </div>
+      </div>
+      </div>
+
+    
 
 
 
         <style jsx>{`
 
-        #auth {
+        section#auth {
+          background: ##dd00ff;
           display: flex;
-          justify-content: space-around;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          /* font-family: 'Montserrat', sans-serif; */
+          /* height: 100vh; */
+          margin: 5rem 0 50px;
         }
 
         h1 {
-          font-size: 2rem;
+          font-weight: bold;
+          margin: 0;
         }
-      
-        .form-control {
-          margin: 1.5rem 0;
+
+        h2 {
+          text-align: center;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 100;
+          line-height: 20px;
+          letter-spacing: 0.5px;
+          margin: 20px 0 30px;
+        }
+
+        span {
+          font-size: 12px;
+        }
+
+        a {
+          color: #333;
+          font-size: 14px;
+          text-decoration: none;
+          margin: 15px 0;
+        }
+
+        button {
+          border-radius: 20px;
+          border: 1px solid #FF4B2B;
+          background-color: #FF4B2B;
+          color: #FFFFFF;
+          font-size: 12px;
+          font-weight: bold;
+          padding: 12px 45px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          transition: transform 80ms ease-in;
+        }
+
+        button:active {
+          transform: scale(0.95);
+        }
+
+        button:focus {
+          outline: none;
+        }
+
+        button.ghost {
+          background-color: transparent;
+          border-color: #FFFFFF;
+        }
+
+        form {
+          background-color: #FFFFFF;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          padding: 0 50px;
+          height: 100%;
+          text-align: center;
         }
 
         input {
-          padding: 0.2rem;
+          background-color: #eee;
+          border: none;
+          padding: 12px 15px;
+          margin: 8px 0;
+          width: 100%;
         }
 
-        label {
-          display: block;
-          font-size: 1.2rem;
+        .container {
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+            0 10px 10px rgba(0,0,0,0.22);
+          position: relative;
+          overflow: hidden;
+          width: 768px;
+          max-width: 100%;
+          min-height: 480px;
+        }
+
+        .form-container {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          transition: all 0.6s ease-in-out;
+        }
+
+        .sign-in-container {
+          left: 0;
+          width: 50%;
+          z-index: 2;
+        }
+
+        .container.right-panel-active .sign-in-container {
+          transform: translateX(100%);
+        }
+
+        .sign-up-container {
+          left: 0;
+          width: 50%;
+          opacity: 0;
+          z-index: 1;
+        }
+
+        .container.right-panel-active .sign-up-container {
+          transform: translateX(100%);
+          opacity: 1;
+          z-index: 5;
+          animation: show 0.6s;
+        }
+
+        @keyframes show {
+          0%, 49.99% {
+            opacity: 0;
+            z-index: 1;
+          }
+          
+          50%, 100% {
+            opacity: 1;
+            z-index: 5;
+          }
+        }
+
+        .overlay-container {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 50%;
+          height: 100%;
+          overflow: hidden;
+          transition: transform 0.6s ease-in-out;
+          z-index: 100;
+        }
+
+        .container.right-panel-active .overlay-container{
+          transform: translateX(-100%);
+        }
+
+        .overlay {
+          background: #FF416C;
+          background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+          background: linear-gradient(to right, #FF4B2B, #FF416C);
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 0 0;
+          color: #FFFFFF;
+          position: relative;
+          left: -100%;
+          height: 100%;
+          width: 200%;
+            transform: translateX(0);
+          transition: transform 0.6s ease-in-out;
+        }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .overlay-panel {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          padding: 0 40px;
+          text-align: center;
+          top: 0;
+          height: 100%;
+          width: 50%;
+          transform: translateX(0);
+          transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-left {
+          transform: translateX(-20%);
+        }
+
+        .container.right-panel-active .overlay-left {
+          transform: translateX(0);
+        }
+
+        .overlay-right {
+          right: 0;
+          transform: translateX(0);
+        }
+
+        .container.right-panel-active .overlay-right {
+          transform: translateX(20%);
+        }
+
+        .social-container {
+          margin: 20px 0;
+        }
+
+        .social-container a {
+          border: 1px solid #DDDDDD;
+          border-radius: 50%;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0 5px;
+          height: 40px;
+          width: 40px;
         }
 
       `}</style>

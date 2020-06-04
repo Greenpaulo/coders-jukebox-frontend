@@ -70,7 +70,7 @@ const Navbar = () => {
         
           #navbar {
             padding: 1.5rem 0;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid black;
             margin-bottom: 2rem;
             /* background-color: #44fff8; */
             /* background-color: #93fffb; */
@@ -89,14 +89,14 @@ const Navbar = () => {
           }
 
           #logo h1 {
-            color: white;
+            color: black;
             font-size: 2rem;
             text-transform: uppercase;
             letter-spacing: 0.3rem;
           }
 
           .nav-item {
-            color: white;
+            color: black;
             margin: 0 1rem;
             font-weight: 400;
           }
@@ -121,13 +121,15 @@ const Navbar = () => {
             position: relative;
           }
 
-          #main-searchbar input {
+          /* #main-searchbar input {
             width: 100%;
             border-radius: 23px;
             padding: 0.6rem 0.5rem 0.5rem 2.3rem;
             font-size: 1.1rem;
-            border: none;
-          }
+            /* border: black; */
+            /* background-color: #f6f6f6; */
+            
+          } */
 
           #main-searchbar input :focus {
             outline: none;

@@ -15,9 +15,9 @@ const UserSearch = () => {
   const userClickHandler = (id) => {
 
     fetchProfileUser(id, false);
-
+    
     // Hide dropdown
-    // document.getElementById('dropdown').style.display = "none";
+    setSearchMode(false)
   }
 
   const checkSearchMode = (input) => {
@@ -61,7 +61,7 @@ const UserSearch = () => {
         }
 
         #dropdown {
-          width: 50%;
+          width: 79%;
           /* position: relative; */
           margin: auto;
         }
