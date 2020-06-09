@@ -51,10 +51,11 @@ const Layout = (props) => (
         background-color: ${colors.primary};
         border: none;
         cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
       }
 
       button:hover {
-        background-color: #42af44;
+        background-color: #e5305a;
       }
     
     `} 

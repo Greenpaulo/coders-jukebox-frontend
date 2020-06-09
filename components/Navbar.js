@@ -3,6 +3,7 @@ import Router from 'next/router';
 import { useContext } from 'react';
 import { GlobalContext} from '../context/GlobalContext';
 import UserSearch from './UserSearch';
+import colors from '../css-variables/colors'
 
 
 const Navbar = () => {
@@ -72,7 +73,8 @@ const Navbar = () => {
             padding: 1.5rem 0;
             border-bottom: 1px solid black;
             margin-bottom: 2rem;
-            /* background-color: #44fff8; */
+            background-color: ${colors.primary};
+            /* color: white; */
             /* background-color: #93fffb; */
 
           }
@@ -89,14 +91,14 @@ const Navbar = () => {
           }
 
           #logo h1 {
-            color: black;
+            color: white;
             font-size: 2rem;
             text-transform: uppercase;
             letter-spacing: 0.3rem;
           }
 
           .nav-item {
-            color: black;
+            color: white;
             margin: 0 1rem;
             font-weight: 400;
           }

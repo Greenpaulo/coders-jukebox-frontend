@@ -1,6 +1,7 @@
 import Link from 'next/Link';
 import { useContext, useState, useEffect, useRef } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import colors from  '../css-variables/colors';
 
 const Comment = ({comment}) => {
   
@@ -97,7 +98,7 @@ const Comment = ({comment}) => {
               {editMode &&
                 <section id="edit-comment">
                   <form id="edit-form" onSubmit={(e) => editCommentSubmitHandler(e)}>
-                    <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="3" ref={editedContentRef}></textarea>
+                    <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="2" ref={editedContentRef}></textarea>
                     <button type="submit">Submit</button>
                   <button onClick={editCommentClickHandler}>Cancel</button>
 
@@ -107,7 +108,7 @@ const Comment = ({comment}) => {
 
               {currentUser.id === commenterId && !editMode &&
                 <>
-                <button onClick={editCommentClickHandler}>EDIT</button>
+                <button onClick={editCommentClickHandler}>Edit</button>
                 <button onClick={removeCommentClickHandler}>X</button>
                 </>
               }
@@ -162,11 +163,11 @@ const Comment = ({comment}) => {
       }
 
       button {
-      background-color: #5e00ff;
+      /* background-color: ; */
       color: white;
-      padding: 0 1rem;
+      padding: 0.5rem 1rem;
       border-radius: 10px;
-      margin: 1rem 0.5rem;
+      margin: 1.5rem 0.5rem;
       border: none;
       cursor: pointer;
       font-size: 1rem;
@@ -177,7 +178,8 @@ const Comment = ({comment}) => {
     }
 
     section#edit-comment {
-      width: 60%;
+      width: 85%;
+      margin-left: 1rem;
     }
 
     form#edit-form {
@@ -186,6 +188,8 @@ const Comment = ({comment}) => {
     
     textarea {
       width: 100%;
+      font: inherit;
+      padding: 0.5rem;
     }
   
     `}</style>
