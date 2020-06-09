@@ -40,7 +40,7 @@ const Comment = ({comment}) => {
   
   const editCommentClickHandler = () => {
     //Show the edit comment textarea
-    setEditMode(true); 
+    setEditMode(!editMode); 
   }
 
   const editCommentSubmitHandler = (e) => {
@@ -96,14 +96,16 @@ const Comment = ({comment}) => {
 
               {editMode &&
                 <section id="edit-comment">
-                  <form onSubmit={(e) => editCommentSubmitHandler(e)}>
+                  <form id="edit-form" onSubmit={(e) => editCommentSubmitHandler(e)}>
                     <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="3" ref={editedContentRef}></textarea>
                     <button type="submit">Submit</button>
+                  <button onClick={editCommentClickHandler}>Cancel</button>
+
                   </form>
                 </section>
               }
 
-              {currentUser.id === commenterId && 
+              {currentUser.id === commenterId && !editMode &&
                 <>
                 <button onClick={editCommentClickHandler}>EDIT</button>
                 <button onClick={removeCommentClickHandler}>X</button>
@@ -168,6 +170,22 @@ const Comment = ({comment}) => {
       border: none;
       cursor: pointer;
       font-size: 1rem;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    section#edit-comment {
+      width: 60%;
+    }
+
+    form#edit-form {
+      display: flex;
+    }
+    
+    textarea {
+      width: 100%;
     }
   
     `}</style>
