@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
+import colors from '../css-variables/colors';
+
 
 const Layout = (props) => (
   <div>
@@ -38,6 +40,7 @@ const Layout = (props) => (
 
       a {
         text-decoration: none;
+        color: black;
       }
 
       button {
@@ -45,7 +48,7 @@ const Layout = (props) => (
         padding: 0.5rem 1rem ;
         border-radius: 5px;
         font-size: 1rem;
-        background-color: #3cbc3e;
+        background-color: ${colors.primary};
         border: none;
         cursor: pointer;
       }

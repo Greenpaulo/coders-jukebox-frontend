@@ -592,6 +592,7 @@ const App = ({ Component, pageProps }) => {
             userById(id:"${userId}") {
               firstName,
               lastName,
+              profilePhotoFilename
             }
           }
           `

@@ -78,7 +78,11 @@ const VideoItem = ({video, mode}) => {
       /* background-color: #e129e8; */
       border-bottom: 1px solid black;
       padding: 1rem;
-      margin-bottom: 1rem;
+      /* margin-bottom: 1rem; */
+    }
+
+    .video-item:last-child {
+      border-bottom: none;
     }
 
     button {

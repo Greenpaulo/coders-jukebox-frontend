@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import Comment from './Comment';
 import { GlobalContext } from '../context/GlobalContext';
+import colors from '../css-variables/colors';
+
 
 
 
@@ -53,8 +55,10 @@ const CommentSection = ({ profileUser }) => {
       section#comment-section {
         margin: 3rem 0;
         padding: 3rem;
-        border: 1px solid white;
-        border-radius: 10px; 
+        border: 1px solid black;
+        border-radius: 10px;
+        color: black;
+        background: ${colors.gradient};
       }
 
       section#comments {
@@ -65,6 +69,10 @@ const CommentSection = ({ profileUser }) => {
         margin: 1rem 0;
       }
 
+      label {
+        font-weight: bold;
+      }
+
       textarea {
         width: 100%;
         font: inherit;
@@ -72,11 +80,11 @@ const CommentSection = ({ profileUser }) => {
       }
 
       button {
-      background-color: #5e00ff;
-      color: white;
+      background-color: white;
+      color: black;
       padding: 0.75rem 1rem;
       border-radius: 10px;
-      margin: 0.5rem;
+      margin: 0.5rem 0;
       border: none;
       cursor: pointer;
       font-size: 1rem;

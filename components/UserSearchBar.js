@@ -64,6 +64,7 @@ const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers, checkSear
             padding: 0.6rem 0.5rem 0.5rem 2.3rem;
             font-size: 1.1rem;
             background-color: #eee;
+            border: none;
           }
 
           #main-searchbar input :focus {

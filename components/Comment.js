@@ -2,20 +2,34 @@ import Link from 'next/Link';
 import { useContext, useState, useEffect, useRef } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
-
-
 const Comment = ({comment}) => {
-
+  
   const commenterId = comment.commenter._id 
-
+  
   const { getCommentUser, removeCommentFromPlaylist, currentUser, fetchProfileUser, editComment } = useContext(GlobalContext);
   
   const [commentUser, setCommentUser] = useState({
     firstName: '',
-    lastName:''
+    lastName:'',
+    profilePhotoFilename: ''
   });
+  
+  const [editMode, setEditMode] = useState(false);
+  
+  const editedContentRef = useRef();
 
-  const [editMode, setEditMode] = useState(false)
+  
+  useEffect(() => {
+    async function fetchData() {
+      const user = await getCommentUser(comment.commenter._id);
+      setCommentUser({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        profilePhotoFilename: user.profilePhotoFilename
+      })
+    }
+    fetchData();
+  }, [])
 
   // const [content, setContent] = useState('');
 
@@ -23,7 +37,6 @@ const Comment = ({comment}) => {
   //   setContent(e.target.value);
   // }
 
-  const editedContentRef = useRef();
   
   const editCommentClickHandler = () => {
     //Show the edit comment textarea
@@ -56,16 +69,6 @@ const Comment = ({comment}) => {
     fetchProfileUser(commenterId, false);
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const user = await getCommentUser(comment.commenter._id);
-      setCommentUser({
-        firstName: user.firstName,
-        lastName: user.lastName 
-      })
-    }
-    fetchData();
-  }, [])
 
 
   return (
@@ -73,38 +76,42 @@ const Comment = ({comment}) => {
     <>
       <div className="comment" key={comment._id}>
         <div className="content">
-          <h4>Avatar</h4>
+            <div id="avatar">
+              {commentUser.profilePhotoFilename !== null && commentUser.profilePhotoFilename !== '' &&
+                <img src={`http://localhost:5000/image/${commentUser.profilePhotoFilename}`} alt="avatar" />
+              }
+            </div>
+            <div className="comment-info">
+              <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
+                <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
+              </Link>
+              
+              {!editMode && 
+              <>
+                <p>{comment.content}</p>
 
-          <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
-            <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
-          </Link>
-          
-          {!editMode && 
-          <>
-            <p>{comment.content}</p>
+                <h4 className="date">{convertDate(comment.createdAt)}</h4>
+              </>
+              }
 
-            <h4 className="date">{convertDate(comment.createdAt)}</h4>
-          </>
-          }
+              {editMode &&
+                <section id="edit-comment">
+                  <form onSubmit={(e) => editCommentSubmitHandler(e)}>
+                    <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="3" ref={editedContentRef}></textarea>
+                    <button type="submit">Submit</button>
+                  </form>
+                </section>
+              }
 
-          {editMode &&
-            <section id="edit-comment">
-              <form onSubmit={(e) => editCommentSubmitHandler(e)}>
-                <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="3" ref={editedContentRef}></textarea>
-                <button type="submit">Submit</button>
-              </form>
-            </section>
-          }
-
+              {currentUser.id === commenterId && 
+                <>
+                <button onClick={editCommentClickHandler}>EDIT</button>
+                <button onClick={removeCommentClickHandler}>X</button>
+                </>
+              }
+            </div>
+          </div>
         </div>
-
-        {currentUser.id === commenterId && 
-          <>
-          <button onClick={editCommentClickHandler}>EDIT</button>
-          <button onClick={removeCommentClickHandler}>X</button>
-          </>
-        }
-      </div>
     </>
 
     
@@ -120,10 +127,24 @@ const Comment = ({comment}) => {
         display: flex;
         width: 100%;
         padding: 1.2rem;
-        border: 1px solid green;
+        border: 1px solid black;
         border-radius: 5px;
         margin: 1rem 0;
+        background-color: white;
+      }
 
+      .comment-info {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-left: 1rem;
+      }
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-top: 10px;
       }
 
       h4 {

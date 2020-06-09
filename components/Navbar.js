@@ -121,19 +121,6 @@ const Navbar = () => {
             position: relative;
           }
 
-          /* #main-searchbar input {
-            width: 100%;
-            border-radius: 23px;
-            padding: 0.6rem 0.5rem 0.5rem 2.3rem;
-            font-size: 1.1rem;
-            /* border: black; */
-            /* background-color: #f6f6f6; */
-            
-          } */
-
-          #main-searchbar input :focus {
-            outline: none;
-          }
 
         `}</style>
       </nav>
