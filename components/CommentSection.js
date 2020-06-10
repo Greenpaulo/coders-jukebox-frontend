@@ -10,7 +10,7 @@ const CommentSection = ({ profileUser }) => {
 
   // console.log(profileUser)
 
-  const { addComment} = useContext(GlobalContext);
+  const { addComment, authState} = useContext(GlobalContext);
 
   const [content, setContent] = useState('');
 
@@ -40,14 +40,16 @@ const CommentSection = ({ profileUser }) => {
         )}
       </section>
 
+      {authState.authenticated === true &&
+        <section id="add-comment">
+          <form onSubmit={(e) => commentSubmitHandler(e)}>
+            <label htmlFor="comment-input">Add a comment</label>
+            <textarea name="comment-input" id="comment-input" value={content} cols="30" rows="3" onChange={handleChange}></textarea>
+            <button type="submit">Submit</button>
+          </form>
+        </section>
+      }
 
-      <section id="add-comment">
-        <form onSubmit={(e) => commentSubmitHandler(e)}>
-          <label htmlFor="comment-input">Add a comment</label>
-          <textarea name="comment-input" id="comment-input" value={content} cols="30" rows="3" onChange={handleChange}></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </section>
 
 
       <style jsx>{`

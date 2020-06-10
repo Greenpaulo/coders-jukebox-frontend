@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
+// import Footer from './Footer';
 import colors from '../css-variables/colors';
 
 
@@ -12,6 +13,7 @@ const Layout = (props) => (
     </Head>
     <Navbar/>
     {props.children}
+    {/* <Footer /> */}
     
 
     <style global jsx>{`
@@ -29,7 +31,8 @@ const Layout = (props) => (
         line-height: 1.8em;
         /* background-color: purple; */
         /* background-color: #dd00ff; */
-        background-color: #fff;
+        /* background-color: #fff; */
+        background-color: black;
       }
 
       .container {
@@ -52,7 +55,17 @@ const Layout = (props) => (
         border: none;
         cursor: pointer;
         transition: background-color 0.2s ease-in-out;
+        transition: transform 80ms ease-in;
+        }
+
+      button:active {
+        transform: scale(0.95);
       }
+
+      button:focus {
+        outline: none;
+      }
+      
 
       button:hover {
         background-color: #e5305a;

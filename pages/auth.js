@@ -1,6 +1,7 @@
 import {useRef, useContext, useState, useEffect} from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Router from 'next/router';
+import colors from '../css-variables/colors'
 
 const Auth = () => {
   
@@ -101,12 +102,6 @@ const Auth = () => {
       <div className="form-container sign-up-container">
           <form onSubmit={(e) => registerHandler(e)}>
           <h1>Create Account</h1>
-          {/* <div className="social-container">
-            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-          </div>
-          <span>or use your email for registration</span> */}
           <input type="text" id="firstName" ref={firstNameRef} placeholder="First Name"/>
           <input type="text" id="lastName" ref={lastNameRef} placeholder="Last Name"/>
           <input type="email" id="email" ref={emailRef} placeholder="Email"/>
@@ -118,16 +113,10 @@ const Auth = () => {
       <div className="form-container sign-in-container">
         <form onSubmit={(e) => loginHandler(e)}>
           <h1>Sign in</h1>
-          {/* <div className="social-container">
-            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-          </div>
-          <span>or use your account</span> */}
           <input type="email" id="loginEmail" defaultValue={newUserEmail} ref={loginEmailRef} placeholder="Email"/>
           <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />
 
-          <a href="#">Forgot your password?</a>
+          {/* <a href="#">Forgot your password?</a> */}
           <button type="submit">Sign In</button>
         </form>
       </div>
@@ -166,9 +155,8 @@ const Auth = () => {
 
         h1 {
           font-weight: bold;
-          margin: 0;
         }
-
+          
         h2 {
           text-align: center;
         }
@@ -194,32 +182,32 @@ const Auth = () => {
 
         button {
           border-radius: 20px;
-          border: 1px solid #FF4B2B;
-          background-color: #FF4B2B;
-          color: #FFFFFF;
+          border: 1px solid ${colors.primary};
+          background-color: ${colors.primary};
+          color: #fff;
           font-size: 12px;
           font-weight: bold;
           padding: 12px 45px;
           letter-spacing: 1px;
           text-transform: uppercase;
-          transition: transform 80ms ease-in;
+          /* transition: transform 80ms ease-in; */
         }
 
-        button:active {
+        /* button:active {
           transform: scale(0.95);
         }
 
         button:focus {
           outline: none;
-        }
+        } */
 
         button.ghost {
           background-color: transparent;
-          border-color: #FFFFFF;
+          border-color: #fff;
         }
 
         form {
-          background-color: #FFFFFF;
+          background-color: #fff;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -235,6 +223,7 @@ const Auth = () => {
           padding: 12px 15px;
           margin: 8px 0;
           width: 100%;
+          border-radius: 5px;
         }
 
         .container {
@@ -273,6 +262,14 @@ const Auth = () => {
           z-index: 1;
         }
 
+        .sign-up-container button, .sign-in-container button {
+          margin-top: 0.8rem;
+        }
+
+        .sign-up-container h1, .sign-in-container h1 {
+          margin-bottom: 0.8rem;
+        }
+
         .container.right-panel-active .sign-up-container {
           transform: translateX(100%);
           opacity: 1;
@@ -308,13 +305,14 @@ const Auth = () => {
         }
 
         .overlay {
-          background: #FF416C;
-          background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-          background: linear-gradient(to right, #FF4B2B, #FF416C);
+          /* background: #FF416C; */
+          /* background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C); */
+          /* background: linear-gradient(to right, #FF4B2B, #FF416C); */
+          background: ${colors.reverseGradient};
           background-repeat: no-repeat;
           background-size: cover;
           background-position: 0 0;
-          color: #FFFFFF;
+          color: #fff;
           position: relative;
           left: -100%;
           height: 100%;
@@ -359,20 +357,7 @@ const Auth = () => {
           transform: translateX(20%);
         }
 
-        .social-container {
-          margin: 20px 0;
-        }
-
-        .social-container a {
-          border: 1px solid #DDDDDD;
-          border-radius: 50%;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          margin: 0 5px;
-          height: 40px;
-          width: 40px;
-        }
+        
 
       `}</style>
       

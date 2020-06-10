@@ -14,7 +14,7 @@ import Favourites from '../../components/Favourites';
 
 const Profile = () => {
 
-  const { currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite, removeFavourite} = useContext(GlobalContext);
+  const { authState, currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite, removeFavourite} = useContext(GlobalContext);
 
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
@@ -94,7 +94,7 @@ const Profile = () => {
               {profileUser.id === currentUser.id &&
                 <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
               }
-              {profileUser.id !== currentUser.id && !(currentUser.favourites.includes(profileUser.id)) &&
+              {profileUser.id !== currentUser.id && !(currentUser.favourites.includes(profileUser.id)) &&  authState.authenticated === true &&
                 <button id="add-favourite" onClick={addFavouriteHandler}>Add Favourite</button>
               }
               {currentUser.favourites.includes(profileUser.id) &&

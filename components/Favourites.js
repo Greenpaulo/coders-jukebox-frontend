@@ -1,6 +1,7 @@
 import FavouriteItem from './FavouriteItem';
 import { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalContext';
+import colors from '../css-variables/colors'
 
 const Favourites = () => {
 
@@ -22,10 +23,10 @@ const Favourites = () => {
   
     section#favourites {
       padding: 3rem;
-      border: 1px solid black;
+      border: 1px solid ${colors.primary};
       border-radius: 10px;
       margin-top: 1rem;
-      color: black;
+      color: white;
       margin-bottom: 2rem;
     }
 

@@ -8,7 +8,7 @@ import colors from '../css-variables/colors';
 const FavouriteItem = ({id}) => {
 
 
-  const { getFavouriteUser, fetchProfileUser, removeFavourite } = useContext(GlobalContext);
+  const { getFavouriteUser, fetchProfileUser, removeFavourite, currentUser, profileUser, authState } = useContext(GlobalContext);
   
   const [favUser, setFavUser] = useState({});
 
@@ -38,7 +38,12 @@ const FavouriteItem = ({id}) => {
     <div id="favourite-item">
       {/* <h4>Avatar</h4> */}
       <div id="avatar">
-        {favUser.profilePhotoFilename !== null && favUser.profilePhotoFilename !== '' &&
+        {favUser.profilePhotoFilename === null &&
+          <img src="/static/default-avatar.png" alt="avatar" />
+        
+        } 
+
+        {favUser.profilePhotoFilename !== null && favUser.profilePhotoFilename !== '' && favUser.profilePhotoFilename !== undefined &&
           <img src={`http://localhost:5000/image/${favUser.profilePhotoFilename}`} alt="avatar" />
         }
       </div>
@@ -47,7 +52,10 @@ const FavouriteItem = ({id}) => {
         <a onClick={favUserClickHandler}><h3>{favUser.firstName} {favUser.lastName}</h3></a>
       </Link>
 
-      <button onClick={removeFavHandler}>Remove</button>
+      
+      { authState.authenticated === true && currentUser.id === profileUser.id &&
+        <button onClick={removeFavHandler}>Remove</button>
+      }
 
       
       <style jsx>{`
@@ -61,6 +69,10 @@ const FavouriteItem = ({id}) => {
         
         img {
           width: 100px;
+        }
+
+        a {
+          color: white;
         }
       
       

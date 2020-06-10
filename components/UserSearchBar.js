@@ -43,7 +43,7 @@ const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers, checkSear
 
           label {
             position: absolute;
-            top: 10px;
+            top: 8px;
             left: 12px;
           }
           
@@ -63,7 +63,7 @@ const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers, checkSear
             border-radius: 23px;
             padding: 0.6rem 0.5rem 0.5rem 2.3rem;
             font-size: 1.1rem;
-            background-color: #eee;
+            background-color: #fff;
             border: none;
           }
 

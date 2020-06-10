@@ -28,11 +28,12 @@ const PlayList = ({profileUser}) => {
 
     
       section#playlist {
-        margin: 3rem 0;
+        margin: 3rem auto;
         /* padding: 3rem; */
-        border: 1px solid black;
+        border: 1px solid ${colors.primary};
         border-radius: 10px;
-        color: black;
+        color: white;
+        width: 84%;
       }
 
       #playlist-header {

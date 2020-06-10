@@ -38,7 +38,6 @@ const VideoItem = ({video, mode}) => {
         videoId: video.videoURL,
       }
     }
-    console.log(videoToSet);
     setCurrentVideo(videoToSet);
   }
 
@@ -76,13 +75,18 @@ const VideoItem = ({video, mode}) => {
       align-items: center;
       justify-content: space-between;
       /* background-color: #e129e8; */
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid ${colors.primary};
       padding: 1rem;
       /* margin-bottom: 1rem; */
     }
 
     .video-item:last-child {
       border-bottom: none;
+    }
+
+    h3 {
+      margin: 0 auto 0 2.7rem;
+
     }
 
     button {

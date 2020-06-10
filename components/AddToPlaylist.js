@@ -8,8 +8,6 @@ const AddToPlaylist = () => {
 
   const [videos, setVideos] = useState([]);
 
-  console.log(videos)
-
   const searchVideoHandler = async (searchInput) => {
     const res = await youtube.get('/search', {
         params: {
@@ -48,11 +46,12 @@ const AddToPlaylist = () => {
   <style jsx>{`
 
     section {
-      margin-top: 3rem;
+      margin: 0 auto 3rem auto;
+      width: 84%;
       /* padding: 3rem; */
       /* border: 1px solid black; */
       border-radius: 10px;
-      color: black;
+      color: white;
     }
   
     #header {
@@ -70,7 +69,7 @@ const AddToPlaylist = () => {
 
     #videos {
       /* padding: 1rem; */
-      border: 1px solid black;
+      border: 1px solid ${colors.primary};
       border-radius: 0 0 10px 10px;
       border-top: none;
     }

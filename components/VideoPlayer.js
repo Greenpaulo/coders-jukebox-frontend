@@ -17,9 +17,9 @@ const VideoPlayer = () => {
       <div id="video-player">
         <iframe width="918" height="567" frameBorder="0" allowFullScreen allow="autoplay" src={videoSrc}></iframe>
         {/* <VideoInfo /> */}
-        <div id="video-info">
+        {/* <div id="video-info">
           <h3>{videoState.title}</h3>
-        </div>
+        </div> */}
       </div>
       
 
@@ -33,11 +33,18 @@ const VideoPlayer = () => {
       width: 85%;
       margin: 4rem auto;
       padding: 1rem;
+      text: center;
     }
 
     #video-info {
       margin-top: 1rem;
+      text-align: center;
     }
+/* 
+    h3 {
+      width: 80%;
+      margin: auto;
+    } */
 
   
   

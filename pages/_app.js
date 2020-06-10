@@ -10,6 +10,9 @@ const App = ({ Component, pageProps }) => {
   let token = null;
 
   useEffect(() => {
+    //Get all users - for the searchbar user search
+    getAllUsers();
+    
     // Check for token in local storage once the component mounts - i.e. code is now run in the browser (instead of on the server)
     token = localStorage.getItem('token');
     if (token) {
@@ -18,8 +21,6 @@ const App = ({ Component, pageProps }) => {
       // Get the logged in user's data
       getUserDataByToken(token)
 
-      //Get all users - for the searchbar user search
-      getAllUsers();
     }
   }, [])
 
@@ -581,7 +582,18 @@ const App = ({ Component, pageProps }) => {
   }
 
   const getCommentUser = async (userId) => {
-    const commentUser = await getUserDataById(userId);
+    let requestBody = {
+      query: `
+          query {
+            userById(id:"${userId}") {
+              firstName,
+              lastName,
+              profilePhotoFilename
+            }
+          }
+          `
+    }
+    const commentUser = await getUserDataById(userId, requestBody);
     return commentUser;
   }
 
