@@ -50,26 +50,29 @@ const ProfileEdit = ({setEditMode}) => {
   return (
     <section id="profile-edit">
       <div id="edit-container">
-        <form onSubmit={(e) => updateProfileHandler(e)} id="profile-info-edit">
-        <h2>Update Profile Info:</h2>
-          <div className="form-control">
-            <label htmlFor="firstName">First Name: </label>
-            <input type="text" id="firstName" defaultValue={profileInfo.firstName}  ref={firstNameRef} />
-          </div>
-          <div className="form-control">
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" defaultValue={profileInfo.lastName} ref={lastNameRef} />
-          </div>
-          <div className="form-control">
-            <label htmlFor="JobTitle">Job Title:</label>
-            <input type="text" id="jobTitle" defaultValue={profileInfo.jobTitle} ref={jobTitleRef} />
-          </div>
-          <div className="form-control">
-            <label htmlFor="location">Location:</label>
-            <input type="text" id="location" defaultValue={profileInfo.location} ref={locationRef} />
-          </div>
-          <button type="submit">Update</button>
-        </form>
+
+        <div id="profile-info-edit">
+          <form onSubmit={(e) => updateProfileHandler(e)}>
+          <h2>Update Profile Info:</h2>
+            <div className="form-control">
+              <label htmlFor="firstName">First Name: </label>
+              <input type="text" id="firstName" defaultValue={profileInfo.firstName}  ref={firstNameRef} />
+            </div>
+            <div className="form-control">
+              <label htmlFor="lastName">Last Name:</label>
+              <input type="text" id="lastName" defaultValue={profileInfo.lastName} ref={lastNameRef} />
+            </div>
+            <div className="form-control">
+              <label htmlFor="JobTitle">Job Title:</label>
+              <input type="text" id="jobTitle" defaultValue={profileInfo.jobTitle} ref={jobTitleRef} />
+            </div>
+            <div className="form-control">
+              <label htmlFor="location">Location:</label>
+              <input type="text" id="location" defaultValue={profileInfo.location} ref={locationRef} />
+            </div>
+            <button type="submit">Update</button>
+          </form>
+        </div>
 
         <FileUpload />
 
@@ -90,6 +93,10 @@ const ProfileEdit = ({setEditMode}) => {
         #edit-container {
           display: flex;
           justify-content: space-between;
+        }
+
+        #profile-info-edit {
+          padding: 3rem;
         }
 
         #profile-info-edit h2 {

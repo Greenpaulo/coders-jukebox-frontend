@@ -1,5 +1,6 @@
 import { useState, useContext} from 'react'
 import { GlobalContext } from '../context/GlobalContext';
+import colors from '../css-variables/colors';
 
 
 const FileUpload = () => {
@@ -37,19 +38,43 @@ const FileUpload = () => {
         <label htmlFor="file" className="custom-file-label">
           {filename}
         </label>
-        <input type="submit" value="Upload" />
+        <button type="submit" value="Upload">Upload</button>
       </form>
 
 
       <style jsx >{`
       
+        #file-upload  {
+          margin: 1rem 0;
+          padding: 2rem 3rem;
+          border-left: 1px solid ${colors.primary}
+        }
+
         #file-upload h2 {
-          margin-bottom: 1rem;  
+          margin-bottom: 1rem;
         }
       
         form {
           display: flex;
           flex-direction: column;
+        }
+
+        input[type="file"] {
+          font-size: 1rem;
+        }
+
+        input#file-upload-button {
+          border-radius: 5px;
+          padding: 1rem;
+        }
+
+        label {
+          margin: 0.5rem 0;
+        }
+
+        button {
+          width: 83px;
+          margin-top: 1rem;
         }
         
         input {
