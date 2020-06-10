@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
-const ProfileInfo = ({showProfileEditSection}) => {
+const ProfileInfo = ({setEditMode, editMode}) => {
 
   const { authState, currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite, removeFavourite } = useContext(GlobalContext);
 
@@ -26,13 +26,14 @@ const ProfileInfo = ({showProfileEditSection}) => {
       <div id="user-info">
         <div id="info">
           <h1>{profileUser.firstName} {profileUser.lastName}</h1>
-          <h2>Job Title: {profileUser.jobTitle}</h2>
-          <h2>Location: {profileUser.location}</h2>
+          <h2>Job Title: &nbsp; {profileUser.jobTitle}</h2>
+          <h2>Location: &nbsp; {profileUser.location}</h2>
         </div>
 
         <div id="buttons">
           {profileUser.id === currentUser.id &&
-            <button id="profile-edit-btn" onClick={showProfileEditSection}>Edit</button>
+            <i className="fa fa-cog fa-2x" id="profile-edit-cog" aria-hidden="true" onClick={() => setEditMode(!editMode)}></i>
+            // <button id="profile-edit-btn" onClick={showProfileEditSection}><i className="fa fa-cog" aria-hidden="true"></i></button>
           }
           {profileUser.id !== currentUser.id && !(currentUser.favourites.includes(profileUser.id)) && authState.authenticated === true &&
             <button id="add-favourite" onClick={addFavouriteHandler}>Add Favourite</button>
@@ -93,8 +94,17 @@ const ProfileInfo = ({showProfileEditSection}) => {
         display: flex;
         justify-content: space-between;
       }
+
+      i#profile-edit-cog {
+        cursor: pointer;
+        transition: transform 2s;
+      }
+
+      i#profile-edit-cog:hover {
+        transform: rotate(360deg);
+      }
       
-      button#profile-edit-btn, button#add-favourite, button#remove-favourite {
+      button#add-favourite, button#remove-favourite {
         cursor: pointer;
         background: white;
         color: black;

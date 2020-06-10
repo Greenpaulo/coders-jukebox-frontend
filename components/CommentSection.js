@@ -90,6 +90,7 @@ const CommentSection = ({ profileUser }) => {
       border: none;
       cursor: pointer;
       font-size: 1rem;
+      font-weight: bold;
     }
     
     `}</style>

@@ -63,16 +63,16 @@ const Profile = () => {
   // }
   
 
-  const showProfileEditSection = () => {
-    setEditMode(true)
-  }
+  // const showProfileEditSection = () => {
+  //   setEditMode(true)
+  // }
 
 
   return (
     <>
       <div className="container" id="profile">
         
-        <ProfileInfo showProfileEditSection={showProfileEditSection} />
+        <ProfileInfo setEditMode={setEditMode} editMode={editMode} />
 
         {editMode &&
           <ProfileEdit setEditMode={setEditMode}/>

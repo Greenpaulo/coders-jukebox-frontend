@@ -76,7 +76,11 @@ const ProfileEdit = ({setEditMode}) => {
 
         <FileUpload />
 
-        <button id="cancel" onClick={() => setEditMode(false)}>x</button>
+        {/* <button id="cancel" onClick={() => setEditMode(false)}>
+          <i className="fa fa-times" aria-hidden="true"></i>
+        </button> */}
+          <i className="fa fa-times-circle fa-2x" id="cancel" aria-hidden="true" onClick={() => setEditMode(false)}></i>
+        
       
       </div>
 
@@ -116,11 +120,9 @@ const ProfileEdit = ({setEditMode}) => {
           margin-top: 1rem;
         }
 
-        button#cancel {
-          height: 40px;
-          width: 40px;
-          border-radius: 50%;
-          margin: 0.25rem;
+        i#cancel {
+          margin: 0.85rem;
+          cursor: pointer;
         }
 
       

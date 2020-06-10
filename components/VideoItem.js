@@ -39,8 +39,8 @@ const VideoItem = ({video, mode}) => {
       }
     }
     setCurrentVideo(videoToSet);
-  }
 
+  }
 
   return (
     <div className="video-item">
@@ -49,8 +49,13 @@ const VideoItem = ({video, mode}) => {
           <img src={video.snippet.thumbnails.default.url} alt="youtube video"/>
           <h3 className="video-title">{video.snippet.title}</h3>
           <div id="buttons">
-            <button onClick={playButtonHandler}>Play</button>
-            <button onClick={addVideoClickHandler}>Add To Playlist</button>
+            <button onClick={playButtonHandler}>
+              <i className="fa fa-play"></i>
+            </button>
+            <button onClick={addVideoClickHandler}>
+              <i className="fa fa-plus"></i>
+
+            </button>
           </div>
         </>
       }
@@ -60,9 +65,13 @@ const VideoItem = ({video, mode}) => {
           <img src={video.thumbnailURL} alt="youtube video" />
           <h3 className="video-title">{video.title}</h3>
           <div id="buttons">
-            <button onClick={playButtonHandler}>Play</button>
+            <button onClick={playButtonHandler}>
+              <i className="fa fa-play" aria-hidden="true"></i>
+            </button>
             { currentUser.id === profileUser.id &&
-              <button onClick={removeVideoClickHandler}>X</button>
+              <button onClick={removeVideoClickHandler}>
+                <i className="fa fa-trash-o" aria-hidden="true"></i>
+              </button>
             }
           </div>
         </>

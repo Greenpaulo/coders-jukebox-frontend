@@ -34,7 +34,7 @@ const Searchbar = ({ placeholder, submitHandler }) => {
 
           label {
             position: absolute;
-            top: 10px;
+            top: 8px;
             left: 12px;
           }
           
@@ -50,7 +50,7 @@ const Searchbar = ({ placeholder, submitHandler }) => {
             padding: 0.6rem 3rem 0.5rem 2.3rem;
             font-size: 1.1rem;
             border: none;
-            background-color: #eee;
+            background-color: white;
           }
 
           #main-searchbar input :focus {
