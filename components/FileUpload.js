@@ -30,7 +30,8 @@ const FileUpload = () => {
 
 
   return (
-    <div>
+    <div id="file-upload">
+      <h2>Upload a profile photo:</h2>
       <form onSubmit={(e) => uploadFileHandler(e)}>
         <input type="file" name="file" id="file" className="custom-file-input" onChange={onChange} />
         <label htmlFor="file" className="custom-file-label">
@@ -40,22 +41,25 @@ const FileUpload = () => {
       </form>
 
 
-  <style jsx >{`
-  
-    form {
-      display: flex;
-      flex-direction: column;
-    }
+      <style jsx >{`
+      
+        #file-upload h2 {
+          margin-bottom: 1rem;  
+        }
+      
+        form {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        input {
+          margin: 1rem 0; 
+        }
+      
+      `}</style>
 
-    input {
-      margin: 1rem 0; 
-    }
-  
-  
-  `}</style>
+    </div> 
 
-
-    </div>
   )
 }
 

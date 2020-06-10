@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
-// import Footer from './Footer';
 import colors from '../css-variables/colors';
 
 
@@ -13,7 +12,6 @@ const Layout = (props) => (
     </Head>
     <Navbar/>
     {props.children}
-    {/* <Footer /> */}
     
 
     <style global jsx>{`
@@ -33,6 +31,7 @@ const Layout = (props) => (
         /* background-color: #dd00ff; */
         /* background-color: #fff; */
         background-color: black;
+        height: 100vh;
       }
 
       .container {
