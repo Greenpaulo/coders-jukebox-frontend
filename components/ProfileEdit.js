@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import FileUpload from './FileUpload';
 import colors from '../css-variables/colors';
@@ -6,16 +6,21 @@ import colors from '../css-variables/colors';
 
 const ProfileEdit = ({setEditMode}) => {
 
-  const { updateUser, currentUser, uploadPhoto } = useContext(GlobalContext);
+  const { updateUser, profileUser, uploadPhoto } = useContext(GlobalContext);
+
+  // // Fetch the updated profile info to prefill form
+  // useEffect(() => {
+  //   fetchProfileUser(userId, false);
+  // }
 
   // Prefill the form with the current info
   const [ profileInfo, setProfileInfo ] = useState({
-    firstName: currentUser.firstName,
-    lastName: currentUser.lastName,
-    jobTitle: currentUser.jobTitle,
-    location: currentUser.location,
-    languages: currentUser.languages,
-    about: currentUser.about
+    firstName: profileUser.firstName,
+    lastName: profileUser.lastName,
+    jobTitle: profileUser.jobTitle,
+    location: profileUser.location,
+    languages: profileUser.languages,
+    about: profileUser.about
   })
   
   
@@ -175,8 +180,10 @@ const ProfileEdit = ({setEditMode}) => {
           width: 100%;
           padding: 12px 15px;
           margin: 8px 0;
-          height: 4rem;
+          height: 10rem;
           border-radius: 5px;
+          font-size: inherit;
+          font: inherit;
         }
 
         #languages {
@@ -211,8 +218,8 @@ const ProfileEdit = ({setEditMode}) => {
         }
 
         #col2 {
-          margin: 1rem 0;
-          padding: 4.6rem 3rem;
+          margin-top: 1rem;
+          padding: 4.6rem 0 0 3rem;
           border-left: 1px solid ${colors.primary}
         }
 
@@ -220,11 +227,8 @@ const ProfileEdit = ({setEditMode}) => {
           margin-bottom: 2rem;  
         }
 
-
-      
       
       `}</style>
-
 
     </section>
   )

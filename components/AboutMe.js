@@ -16,7 +16,15 @@ const AboutMe = ({profileUser}) => {
         /* background  : ${colors.reversePinkGradient}; */
         border: 1px solid ${colors.primary};
         border-radius: 10px;
-        padding: 1rem;
+        padding: 2rem;
+        width: 84%;
+        margin: 3rem auto;
+      }
+
+      p {
+        padding: 2rem;
+        font-size: 1.2rem;
+        line-height: 2.5rem;
       }
     
     `}</style>
