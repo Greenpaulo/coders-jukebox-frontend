@@ -9,7 +9,7 @@ const Favourites = () => {
 
   return (
     <section id="favourites">
-      <h2>Favourites</h2>
+      <h2><i className="fa fa-user" aria-hidden="true"></i>Favourites </h2>
 
       <div id="favourite-items">
         {profileUser.favourites.map(favourite => (
@@ -28,6 +28,11 @@ const Favourites = () => {
       margin-top: 1rem;
       color: white;
       margin-bottom: 2rem;
+    }
+
+    i.fa-user {
+      margin-right: 0.75rem;
+      /* height: 50px; */
     }
 
     #favourite-items {

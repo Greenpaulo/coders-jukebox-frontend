@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import colors from '../css-variables/colors';
 
 const ProfileInfo = ({setEditMode, editMode}) => {
 
@@ -8,7 +9,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
   const [isFavourite, setIsFavourite] = useState(false)
 
   const addFavouriteHandler = () => {
-    addFavourite(userId);
+    addFavourite(profileUser.id);
   }
 
   const removeFavouriteHandler = () => {
@@ -36,10 +37,14 @@ const ProfileInfo = ({setEditMode, editMode}) => {
             // <button id="profile-edit-btn" onClick={showProfileEditSection}><i className="fa fa-cog" aria-hidden="true"></i></button>
           }
           {profileUser.id !== currentUser.id && !(currentUser.favourites.includes(profileUser.id)) && authState.authenticated === true &&
-            <button id="add-favourite" onClick={addFavouriteHandler}>Add Favourite</button>
+            <button id="add-favourite" onClick={addFavouriteHandler}>
+              <i className="fa fa-user-plus fa-2x favourite" aria-hidden="true"></i>
+            </button>
           }
           {currentUser.favourites.includes(profileUser.id) &&
-            <button id="remove-favourite" onClick={removeFavouriteHandler}>Remove Favourite</button>
+            <button id="remove-favourite" onClick={removeFavouriteHandler}>
+              <i className="fa fa-user-times fa-2x favourite" aria-hidden="true"></i>
+            </button>
           }
         </div>
       </div>
@@ -109,7 +114,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         background: white;
         color: black;
         border: none;
-        border-radius: 20px;
+        border-radius: 30px;
         /* height: 10%; */
       }
 
@@ -120,6 +125,10 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       img {
         width: 100%;
         border-radius: 50%;
+      }
+
+      i.favourite {
+        color: ${colors.secondary}
       }
     
     `}</style>  

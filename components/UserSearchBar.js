@@ -26,7 +26,7 @@ const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers, checkSear
     e.preventDefault();
 
     // Call the relevant submit handler from props
-    submitHandler(searchInput);
+    // submitHandler(searchInput);
   }
 
   return (
