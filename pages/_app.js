@@ -221,12 +221,19 @@ const App = ({ Component, pageProps }) => {
 
   // USER *****************************************************************************
   const updateUser = async (firstName, lastName, jobTitle, location, languages, about) => {
-    
+
     // Make a API query to get a token
     const requestBody = {
       query: `
       mutation {
-        updateUser(profileInput: {firstName: "${firstName}", lastName: "${lastName}", jobTitle: "${jobTitle}", location: "${location}", languages: "${languages}",about: "${about}"}) {
+        updateUser(profileInput: {firstName: "${firstName}", lastName: "${lastName}", jobTitle: "${jobTitle}", location: "${location}", 
+        languages: [
+          "${languages[0]}",
+          "${languages[1]}", 
+          "${languages[2]}", 
+          "${languages[3]}"
+        ],
+        about: "${about}"}) {
           firstName,
           lastName,
           jobTitle,
@@ -237,8 +244,6 @@ const App = ({ Component, pageProps }) => {
       }
     `
     }
-
-    console.log(requestBody)
 
     try {
       const res = await fetch('http://localhost:5000/graphql', {
@@ -265,9 +270,8 @@ const App = ({ Component, pageProps }) => {
         return
       }
 
-      // const newUserEmail = (data.data.createUser.email);
-      console.log(data.data)
-      // return newUserEmail;
+      // Refresh the profile with the new user data - to update the profileInfo section
+      fetchProfileUser(profileUser.id, false)
 
     } catch (err) {
       console.log(err);

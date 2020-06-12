@@ -13,7 +13,9 @@ const ProfileEdit = ({setEditMode}) => {
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
     jobTitle: currentUser.jobTitle,
-    location: currentUser.location
+    location: currentUser.location,
+    languages: currentUser.languages,
+    about: currentUser.about
   })
   
   
@@ -51,8 +53,6 @@ const ProfileEdit = ({setEditMode}) => {
 
     // Call register action to send a post request to API and change the local and global state
     await updateUser(firstName, lastName, jobTitle, location, languages, about);
-    const updatedUser=  { firstName, lastName, jobTitle, location, languages, about};
-    console.log(updatedUser)
 
     //Close the edit profile section - set edit to false on profile page
     setEditMode(false);
@@ -61,7 +61,7 @@ const ProfileEdit = ({setEditMode}) => {
 
   const getExistingLanguages = () => {
     if (profileInfo.languages.length > 0) {
-      return languages
+      return profileInfo.languages;
     }
 
     else return ['', '', '', '']
@@ -97,22 +97,22 @@ const ProfileEdit = ({setEditMode}) => {
               <div id="language-input-container">
                 <div>
                   <label htmlFor="language1" className="language-label">1.</label>
-                  <input type="text" className="language-input" id="language1" defaultValue={getExistingLanguages[0]} ref={language1Ref} />
+                  <input type="text" className="language-input" id="language1" defaultValue={getExistingLanguages()[0]} ref={language1Ref} />
                 </div>
                 
                 <div>
                   <label htmlFor="language2" className="language-label">2.</label>
-                  <input type="text" className="language-input" id="language2" defaultValue={getExistingLanguages[1]} ref={language2Ref} />
+                  <input type="text" className="language-input" id="language2" defaultValue={getExistingLanguages()[1]} ref={language2Ref} />
                 </div>
                 
                 <div>
                   <label htmlFor="language3" className="language-label">3.</label>
-                  <input type="text" className="language-input" id="language3" defaultValue={getExistingLanguages[2]} ref={language3Ref} />
+                  <input type="text" className="language-input" id="language3" defaultValue={getExistingLanguages()[2]} ref={language3Ref} />
                 </div>
                 
                 <div>
                   <label htmlFor="language4" className="language-label">4.</label>
-                  <input type="text" className="language-input" id="language4" defaultValue={getExistingLanguages[3]} ref={language4Ref} />
+                  <input type="text" className="language-input" id="language4" defaultValue={getExistingLanguages()[3]} ref={language4Ref} />
                 </div>
                 
               </div>
@@ -187,6 +187,10 @@ const ProfileEdit = ({setEditMode}) => {
           display: grid;
           grid-template-columns 1fr 1fr;
 
+        }
+
+        h4 {
+          font-weight: 400 ;
         }
 
         label.language-label {

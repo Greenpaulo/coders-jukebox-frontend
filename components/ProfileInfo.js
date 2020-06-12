@@ -16,6 +16,27 @@ const ProfileInfo = ({setEditMode, editMode}) => {
     removeFavourite(profileUser.id);
   }
 
+  const getLanguageString = () => {
+    const languages = profileUser.languages;
+    let languageString = '';
+    
+    if (profileUser.languages.length === 0){
+      return languageString;
+    }
+
+    else {
+      languages.map((language, index) => {
+        if(language !== ''){
+          languageString += language;
+          if (languages[index+1] !== '' && index+1 !== languages.length) {
+            languageString += ' ' + '/' + ' ';
+          }
+        }
+      })
+      return languageString;
+    }
+  }
+
   return (
     <section id="user">
       <div id="profile-photo">
@@ -29,6 +50,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
           <h1>{profileUser.firstName} {profileUser.lastName}</h1>
           <h2>Job Title: &nbsp; {profileUser.jobTitle}</h2>
           <h2>Location: &nbsp; {profileUser.location}</h2>
+          <h2>Languages: &nbsp; {getLanguageString()}</h2>
         </div>
 
         <div id="buttons">

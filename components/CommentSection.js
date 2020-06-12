@@ -8,8 +8,6 @@ import colors from '../css-variables/colors';
 
 const CommentSection = ({ profileUser }) => {
 
-  // console.log(profileUser)
-
   const { addComment, authState} = useContext(GlobalContext);
 
   const [content, setContent] = useState('');
