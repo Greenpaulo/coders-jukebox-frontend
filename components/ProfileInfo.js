@@ -38,12 +38,12 @@ const ProfileInfo = ({setEditMode, editMode}) => {
           }
           {profileUser.id !== currentUser.id && !(currentUser.favourites.includes(profileUser.id)) && authState.authenticated === true &&
             <button id="add-favourite" onClick={addFavouriteHandler}>
-              <i className="fa fa-user-plus fa-2x favourite" aria-hidden="true"></i>
+              <i className="fa fa-star-o fa-2x favourite" aria-hidden="true"></i>
             </button>
           }
           {currentUser.favourites.includes(profileUser.id) &&
             <button id="remove-favourite" onClick={removeFavouriteHandler}>
-              <i className="fa fa-user-times fa-2x favourite" aria-hidden="true"></i>
+              <i className="fa fa-star fa-2x favourite" aria-hidden="true"></i>
             </button>
           }
         </div>
@@ -113,8 +113,11 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         cursor: pointer;
         background: white;
         color: black;
-        border: none;
-        border-radius: 30px;
+        border: 1px solid ${colors.tertiary};
+        border-radius: 50%;
+        padding: 0.7rem;
+        font-size: 1rem;
+        
         /* height: 10%; */
       }
 

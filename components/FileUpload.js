@@ -44,10 +44,10 @@ const FileUpload = () => {
 
       <style jsx >{`
       
-        #file-upload  {
-          margin: 1rem 0;
-          padding: 2rem 3rem;
-          border-left: 1px solid ${colors.primary}
+        #file-upload {
+          margin-top: 4rem;
+          border-top: 1px solid ${colors.primary};
+          padding-top: 2rem;
         }
 
         #file-upload h2 {

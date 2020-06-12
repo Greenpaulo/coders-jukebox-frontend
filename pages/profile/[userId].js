@@ -5,6 +5,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 // import fetch from 'isomorphic-unfetch';
 
 import ProfileInfo from '../../components/ProfileInfo';
+import AboutMe from '../../components/AboutMe';
 import VideoPlayer from '../../components/VideoPlayer';
 import AddToPlaylist from '../../components/AddToPlaylist';
 import Playlist from '../../components/PlayList';
@@ -77,6 +78,8 @@ const Profile = () => {
         {editMode &&
           <ProfileEdit setEditMode={setEditMode}/>
         }
+
+        <AboutMe profileUser={profileUser}/>
 
         <VideoPlayer />
 

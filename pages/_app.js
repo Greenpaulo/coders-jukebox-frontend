@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Router from 'next/router';
 import cookie from 'react-cookies';
 import axios from 'axios';
+import { empty } from 'apollo-boost';
 
 const App = ({ Component, pageProps }) => {
 
@@ -24,6 +25,21 @@ const App = ({ Component, pageProps }) => {
     }
   }, [])
 
+  const emptyUser = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    jobTitle: '',
+    location: '',
+    languages: [],
+    about: '',
+    ownedVideos: [],
+    userComments: [],
+    playlistComments: [],
+    favourites: [],
+    profilePhotoFilename: ''
+  }
+
 
   // State
   const [authState, setAuthState] = useState({
@@ -34,32 +50,10 @@ const App = ({ Component, pageProps }) => {
   });
 
   // Logged in User's Data
-  const [currentUser, setCurrentUser] = useState({
-    id: '',
-    firstName: '',
-    lastName: '',
-    jobTitle: '',
-    location: '',
-    ownedVideos: [],
-    userComments: [],
-    playlistComments: [],
-    favourites: [],
-    profilePhotoFilename: ''
-  });
+  const [currentUser, setCurrentUser] = useState(emptyUser);
 
   // Current profiles user data
-  const [profileUser, setProfileUser] = useState({
-    id: '',
-    firstName: '',
-    lastName: '',
-    jobTitle: '',
-    location: '',
-    ownedVideos: [],
-    userComments: [],
-    playlistComments: [],
-    favourites: [],
-    profilePhotoFilename: ''
-  });
+  const [profileUser, setProfileUser] = useState(emptyUser);
 
   // const [profilePhoto, setProfilePhoto] = useState(null);
   
@@ -215,27 +209,9 @@ const App = ({ Component, pageProps }) => {
     // Remove token from localStorage
     localStorage.removeItem('token');
     // Clear the current user
-    setCurrentUser({
-      id: '',
-      firstName: '',
-      lastName: '',
-      ownedVideos: [],
-      userComments: [],
-      playlistComments: [],
-      favourites: [],
-      profilePhotoFilename: ''
-    });
+    setCurrentUser(emptyUser);
 
-    setProfileUser({
-      id: '',
-      firstName: '',
-      lastName: '',
-      ownedVideos: [],
-      userComments: [],
-      playlistComments: [],
-      favourites: [],
-      profilePhotoFilename: ''
-    });
+    setProfileUser(emptyUser);
     
     // Redirect to home page
     // Router.push('/');
@@ -244,21 +220,25 @@ const App = ({ Component, pageProps }) => {
   }
 
   // USER *****************************************************************************
-  const updateUser = async (firstName, lastName, jobTitle, location) => {
+  const updateUser = async (firstName, lastName, jobTitle, location, languages, about) => {
     
     // Make a API query to get a token
     const requestBody = {
       query: `
       mutation {
-        updateUser(profileInput: {firstName: "${firstName}", lastName: "${lastName}", jobTitle: "${jobTitle}", location: "${location}"}) {
+        updateUser(profileInput: {firstName: "${firstName}", lastName: "${lastName}", jobTitle: "${jobTitle}", location: "${location}", languages: "${languages}",about: "${about}"}) {
           firstName,
           lastName,
           jobTitle,
-          location
+          location,
+          languages,
+          about
         }
       }
     `
     }
+
+    console.log(requestBody)
 
     try {
       const res = await fetch('http://localhost:5000/graphql', {
@@ -371,6 +351,8 @@ const App = ({ Component, pageProps }) => {
               jobTitle,
               location,
               _id,
+              languages,
+              about,
               ownedVideos {
                 _id,
                 thumbnailURL,
@@ -450,6 +432,8 @@ const App = ({ Component, pageProps }) => {
             jobTitle,
             location,
             _id,
+            languages,
+            about,
             ownedVideos {
               _id,
               title,
@@ -507,6 +491,8 @@ const App = ({ Component, pageProps }) => {
         lastName: user.lastName,
         jobTitle: user.jobTitle,
         location: user.location,
+        languages: user.languages,
+        about: user.about,
         ownedVideos: user.ownedVideos,
         userComments: user.userComments,
         playlistComments: user.playlistComments,
@@ -542,6 +528,8 @@ const App = ({ Component, pageProps }) => {
       lastName: user.lastName,
       jobTitle: user.jobTitle,
       location: user.location,
+      languages: user.languages,
+      about: user.about,
       ownedVideos: user.ownedVideos,
       userComments: user.userComments,
       playlistComments: user.playlistComments,
@@ -573,6 +561,8 @@ const App = ({ Component, pageProps }) => {
       lastName: '',
       jobTitle: '',
       location: '',
+      languages: [],
+      about: '',
       ownedVideos: [],
       userComments: [],
       playlistComments: [],
