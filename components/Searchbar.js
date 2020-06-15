@@ -29,7 +29,7 @@ const Searchbar = ({ placeholder, submitHandler }) => {
       <style jsx >{`
 
           form {
-            width: 100%;
+            width: 68.5%;
           }
 
           label {
@@ -39,9 +39,11 @@ const Searchbar = ({ placeholder, submitHandler }) => {
           }
           
           #main-searchbar {
-            margin: auto;
+            // margin: auto;
+            // margin-left: 3.5rem;
             display: flex;
             position: relative;
+            width: 100%;
           }
 
           #main-searchbar input {

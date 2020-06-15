@@ -65,6 +65,8 @@ const AddToPlaylist = () => {
 
     h2 {
       color: white;
+      margin-right: 7rem;
+      width: 25%;
     }
 
     #videos {
@@ -75,7 +77,7 @@ const AddToPlaylist = () => {
     }
 
     h3 {
-      padding: 1rem;
+      padding: 2rem;
     }
   
   `}</style>

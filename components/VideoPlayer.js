@@ -1,5 +1,6 @@
 import { GlobalContext } from '../context/GlobalContext';
 import { useContext } from 'react';
+import colors from '../css-variables/colors'
 
 const VideoPlayer = () => {
 
@@ -33,7 +34,6 @@ const VideoPlayer = () => {
       width: 85%;
       margin: 4rem auto;
       padding: 1rem;
-      text: center;
     }
 
     #video-info {
