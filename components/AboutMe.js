@@ -4,9 +4,16 @@ const AboutMe = ({profileUser}) => {
   return (
     <section id="about-me">
       <h2>About {profileUser.firstName}</h2>
-      <p>
-        {profileUser.about}
-      </p>
+      {profileUser.about !== null &&
+        <p>
+          {profileUser.about}
+        </p>
+      }
+      {profileUser.about === null &&
+        <p>
+          There's nothing here yet!
+        </p>
+      }
     
     
     

@@ -43,7 +43,7 @@ const CommentSection = ({ profileUser }) => {
           <form onSubmit={(e) => commentSubmitHandler(e)}>
             <label htmlFor="comment-input">Add a comment</label>
             <textarea name="comment-input" id="comment-input" value={content} cols="30" rows="3" onChange={handleChange}></textarea>
-            <button type="submit">Submit</button>
+            <button type="submit">Post</button>
           </form>
         </section>
       }
@@ -71,12 +71,15 @@ const CommentSection = ({ profileUser }) => {
 
       label {
         font-weight: bold;
+        font-size: 1.2rem;
       }
 
       textarea {
+        margin-top: 0.5rem;
         width: 100%;
         font: inherit;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        padding: 0.5rem;
       }
 
       button {

@@ -41,7 +41,9 @@ const ProfileInfo = ({setEditMode, editMode}) => {
     <section id="user">
       <div id="profile-photo">
         {profileUser.profilePhotoFilename !== null && profileUser.profilePhotoFilename !== '' &&
-          <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo" />
+          <div className="crop">
+            <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo" />
+          </div>
         }
       </div>
 
@@ -104,7 +106,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       #profile-photo {
         width: 33%;
         background: white;
-        padding: 3rem;
+        padding: 3.5rem 3rem 3rem 3rem;
         border: 1px solid black;
         border-right: none;
         border-radius: 10px 0 0 10px;
@@ -139,6 +141,9 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         border-radius: 50%;
         padding: 0.7rem;
         font-size: 1rem;
+        height: 50px;
+        width: 50px;
+        position: relative;
         
         /* height: 10%; */
       }
@@ -147,13 +152,23 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         margin-top: 4rem;
       }
 
+      .crop {
+        max-width: 266px;
+        max-height: 266px;
+        overflow: hidden;
+        border-radius: 50%;
+      }
+      
       img {
         width: 100%;
-        border-radius: 50%;
+        height: 100%;
       }
 
       i.favourite {
-        color: ${colors.secondary}
+        color: ${colors.secondary};
+        position: absolute;
+        top: 9px;
+        left: 9.6px;
       }
     
     `}</style>  

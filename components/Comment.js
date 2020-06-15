@@ -55,13 +55,15 @@ const Comment = ({comment}) => {
     setEditMode(false);
   }
 
-
-  
   
   const convertDate= (millisecs) => {
     const d = new Date(+millisecs);
-    return d.toLocaleString();
+    // return d.toLocaleString();
+    const dateArray = d.toLocaleString().split(", ");
+    // console.log(array);
+    return dateArray
   }
+
   const removeCommentClickHandler = () => {
     removeCommentFromPlaylist(comment._id);
   }
@@ -83,15 +85,23 @@ const Comment = ({comment}) => {
               }
             </div>
             <div className="comment-info">
-              <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
-                <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
-              </Link>
+              <div className="commenter">
+                <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
+                  <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
+                </Link>
+              </div>
               
               {!editMode && 
               <>
                 <p>{comment.content}</p>
 
-                <h4 className="date">{convertDate(comment.createdAt)}</h4>
+                {/* <h4 className="date">{convertDate(comment.createdAt)}</h4> */}
+                
+                <div className="date-container">
+                  {convertDate(comment.createdAt).map(date => {
+                    return <h4 className="date">{date}</h4>
+                  })}
+                </div>
               </>
               }
 
@@ -108,8 +118,12 @@ const Comment = ({comment}) => {
 
               {currentUser.id === commenterId && !editMode &&
                 <>
-                <button onClick={editCommentClickHandler}>Edit</button>
-                <button onClick={removeCommentClickHandler}>X</button>
+                <button onClick={editCommentClickHandler}>
+                  <i className="fa fa-pencil-square-o"></i>
+                </button>
+                <button onClick={removeCommentClickHandler}>
+                  <i className="fa fa-trash"></i>
+                </button>
                 </>
               }
             </div>
@@ -125,7 +139,18 @@ const Comment = ({comment}) => {
         display: flex;
         justify-content: flex-end;
       }
-      
+
+      .commenter {
+        height: 56px;
+        display: flex;
+        align-items: center;
+        border-right: 1px solid ${colors.primary}
+      }
+
+      .commenter h3 {
+        margin-right: 1rem;
+      }
+
       .content {
         display: flex;
         width: 100%;
@@ -147,7 +172,7 @@ const Comment = ({comment}) => {
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        margin-top: 10px;
+        margin-top: 15px;
       }
 
       h4 {
@@ -155,11 +180,17 @@ const Comment = ({comment}) => {
       }
 
       p {
-        margin: 0 2rem;
+        margin: 0 1rem;
       }
 
-      .date {
+      .date-container {
         margin-left: auto;
+      }
+
+      .date-container h4 {
+        font-size: 0.9rem;
+        border-left: 1px solid ${colors.primary};
+        padding-left: 1.8rem;
       }
 
       button {
