@@ -1,12 +1,9 @@
 import { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
-const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers, checkSearchMode}) => {
+const UserSearchbar = ({ placeholder, setFilteredUsers, checkSearchMode, searchInput, setSearchInput}) => {
 
   const { allUsers } = useContext(GlobalContext);
-
-  const [searchInput, setSearchInput] = useState('');
-
 
   useEffect(() => {
     // action on update of searchInput
@@ -61,7 +58,7 @@ const UserSearchbar = ({ placeholder, submitHandler, setFilteredUsers, checkSear
           #main-searchbar input {
             width: 100%;
             border-radius: 23px;
-            padding: 0.6rem 0.5rem 0.5rem 2.3rem;
+            padding: 0.6rem 0.5rem 0.5rem 2.5rem;
             font-size: 1.1rem;
             background-color: #fff;
             border: none;

@@ -11,6 +11,8 @@ const UserSearch = () => {
   const [searchMode, setSearchMode] = useState(false);
   
   const { fetchProfileUser } = useContext(GlobalContext);
+
+  const [searchInput, setSearchInput] = useState('');
   
   const userClickHandler = (id) => {
 
@@ -18,23 +20,23 @@ const UserSearch = () => {
     
     // Hide dropdown
     setSearchMode(false)
+
+    // Clear the search bar
+    setSearchInput('');
   }
 
   const checkSearchMode = (input) => {
-    console.log(input)
     if (input !== '') {
       setSearchMode(true);
     } else {
       setSearchMode(false);
     }
-
-    console.log(searchMode);
   }
 
 
   return (
     <div id="user-search">
-      <UserSearchBar checkSearchMode={checkSearchMode} placeholder='Search for user' searchMode='user' setFilteredUsers={setFilteredUsers}/>
+      <UserSearchBar checkSearchMode={checkSearchMode} placeholder='Search for user' searchMode='user' setFilteredUsers={setFilteredUsers} searchInput={searchInput} setSearchInput={setSearchInput}/>
       { searchMode &&
       <div id="dropdown">
         <div id="search-results">
@@ -47,6 +49,10 @@ const UserSearch = () => {
                 </Link>
               </li>
             ))}
+
+            {filteredUsers.length === 0 && 
+              <li>No Users Found</li>
+            }
 
           </ul>
         </div>

@@ -79,56 +79,59 @@ const Comment = ({comment}) => {
     <>
       <div className="comment" key={comment._id}>
         <div className="content">
-            <div id="avatar">
+            
+          <div className="avatar">
+            <div className="avatar-crop">
               {commentUser.profilePhotoFilename !== null && commentUser.profilePhotoFilename !== '' &&
                 <img src={`http://localhost:5000/image/${commentUser.profilePhotoFilename}`} alt="avatar" />
               }
             </div>
-            <div className="comment-info">
-              <div className="commenter">
-                <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
-                  <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
-                </Link>
-              </div>
+          </div>
+          
+          <div className="commenter">
+            <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
+              <a onClick={commenterClickHandler}><h3>{commentUser.firstName} {commentUser.lastName}</h3></a>
+            </Link>
+          </div>
               
-              {!editMode && 
-              <>
-                <p>{comment.content}</p>
+          {!editMode && 
+            <p>{comment.content}</p>
+          }
+        </div>      
 
-                {/* <h4 className="date">{convertDate(comment.createdAt)}</h4> */}
-                
-                <div className="date-container">
-                  {convertDate(comment.createdAt).map(date => {
-                    return <h4 className="date">{date}</h4>
-                  })}
-                </div>
-              </>
-              }
-
-              {editMode &&
-                <section id="edit-comment">
-                  <form id="edit-form" onSubmit={(e) => editCommentSubmitHandler(e)}>
-                    <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="2" ref={editedContentRef}></textarea>
-                    <button type="submit">Submit</button>
-                  <button onClick={editCommentClickHandler}>Cancel</button>
-
-                  </form>
-                </section>
-              }
-
-              {currentUser.id === commenterId && !editMode &&
-                <>
+        {!editMode && 
+          <div className="date-container">
+            {currentUser.id === commenterId && !editMode &&
+              <div className="comment-btns">
                 <button onClick={editCommentClickHandler}>
                   <i className="fa fa-pencil-square-o"></i>
                 </button>
                 <button onClick={removeCommentClickHandler}>
                   <i className="fa fa-trash"></i>
                 </button>
-                </>
-              }
+              </div>
+            }
+            <div className="date-time">
+              {convertDate(comment.createdAt).map(date => {
+                return <h4 className="date">{date}</h4>
+              })}
             </div>
           </div>
-        </div>
+        }  
+
+        {editMode &&
+          <section id="edit-comment">
+            <form id="edit-form" onSubmit={(e) => editCommentSubmitHandler(e)}>
+              <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="2" ref={editedContentRef}></textarea>
+              <button type="submit">Submit</button>
+            <button onClick={editCommentClickHandler}>Cancel</button>
+
+            </form>
+          </section>
+        }
+
+      </div>
+
     </>
 
     
@@ -137,28 +140,30 @@ const Comment = ({comment}) => {
 
       .comment {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 1rem 0;
+        background-color: white;
       }
 
       .commenter {
-        height: 56px;
+        height: 100%;
         display: flex;
         align-items: center;
         border-right: 1px solid ${colors.primary}
       }
 
       .commenter h3 {
-        margin-right: 1rem;
+        margin: 0 1rem;
       }
 
       .content {
         display: flex;
         width: 100%;
-        padding: 1.2rem;
-        border: 1px solid black;
-        border-radius: 5px;
-        margin: 1rem 0;
-        background-color: white;
+        padding: 1.2rem 0 1.2rem 1.2rem;
+        align-items: center;
       }
 
       .comment-info {
@@ -168,11 +173,20 @@ const Comment = ({comment}) => {
         margin-left: 1rem;
       }
 
-      img {
-        width: 50px;
-        height: 50px;
+      .avatar {
+        max-height: 50px;
+      }
+
+      .avatar-crop {
+        max-width: 50px;
+        max-height: 50px;
+        overflow: hidden;
         border-radius: 50%;
-        margin-top: 15px;
+      }
+
+      img {
+        max-width: 50px;
+        max-height: 75px;
       }
 
       h4 {
@@ -180,28 +194,59 @@ const Comment = ({comment}) => {
       }
 
       p {
-        margin: 0 1rem;
+        margin: 0 1.5rem;
+        overflow: hidden;
       }
 
       .date-container {
-        margin-left: auto;
+        margin: 1rem 0 1rem auto;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid ${colors.primary};
+        padding-right: 0.5rem;
+      }
+
+      .date-time {
+        margin-top: 0.5rem;
       }
 
       .date-container h4 {
         font-size: 0.9rem;
-        border-left: 1px solid ${colors.primary};
-        padding-left: 1.8rem;
+        padding: 0 1rem 0 1.5rem;
+        width: 100%;
+      }
+
+      .comment-btns {
+        display: flex;
+        height: 40px;
+        margin: 0 auto;
+        padding-left: 0.15rem;
+
       }
 
       button {
-      /* background-color: ; */
+      background-color: white;
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 10px;
-      margin: 1.5rem 0.5rem;
       border: none;
       cursor: pointer;
       font-size: 1rem;
+      position: relative;
+    }
+
+    i {
+      position: absolute;
+      color: ${colors.primary};
+      font-size: 1.5rem;
+    }
+
+    i.fa-pencil-square-o {
+      top: 8px;
+      left: -2px;
+    }
+
+    i.fa-trash {
+      top: 6px;
+      left: 0px;
     }
 
     button:focus {
