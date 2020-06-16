@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
-import colors from '../css-variables/colors'
+import colors from '../css-variables/colors';
 
 const Index = () => {
 
@@ -13,7 +13,12 @@ const Index = () => {
   return (
     <div className="container">
       <section id="welcome">
-        <h1>Welcome To CodeTunes</h1>
+        {/* <div id="welcome-text">
+          <h1>CodeTunes</h1>
+        </div> */}
+        <div id="welcome-img">
+          <img src='/keyboard3.jpg' />    
+        </div>
       </section>
 
 
@@ -22,7 +27,24 @@ const Index = () => {
     <style jsx>{`
     
       section#welcome{
+        display: flex;
+        height: 80vh;
+        overflow: hidden;
+        justify-content: center;
+      }
 
+      #welcome-text {
+        width: 50%;
+        /* padding: 2rem; */
+        margin-right: 1rem;
+      } 
+      
+      #welcome-img {
+        max-width: 100%;
+      }
+
+      #welcome-img img {
+        max-height:100%;
       }
 
       section#welcome h1 {

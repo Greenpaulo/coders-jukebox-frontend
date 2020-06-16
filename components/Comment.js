@@ -113,7 +113,7 @@ const Comment = ({comment}) => {
             }
             <div className="date-time">
               {convertDate(comment.createdAt).map(date => {
-                return <h4 className="date">{date}</h4>
+                return <h4 className="date" key={date}>{date}</h4>
               })}
             </div>
           </div>
@@ -191,6 +191,7 @@ const Comment = ({comment}) => {
 
       h4 {
         margin-right: 1rem;
+        text-align: center;
       }
 
       p {
@@ -220,7 +221,7 @@ const Comment = ({comment}) => {
         display: flex;
         height: 40px;
         margin: 0 auto;
-        padding-left: 0.15rem;
+        padding-left: 1.15rem;
 
       }
 

@@ -45,6 +45,11 @@ const ProfileInfo = ({setEditMode, editMode}) => {
             <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo" />
           </div>
         }
+        {(profileUser.profilePhotoFilename === null || profileUser.profilePhotoFilename === '') &&
+          <div className="crop">
+            <img src='/default-avatar.jpg' alt="profile-photo" />
+          </div>
+        }
       </div>
 
       <div id="user-info">

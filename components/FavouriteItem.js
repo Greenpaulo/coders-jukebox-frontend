@@ -39,7 +39,7 @@ const FavouriteItem = ({id}) => {
       {/* <h4>Avatar</h4> */}
       <div id="avatar">
         {favUser.profilePhotoFilename === null &&
-          <img src="/static/default-avatar.png" alt="avatar" />
+          <img src="/default-avatar.jpg" alt="avatar" />
         
         } 
 
