@@ -65,7 +65,6 @@ const Layout = (props) => (
         outline: none;
       }
       
-
       button:hover {
         background-color: #e5305a;
       }

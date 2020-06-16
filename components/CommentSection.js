@@ -92,7 +92,13 @@ const CommentSection = ({ profileUser }) => {
       cursor: pointer;
       font-size: 1rem;
       font-weight: bold;
-    }
+      transition: background-color 0.2s ease-in-out;
+
+      }
+
+      button:hover {
+        background-color: #eee;
+      }
     
     `}</style>
 

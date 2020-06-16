@@ -17,6 +17,12 @@ const Favourites = () => {
         ))}
       </div>
 
+      {profileUser.favourites.length === 0 && 
+        <h3>
+          No favourite users have been added.
+        </h3>
+      }
+
 
 
   <style jsx>{`
@@ -41,6 +47,10 @@ const Favourites = () => {
       display: flex;
       padding: 1rem;
       margin-top: 1rem;
+    }
+
+    h3 {
+      font-weight: normal;
     }
   
   `}</style>

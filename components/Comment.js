@@ -83,7 +83,18 @@ const Comment = ({comment}) => {
           <div className="avatar">
             <div className="avatar-crop">
               {commentUser.profilePhotoFilename !== null && commentUser.profilePhotoFilename !== '' &&
-                <img src={`http://localhost:5000/image/${commentUser.profilePhotoFilename}`} alt="avatar" />
+                <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
+                  <a onClick={commenterClickHandler}>
+                    <img src={`http://localhost:5000/image/${commentUser.profilePhotoFilename}`} alt="avatar" />
+                  </a>
+                </Link>
+              }
+              {(commentUser.profilePhotoFilename === null || commentUser.profilePhotoFilename === '') &&
+                <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
+                  <a onClick={commenterClickHandler}>
+                    <img src='/default-avatar.jpg' alt="avatar" />
+                  </a>
+                </Link>
               }
             </div>
           </div>
@@ -203,8 +214,10 @@ const Comment = ({comment}) => {
         margin: 1rem 0 1rem auto;
         display: flex;
         flex-direction: column;
-        border-left: 1px solid ${colors.primary};
+        align-items: center;
+        justify-content: center;
         padding-right: 0.5rem;
+        border-left: 1px solid ${colors.primary};
       }
 
       .date-time {
@@ -238,6 +251,7 @@ const Comment = ({comment}) => {
       position: absolute;
       color: ${colors.primary};
       font-size: 1.5rem;
+      transition: color 0.2s ease-in-out;
     }
 
     i.fa-pencil-square-o {
@@ -248,6 +262,10 @@ const Comment = ({comment}) => {
     i.fa-trash {
       top: 6px;
       left: 0px;
+    }
+
+    i:hover {
+      color: #e5305a;
     }
 
     button:focus {

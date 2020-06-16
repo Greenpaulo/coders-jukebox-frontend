@@ -107,6 +107,11 @@ const VideoItem = ({video, mode}) => {
       border: none;
       cursor: pointer;
       font-size: 1rem;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #e5305a;
     }
   
   `}</style>

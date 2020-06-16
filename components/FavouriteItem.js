@@ -39,12 +39,24 @@ const FavouriteItem = ({id}) => {
       {/* <h4>Avatar</h4> */}
       <div id="avatar">
         {favUser.profilePhotoFilename === null &&
-          <img src="/default-avatar.jpg" alt="avatar" />
+        <div className="crop">
+          <Link href="/profile/[userId]" as={`/profile/${id}`}>
+            <a onClick={favUserClickHandler}>
+              <img src="/default-avatar.jpg" alt="avatar" />
+            </a>
+          </Link>
+        </div>
         
         } 
 
         {favUser.profilePhotoFilename !== null && favUser.profilePhotoFilename !== '' && favUser.profilePhotoFilename !== undefined &&
-          <img src={`http://localhost:5000/image/${favUser.profilePhotoFilename}`} alt="avatar" />
+        <div className="crop">
+          <Link href="/profile/[userId]" as={`/profile/${id}`}>
+            <a onClick={favUserClickHandler}>
+              <img src={`http://localhost:5000/image/${favUser.profilePhotoFilename}`} alt="avatar" />
+            </a>
+          </Link>
+        </div>
         }
       </div>
 
@@ -54,7 +66,9 @@ const FavouriteItem = ({id}) => {
 
       
       { authState.authenticated === true && currentUser.id === profileUser.id &&
-        <button onClick={removeFavHandler}>Remove</button>
+        <button onClick={removeFavHandler}>
+          <i className="fa fa-times-circle"></i>
+        </button>
       }
 
       
@@ -65,6 +79,15 @@ const FavouriteItem = ({id}) => {
           border: 2px solid ${colors.primary};
           border-radius: 5px;
           padding: 2rem;
+          position: relative;
+        }
+
+        .crop {
+          max-height: 100px;
+          max-width: 100px;
+          overflow: hidden;
+          border-radius: 50px;
+          margin: 0 auto 0.8rem auto;
         }
         
         img {
@@ -73,6 +96,26 @@ const FavouriteItem = ({id}) => {
 
         a {
           color: white;
+        }
+
+        button {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          position: absolute;
+          top: 0px;
+          right: 8px;
+          background-color: black;
+          font-size: 1.5rem;
+          color: ${colors.primary};
+        }
+
+        i {
+          transition: color 0.2s ease-in-out;
+        }
+        
+        i:hover {
+          color: #e5305a;
         }
       
       
