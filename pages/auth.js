@@ -190,6 +190,13 @@ const Auth = () => {
           padding: 12px 45px;
           letter-spacing: 1px;
           text-transform: uppercase;
+          transition: text-shadow 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+          text-shadow: 0px 0px 8px rgb(255, 255, 255);
+          box-shadow: 0px 0px 8px rgb(255, 255, 255);
+          /* transform: scale(1); */
         }
 
         button.ghost {
