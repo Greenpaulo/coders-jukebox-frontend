@@ -1,6 +1,28 @@
 import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import colors from '../css-variables/colors';
+import { motion } from 'framer-motion';
+
+const profileInfoVariants = {
+  hidden: { opacity: 0},
+  visible: { 
+    opacity: 1,
+    transition: {
+      duration: 1.5
+    }
+  }
+}
+
+const infoVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 1.5,
+      delay: 2
+    }
+  }
+}
 
 const ProfileInfo = ({setEditMode, editMode}) => {
 
@@ -38,7 +60,8 @@ const ProfileInfo = ({setEditMode, editMode}) => {
   }
 
   return (
-    <section id="user">
+    <motion.div variants={profileInfoVariants} initial='hidden' animate='visible'>
+      <section id="user">
       <div id="profile-photo">
         {profileUser.profilePhotoFilename !== null && profileUser.profilePhotoFilename !== '' &&
           <div className="crop">
@@ -53,12 +76,12 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       </div>
 
       <div id="user-info">
-        <div id="info">
+        <motion.div id="info" variants={infoVariants}>
           <h1>{profileUser.firstName} {profileUser.lastName}</h1>
           <h2>Job Title: &nbsp; {profileUser.jobTitle}</h2>
           <h2>Location: &nbsp; {profileUser.location}</h2>
           <h2>Languages: &nbsp; {getLanguageString()}</h2>
-        </div>
+        </motion.div>
 
         <div id="buttons">
           {profileUser.id === currentUser.id &&
@@ -77,6 +100,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
           }
         </div>
       </div>
+    </section>
 
 
     <style jsx>{`
@@ -178,7 +202,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
     
     `}</style>  
 
-    </section>
+    </motion.div>
   )
 }
 

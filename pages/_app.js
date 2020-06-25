@@ -5,8 +5,9 @@ import Router from 'next/router';
 import cookie from 'react-cookies';
 import axios from 'axios';
 import { empty } from 'apollo-boost';
+import { AnimatePresence } from 'framer-motion';
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps, router }) => {
 
   let token = null;
 
@@ -1094,7 +1095,9 @@ const App = ({ Component, pageProps }) => {
       uploadFile
     }}>
       <Layout>
-        <Component {...pageProps} />
+        <AnimatePresence exitBeforeEnter key={router.route}>
+          <Component {...pageProps} />
+        </AnimatePresence>
       </Layout>
     </ContextProvider>
   )

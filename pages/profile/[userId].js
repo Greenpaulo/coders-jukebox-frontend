@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 // import Router from 'next/router'
 import { GlobalContext } from '../../context/GlobalContext';
 // import fetch from 'isomorphic-unfetch';
+import { motion } from 'framer-motion';
 
 import ProfileInfo from '../../components/ProfileInfo';
 import AboutMe from '../../components/AboutMe';
@@ -13,6 +14,10 @@ import CommentSection from '../../components/CommentSection';
 import ProfileEdit from '../../components/ProfileEdit';
 import Favourites from '../../components/Favourites';
 import Footer from '../../components/Footer';
+
+// Framer-motion variants
+
+
 
 
 
