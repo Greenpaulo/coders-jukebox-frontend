@@ -2,6 +2,19 @@ import { useContext, useRef, useState, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import FileUpload from './FileUpload';
 import colors from '../css-variables/colors';
+import { motion } from 'framer-motion';
+
+const editVariants = {
+  hidden: { opacity: 0, y: -500, zIndex: -3},
+  visible: { 
+    opacity: 1,
+    y: 0,
+    zIndex: -3,
+    transition: {
+      duration: 0.5
+    }
+  }
+}
 
 
 const ProfileEdit = ({setEditMode}) => {
@@ -75,7 +88,8 @@ const ProfileEdit = ({setEditMode}) => {
 
 
   return (
-    <section id="profile-edit">
+    <motion.div variants={editVariants} initial='hidden' animate='visible'>
+      <section id="profile-edit">
       <div id="edit-container">
 
         <div id="col1">
@@ -142,6 +156,7 @@ const ProfileEdit = ({setEditMode}) => {
         
       
       </div>
+      </section>
 
 
       <style jsx>{`
@@ -150,7 +165,8 @@ const ProfileEdit = ({setEditMode}) => {
           /* padding: 3rem; */
           border: 1px solid white;
           border-radius: 10px;
-          margin-top: 1rem; 
+          margin-top: 1rem;
+          z-index: -3;
         }
 
         #edit-container {
@@ -230,7 +246,7 @@ const ProfileEdit = ({setEditMode}) => {
       
       `}</style>
 
-    </section>
+    </motion.div>
   )
 }
 

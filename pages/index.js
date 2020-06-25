@@ -1,6 +1,18 @@
 import { useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import colors from '../css-variables/colors';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const welcomeTextVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: {
+      duration: 2
+    }
+  },
+  exit: { y: -500, opacity: 1 }
+}
 
 const Index = () => {
 
@@ -11,15 +23,18 @@ const Index = () => {
   }, [])
 
   return (
+    <AnimatePresence exitBeforeEnter>
     <div className="container">
       <section id="welcome">
-        {/* <div id="welcome-text">
+        <motion.div id="welcome-text" variants={welcomeTextVariants} initial='hidden' animate='visible' exit='exit'>
           <h1>CodeTunes</h1>
-        </div> */}
-        <div id="welcome-img">
+        </motion.div>
+        {/* <div id="welcome-img">
           <img src='/keyboard3.jpg' />    
-        </div>
+        </div> */}
       </section>
+      </div>
+
 
 
 
@@ -60,7 +75,7 @@ const Index = () => {
     `}</style>
 
 
-    </div>
+    </AnimatePresence>
   )
 };
 
