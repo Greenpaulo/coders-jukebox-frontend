@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { GlobalContext } from './GlobalContext';
+import { AnimatePresence } from 'framer-motion';
 
 class ContextProvider extends Component {
   constructor(props) {
@@ -13,7 +14,9 @@ class ContextProvider extends Component {
     const { value } = this.props;
     return (
       <GlobalContext.Provider value={value}>
-        {this.props.children}
+        <AnimatePresence exitBeforeEnter >
+          {this.props.children}
+        </AnimatePresence>
       </GlobalContext.Provider>
     );
   }

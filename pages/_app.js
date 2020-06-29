@@ -1095,7 +1095,7 @@ const App = ({ Component, pageProps, router }) => {
       uploadFile
     }}>
       <Layout>
-        <AnimatePresence exitBeforeEnter key={router.route}>
+        <AnimatePresence exitBeforeEnter>
           <Component {...pageProps} />
         </AnimatePresence>
       </Layout>

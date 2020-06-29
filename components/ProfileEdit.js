@@ -2,7 +2,8 @@ import { useContext, useRef, useState, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import FileUpload from './FileUpload';
 import colors from '../css-variables/colors';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+
 
 const editVariants = {
   hidden: { opacity: 0, y: -500, zIndex: -3},
@@ -13,7 +14,8 @@ const editVariants = {
     transition: {
       duration: 0.5
     }
-  }
+  },
+  exit: { opacity: 0, y: -500, zIndex: -3 }
 }
 
 
@@ -88,7 +90,8 @@ const ProfileEdit = ({setEditMode}) => {
 
 
   return (
-    <motion.div variants={editVariants} initial='hidden' animate='visible'>
+    <AnimatePresence>
+    <motion.div variants={editVariants} initial='hidden' animate='visible' exit='exit'>
       <section id="profile-edit">
       <div id="edit-container">
 
@@ -247,6 +250,7 @@ const ProfileEdit = ({setEditMode}) => {
       `}</style>
 
     </motion.div>
+    </AnimatePresence>
   )
 }
 

@@ -72,7 +72,7 @@ const Navbar = () => {
           #navbar {
             padding: 1.5rem 0;
             border-bottom: 1px solid black;
-            margin-bottom: 2rem;
+            /* margin-bottom: 2rem; */
             background: ${colors.gradient};
             /* color: white; */
             /* background-color: #93fffb; */
