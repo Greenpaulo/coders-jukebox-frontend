@@ -121,13 +121,6 @@ const Index = () => {
       }
 
       a {
-        /* color: white;
-        padding: 0.5rem 2rem;
-        margin: 2rem;
-        border-radius: 30px;
-        font-size: 1.5rem;
-        text-transform: uppercase; */
-
         border-radius: 20px;
         color: #fff;
         font-size: 16px;
@@ -138,7 +131,6 @@ const Index = () => {
         margin: 2rem;
         background: ${colors.reversePinkGradient};
         transition: text-shadow 0.2s, box-shadow 0.2s;
-
       }
 
       a.login-btn {
@@ -151,10 +143,10 @@ const Index = () => {
       }
 
       a:hover {
-          /* Glow effect */
-          text-shadow: 0px 0px 8px rgb(255, 255, 255);
-          box-shadow: 0px 0px 8px rgb(255, 255, 255);
-        }
+        /* Glow effect */
+        text-shadow: 0px 0px 8px rgb(255, 255, 255);
+        box-shadow: 0px 0px 8px rgb(255, 255, 255);
+      }
     
     
     `}</style>
