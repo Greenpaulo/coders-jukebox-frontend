@@ -1,4 +1,5 @@
 import { useEffect, useContext } from 'react';
+import Link from 'next/Link';
 import { GlobalContext } from '../context/GlobalContext';
 import colors from '../css-variables/colors';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -19,7 +20,7 @@ const welcomeTextVariants = {
 
 const Index = () => {
 
-  const { clearProfileUser } = useContext(GlobalContext);
+  const { clearProfileUser, authState } = useContext(GlobalContext);
 
   useEffect(() => {
     clearProfileUser();
@@ -34,9 +35,25 @@ const Index = () => {
 
       <section id="welcome">
         
-        <motion.div id="welcome-text" variants={welcomeTextVariants} initial='hidden' animate='visible' exit='exit'>
-          <h1>CodeTunes</h1>
-          <h3>A social music app for coders</h3>
+        <motion.div variants={welcomeTextVariants} initial='hidden' animate='visible' exit='exit'>
+          <div id="welcome-text" >
+            <h1>CodeTunes</h1>
+            <h3>A social music app for coders</h3>
+            
+            <div className="auth-btns">
+              {!authState.authenticated &&
+                <>
+                  <Link href="/auth">
+                    <a className="signup-btn">Sign Up</a>
+                  </Link>
+                  <Link href="/auth">
+                    <a className="login-btn">Login</a>
+                  </Link>
+                </>
+              }
+            </div>
+          </div>
+          
         </motion.div>
 
         <WelcomeImage />
@@ -61,13 +78,14 @@ const Index = () => {
         margin-top: 4rem;
         overflow: hidden;
         justify-content: center;
+        text-align: center;
         /* background: url('/mainsvg.svg') no-repeat; */
       }
 
       #welcome-text {
-        width: 50%;
+        /* width: 50%; */
         /* padding: 2rem; */
-        margin-right: 1rem;
+        margin-right: 2rem;
       }
       
       #welcome-img {
@@ -81,21 +99,62 @@ const Index = () => {
       section#welcome h1 {
         font-size: 7.5rem;
         /* padding: 5rem 5rem 0 5rem; */
-        margin: 6rem 4rem 1rem 0;
+        margin: 9rem auto 1rem auto;
         line-height: 6rem;
-        width: 70%;
-        color: ${colors.primary}
+        /* width: 70%; */
+        color: ${colors.primary};
+        text-align: center;
       }
 
       section#welcome h3 {
         font-size: 1.5rem;
         /* padding: 5rem; */
-        margin-top: 1.5rem;
+        margin: 1.5rem auto 1.5rem auto;
         /* line-height: 6rem; */
         width: 60%;
         color: ${colors.primary};
         text-align: center;
       }
+
+      .auth-btns {
+        margin-top: 5rem;
+      }
+
+      a {
+        /* color: white;
+        padding: 0.5rem 2rem;
+        margin: 2rem;
+        border-radius: 30px;
+        font-size: 1.5rem;
+        text-transform: uppercase; */
+
+        border-radius: 20px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 45px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin: 2rem;
+        background: ${colors.reversePinkGradient};
+        transition: text-shadow 0.2s, box-shadow 0.2s;
+
+      }
+
+      a.login-btn {
+        /* border: 1px solid ${colors.secondary};
+        background-color: ${colors.secondary}; */
+      }
+
+      a.signup-btn {
+        /* border: 1px solid ${colors.gradient}; */
+      }
+
+      a:hover {
+          /* Glow effect */
+          text-shadow: 0px 0px 8px rgb(255, 255, 255);
+          box-shadow: 0px 0px 8px rgb(255, 255, 255);
+        }
     
     
     `}</style>

@@ -194,9 +194,9 @@ const Auth = () => {
         }
 
         button:hover {
+          /* Glow effect */
           text-shadow: 0px 0px 8px rgb(255, 255, 255);
           box-shadow: 0px 0px 8px rgb(255, 255, 255);
-          /* transform: scale(1); */
         }
 
         button.ghost {

@@ -101,6 +101,11 @@ const Navbar = () => {
             color: white;
             margin: 0 1rem;
             font-weight: 400;
+            transition: text-shadow 0.2s;
+          }
+
+          .nav-item:hover {
+            text-shadow: 0px 0px 8px rgb(255, 255, 255);
           }
 
           #search {
