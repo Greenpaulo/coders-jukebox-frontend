@@ -184,11 +184,11 @@ const App = ({ Component, pageProps, router }) => {
         data.errors.map(error => {
           console.log(error.message)
         })
-        return
+        return {newUserEmail: '', error:data.errors}
       }
 
       const newUserEmail = (data.data.createUser.email);
-      return newUserEmail;
+      return { newUserEmail: newUserEmail, error: []};
 
       // Flip the form to Sign In and prefill the email input with the email just used
 

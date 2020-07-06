@@ -2,17 +2,25 @@ import {useRef, useContext, useState, useEffect} from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Router from 'next/router';
 import colors from '../css-variables/colors'
+import FlashMessage from '../components/FlashMessage';
 
 const Auth = () => {
+
+
   
   const [ newUserEmail, setNewUserEmail ] = useState('');
+  const [authError, setAuthError] = useState({
+    status: false,
+    message: ''
+  });
+  
 
   useEffect(() => {
     // const container = document.getElementById('container');
   }, [])
 
 
-  const context = useContext(GlobalContext);
+  const { login, register } = useContext(GlobalContext);
 
   // Create refs
   const firstNameRef = useRef();
@@ -39,7 +47,7 @@ const Auth = () => {
     // console.log(email, password)
 
     // Call login action to fetch token from API and change the global state
-    context.login(email, password);
+    login(email, password);
   };
 
 
@@ -56,18 +64,56 @@ const Auth = () => {
 
     // Check if any field is empty
     if (firstName.trim().length === 0 || lastName.trim().length === 0 || email.trim().length === 0 || password.trim().length === 0){
+      setAuthError({
+        status: true,
+        message: 'Please fill in all fields'
+      })
+      setTimeout(() => {
+        setAuthError({
+          status: false,
+          message: ''
+        })
+      }, 4000);
       return;
     }
 
     // Check if passwords match
     if (password !== passwordConfirm) {
-      // ***********************ADD FLASH ERROR MESSAGING IN HERE*****************
+      setAuthError({
+        status: true,
+        message: 'Passwords do not match!'
+      })
+      setTimeout(() => {
+        setAuthError({
+          status: false,
+          message: ''
+        })
+      }, 4000);
+      document.getElementById('password').value = '';
+      document.getElementById('passwordConfirm').value = '';
       return;
 
     }
 
     // Call register action to send a post request to API and change the local and global state
-    const newEmail = await context.register(firstName, lastName, email, password);
+    const response = await register(firstName, lastName, email, password);
+    console.log(response)
+
+    //Check for errors
+    if (response.error) {
+      console.log(response.error[0].message);
+      setAuthError({
+        status: true,
+        message: response.error[0].message
+      })
+      setTimeout(() => {
+        setAuthError({
+          status: false,
+          message: ''
+        })
+      }, 4000);
+      return;
+    }
 
     // Prefill the sign up from with the newly registered email
     setNewUserEmail(newEmail);
@@ -83,8 +129,6 @@ const Auth = () => {
     container.classList.remove("right-panel-active");
   };
 
-
-  // console.log(container)
 
   const signUpButtonHandler = () => {
     // console.log('click')
@@ -105,6 +149,9 @@ const Auth = () => {
       <div className="form-container sign-up-container">
           <form onSubmit={(e) => registerHandler(e)}>
           <h1>Create Account</h1>
+          {authError.status &&
+            <FlashMessage message={authError.message}/>
+          }
           <input type="text" id="firstName" ref={firstNameRef} placeholder="First Name"/>
           <input type="text" id="lastName" ref={lastNameRef} placeholder="Last Name"/>
           <input type="email" id="email" ref={emailRef} placeholder="Email"/>
