@@ -4,24 +4,28 @@ import colors from '../css-variables/colors'
 
 const VideoPlayer = () => {
 
-  const { videoState } = useContext(GlobalContext);
+  const { videoState, autoplay, profileUser } = useContext(GlobalContext);
 
-  // Autoplay on
-  // const videoSrc = `https://www.youtube.com/embed/${videoState.videoId}?autoplay=1`;
-  
   // Autoplay off
-  const videoSrc = `https://www.youtube.com/embed/${videoState.videoId}`;
+  let videoSrc = `https://www.youtube.com/embed/${videoState.videoId}`;
+
+  if (autoplay) {
+    // Autoplay on
+    videoSrc = `https://www.youtube.com/embed/${videoState.videoId}?autoplay=1`;
+  }
 
   return (
 
     <div id="video-container">
-      <div id="video-player">
-        <iframe width="918" height="567" frameBorder="0" allowFullScreen allow="autoplay" src={videoSrc}></iframe>
-        {/* <VideoInfo /> */}
-        {/* <div id="video-info">
-          <h3>{videoState.title}</h3>
-        </div> */}
-      </div>
+      {profileUser.ownedVideos.length > 0 && 
+        <div id="video-player">
+          <iframe width="918" height="567" frameBorder="0" allowFullScreen allow="autoplay" src={videoSrc}></iframe>
+          {/* <VideoInfo /> */}
+          {/* <div id="video-info">
+            <h3>{videoState.title}</h3>
+          </div> */}
+        </div>
+      }
       
 
   <style jsx>{`

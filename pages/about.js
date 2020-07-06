@@ -86,8 +86,8 @@ const About = () => {
 
     #profile-link {
       width: 70%;
-      border-bottom: 1px solid ${colors.primary};
       padding-bottom: 4rem;
+      border-bottom: 1px solid ${colors.primary};
     }
 
     #profile-link-text {

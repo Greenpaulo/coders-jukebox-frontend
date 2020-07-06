@@ -2,10 +2,10 @@ import { GlobalContext } from '../context/GlobalContext';
 import { useContext } from 'react';
 import colors from '../css-variables/colors'
 
-const VideoItem = ({video, mode}) => {
+const VideoItem = ({ video, mode }) => {
 
   
-  const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo, currentUser, profileUser } = useContext(GlobalContext);
+  const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo, currentUser, profileUser, setAutoplay  } = useContext(GlobalContext);
   
   const addVideoClickHandler = () => {
 
@@ -39,6 +39,8 @@ const VideoItem = ({video, mode}) => {
       }
     }
     setCurrentVideo(videoToSet);
+
+    setAutoplay(true);
 
   }
 

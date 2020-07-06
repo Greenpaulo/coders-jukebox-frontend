@@ -70,6 +70,7 @@ const UserSearch = () => {
           width: 79%;
           /* position: relative; */
           margin: auto;
+          z-index: 3;
         }
         
         #search-results {

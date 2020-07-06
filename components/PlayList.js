@@ -2,7 +2,7 @@ import VideoItem from './VideoItem';
 import colors from '../css-variables/colors'
 
 
-const PlayList = ({profileUser}) => {
+const PlayList = ({profileUser }) => {
 
   return (
     <section id="playlist">
@@ -12,7 +12,7 @@ const PlayList = ({profileUser}) => {
       </div>
 
       {profileUser.ownedVideos.length === 0 && 
-        <h2>Add some music to your playlist!</h2>
+        <h3>Add some music to your playlist!</h3>
       }
       
       
@@ -44,6 +44,10 @@ const PlayList = ({profileUser}) => {
         padding: 2rem;
         border-radius: 10px 10px 0 0;
         color: white;
+      }
+
+      h3 {
+        padding: 2rem;
       }
     
     `}</style>

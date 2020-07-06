@@ -70,6 +70,8 @@ const App = ({ Component, pageProps, router }) => {
 
   const [allUsers, setAllUsers] = useState([]);
 
+  const [ autoplay, setAutoplay ] = useState(false);
+
 
 
   // AUTHENTICATION *******************************************************************
@@ -1073,6 +1075,8 @@ const App = ({ Component, pageProps, router }) => {
       videoState,
       commentState,
       allUsers,
+      autoplay,
+      setAutoplay,
       // profilePhoto,
       login,
       register,

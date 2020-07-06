@@ -78,6 +78,9 @@ const Auth = () => {
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
     document.getElementById('passwordConfirm').value = '';
+
+    // Switch the panels to sign-in form
+    container.classList.remove("right-panel-active");
   };
 
 

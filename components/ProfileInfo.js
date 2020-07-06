@@ -4,15 +4,14 @@ import colors from '../css-variables/colors';
 import { motion } from 'framer-motion';
 
 const profileInfoVariants = {
-  hidden: { opacity: 0, zIndex: 3, position: 'relative'},
-  visible: { 
-    opacity: 1,
-    zIndex: 3,
-    position: 'relative',
-    transition: {
-      duration: 1.5
-    }
-  }
+  // hidden: { opacity: 0, position: 'relative'},
+  // visible: { 
+  //   opacity: 1,
+  //   position: 'relative',
+  //   transition: {
+  //     duration: 1.5
+  //   }
+  // }
 }
 
 const infoVariants = {
@@ -112,7 +111,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         /* border: 1px solid white; */
         border-radius: 10px;
         margin-top: 1rem;
-        z-index: 2;
+        /* z-index: 2; */
       }
       
       #user {

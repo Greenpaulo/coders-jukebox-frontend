@@ -23,7 +23,7 @@ import Footer from '../../components/Footer';
 
 const Profile = () => {
 
-  const { authState, currentUser, profileUser, fetchProfileUser, clearProfileUser, addFavourite, removeFavourite} = useContext(GlobalContext);
+  const { authState, currentUser, profileUser, setAutoplay, fetchProfileUser, clearProfileUser, addFavourite, removeFavourite} = useContext(GlobalContext);
 
   // Get the userId from the URL and fetch the profile user's data
   const router = useRouter()
@@ -32,9 +32,9 @@ const Profile = () => {
 
   
   
-  // useEffect(() => {
-    //   return () => clearProfileUser()
-    // }, [])
+  useEffect(() => {
+      setAutoplay(false);
+    }, [])
     
     
   //   useEffect(() => {
@@ -50,7 +50,9 @@ const Profile = () => {
   //   // }
   // }, [])
 
-  const [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(false);
+  
+
   // const [imageString, setImageString] = useState('http://localhost:5000/image/3cae4585ddf4cc55c72b174c0726f266.jpg');
 
   // if (profilePhoto !== null) {
@@ -86,10 +88,10 @@ const Profile = () => {
 
         <AboutMe profileUser={profileUser}/>
 
-        <VideoPlayer />
+        <VideoPlayer/>
 
         {profileUser.id === currentUser.id && 
-         <AddToPlaylist/> 
+          <AddToPlaylist/> 
         }
 
         <Playlist profileUser={profileUser}/>
