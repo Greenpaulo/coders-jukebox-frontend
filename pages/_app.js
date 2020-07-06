@@ -109,10 +109,7 @@ const App = ({ Component, pageProps, router }) => {
 
       // Check for errors array in response
       if (data.errors) {
-        data.errors.map(error => {
-          console.log(error.message)
-        })
-        return
+        return { error: data.errors };
       }
 
       // Set state with returned auth data
@@ -181,10 +178,7 @@ const App = ({ Component, pageProps, router }) => {
 
       // Check for errors array in response
       if (data.errors) {
-        data.errors.map(error => {
-          console.log(error.message)
-        })
-        return {newUserEmail: '', error:data.errors}
+        return {newUserEmail: '', error: data.errors}
       }
 
       const newUserEmail = (data.data.createUser.email);

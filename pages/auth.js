@@ -32,7 +32,7 @@ const Auth = () => {
   const loginEmailRef = useRef();
   
   // Handle login form submit
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
     
     // Get credentials from refs
@@ -41,14 +41,38 @@ const Auth = () => {
 
     // Check if email or password is empty
     if (email.trim().length === 0 || password.trim().length === 0){
+      setAuthError({
+        status: true,
+        message: 'Please fill in all fields'
+      })
+      setTimeout(() => {
+        setAuthError({
+          status: false,
+          message: ''
+        })
+      }, 4000);
       return;
     }
 
-    // console.log(email, password)
-
     // Call login action to fetch token from API and change the global state
-    login(email, password);
-  };
+    const response = await login(email, password);
+
+    // Check for errors
+    if (response.error) {
+      setAuthError({
+        status: true,
+        message: response.error[0].message
+      })
+      setTimeout(() => {
+        setAuthError({
+          status: false,
+          message: ''
+        })
+      }, 4000);
+      document.getElementById('loginPassword').value = '';
+      return;
+    };
+  }
 
 
   // Handle register form submit
@@ -97,11 +121,9 @@ const Auth = () => {
 
     // Call register action to send a post request to API and change the local and global state
     const response = await register(firstName, lastName, email, password);
-    console.log(response)
 
     //Check for errors
     if (response.error) {
-      console.log(response.error[0].message);
       setAuthError({
         status: true,
         message: response.error[0].message
@@ -131,12 +153,10 @@ const Auth = () => {
 
 
   const signUpButtonHandler = () => {
-    // console.log('click')
     container.classList.add("right-panel-active");
   }
 
   const signInButtonHandler = () => {
-    // console.log('click')
     container.classList.remove("right-panel-active");
   }
 
@@ -163,6 +183,9 @@ const Auth = () => {
       <div className="form-container sign-in-container">
         <form onSubmit={(e) => loginHandler(e)}>
           <h1>Sign in</h1>
+          {authError.status &&
+            <FlashMessage message={authError.message} />
+          }
           <input type="email" id="loginEmail" defaultValue={newUserEmail} ref={loginEmailRef} placeholder="Email"/>
           <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />
 
