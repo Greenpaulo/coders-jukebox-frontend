@@ -9,7 +9,11 @@ const Auth = () => {
 
   
   const [ newUserEmail, setNewUserEmail ] = useState('');
-  const [authError, setAuthError] = useState({
+  const [loginError, setLoginError] = useState({
+    status: false,
+    message: ''
+  });
+  const [registerError, setRegisterError] = useState({
     status: false,
     message: ''
   });
@@ -41,12 +45,12 @@ const Auth = () => {
 
     // Check if email or password is empty
     if (email.trim().length === 0 || password.trim().length === 0){
-      setAuthError({
+      setLoginError({
         status: true,
         message: 'Please fill in all fields'
       })
       setTimeout(() => {
-        setAuthError({
+        setLoginError({
           status: false,
           message: ''
         })
@@ -59,12 +63,12 @@ const Auth = () => {
 
     // Check for errors
     if (response.error) {
-      setAuthError({
+      setLoginError({
         status: true,
         message: response.error[0].message
       })
       setTimeout(() => {
-        setAuthError({
+        setLoginError({
           status: false,
           message: ''
         })
@@ -88,12 +92,12 @@ const Auth = () => {
 
     // Check if any field is empty
     if (firstName.trim().length === 0 || lastName.trim().length === 0 || email.trim().length === 0 || password.trim().length === 0){
-      setAuthError({
+      setRegisterError({
         status: true,
         message: 'Please fill in all fields'
       })
       setTimeout(() => {
-        setAuthError({
+        setRegisterError({
           status: false,
           message: ''
         })
@@ -103,12 +107,12 @@ const Auth = () => {
 
     // Check if passwords match
     if (password !== passwordConfirm) {
-      setAuthError({
+      setRegisterError({
         status: true,
         message: 'Passwords do not match!'
       })
       setTimeout(() => {
-        setAuthError({
+        setRegisterError({
           status: false,
           message: ''
         })
@@ -124,12 +128,12 @@ const Auth = () => {
 
     //Check for errors
     if (response.error) {
-      setAuthError({
+      setRegisterError({
         status: true,
         message: response.error[0].message
       })
       setTimeout(() => {
-        setAuthError({
+        setRegisterError({
           status: false,
           message: ''
         })
@@ -169,8 +173,8 @@ const Auth = () => {
       <div className="form-container sign-up-container">
           <form onSubmit={(e) => registerHandler(e)}>
           <h1>Create Account</h1>
-          {authError.status &&
-            <FlashMessage message={authError.message}/>
+          {registerError.status &&
+            <FlashMessage message={registerError.message}/>
           }
           <input type="text" id="firstName" ref={firstNameRef} placeholder="First Name"/>
           <input type="text" id="lastName" ref={lastNameRef} placeholder="Last Name"/>
@@ -183,8 +187,8 @@ const Auth = () => {
       <div className="form-container sign-in-container">
         <form onSubmit={(e) => loginHandler(e)}>
           <h1>Sign in</h1>
-          {authError.status &&
-            <FlashMessage message={authError.message} />
+          {loginError.status &&
+            <FlashMessage message={loginError.message} />
           }
           <input type="email" id="loginEmail" defaultValue={newUserEmail} ref={loginEmailRef} placeholder="Email"/>
           <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />
@@ -202,7 +206,7 @@ const Auth = () => {
           </div>
           <div className="overlay-panel overlay-right">
             <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start journey with us</p>
+            <p>Enter your personal details and start your journey with us</p>
             <button className="ghost" id="signUp" onClick={signUpButtonHandler}>Sign Up</button>
           </div>
         </div>
