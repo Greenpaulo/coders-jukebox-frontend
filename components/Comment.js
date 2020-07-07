@@ -79,7 +79,6 @@ const Comment = ({comment}) => {
     <>
       <div className="comment" key={comment._id}>
         <div className="content">
-            
           <div className="avatar">
             <div className="avatar-crop">
               {commentUser.profilePhotoFilename !== null && commentUser.profilePhotoFilename !== '' &&
@@ -106,7 +105,7 @@ const Comment = ({comment}) => {
           </div>
               
           {!editMode && 
-            <p>{comment.content}</p>
+              <p>{comment.content}</p>
           }
         </div>      
 
@@ -285,6 +284,24 @@ const Comment = ({comment}) => {
       width: 100%;
       font: inherit;
       padding: 0.5rem;
+    }
+
+    /* Media queries */
+    @media (max-width: 768px ) {
+      .avatar {
+        /* display: none; */
+      }
+      
+      p {
+        overflow: scroll;
+        height: 100px;
+        word-wrap: break-word;
+        /* width: 100px; */
+      }
+
+      .content {
+        display: grid;
+      }
     }
   
     `}</style>

@@ -226,8 +226,9 @@ const ProfileInfo = ({setEditMode, editMode}) => {
           background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
           background: linear-gradient(to right, #FF4B2B, #FF416C);
           margin: auto;
-          width: 80%;
+          width: 90%;
           border-radius: 10px;
+          padding: 2.5rem;
         }
       }
     

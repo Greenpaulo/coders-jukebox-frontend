@@ -50,6 +50,24 @@ const VideoPlayer = () => {
       margin: auto;
     } */
 
+    /* Media queries */
+    @media (max-width: 1150px ) {
+
+      #video-player {
+        width: 92%;
+        margin: auto;
+      }
+
+      iframe {
+        margin: auto;
+      }
+    }
+
+    @media (max-width: 768px ) {
+      iframe {
+        width: 500;
+      }
+    }
   
   
   

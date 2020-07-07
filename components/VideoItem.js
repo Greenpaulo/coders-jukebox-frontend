@@ -97,7 +97,6 @@ const VideoItem = ({ video, mode }) => {
 
     h3 {
       margin: 0 auto 0 2.7rem;
-
     }
 
     button {
@@ -115,6 +114,24 @@ const VideoItem = ({ video, mode }) => {
     button:hover {
       background-color: #e5305a;
       text-shadow: 0px 0px 8px rgb(255, 255, 255);
+    }
+
+    /* Media queries */
+    @media (max-width: 768px) {
+      .video-item {
+        text-align: left;
+      }
+      
+      h3 {
+        font-size: 0.8rem;
+        margin: 0;
+        text-align: left;
+
+      }
+
+      #buttons {
+        width: 20%;
+      }
     }
   
   `}</style>

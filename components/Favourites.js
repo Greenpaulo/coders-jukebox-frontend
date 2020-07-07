@@ -52,6 +52,15 @@ const Favourites = () => {
     h3 {
       font-weight: normal;
     }
+
+    /* Media queries */
+    @media (max-width: 1150px ) {
+
+      section#favourites {
+        width: 80%;
+        margin: auto;
+      }
+    }
   
   `}</style>
 

@@ -99,6 +99,21 @@ const CommentSection = ({ profileUser }) => {
       button:hover {
         background-color: #eee;
       }
+
+      /* Media queries */
+      @media (max-width: 1150px ) {
+
+        section#comment-section {
+          width: 80%;
+          margin: auto;
+        }
+      }
+
+      @media (max-width: 768px ) {
+        p {
+          width: 50%;
+        }
+      }
     
     `}</style>
 
