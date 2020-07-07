@@ -83,6 +83,7 @@ const Navbar = () => {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin: auto;
           }
 
           #nav-menu {
@@ -126,6 +127,21 @@ const Navbar = () => {
             margin: auto;
             display: flex;
             position: relative;
+          }
+
+          /* Media queries */
+          @media (max-width: 1150px){
+            #nav-content {
+              width: 90%;
+            }
+
+            h1 {
+              margin-left: 2rem;
+            }
+          }
+
+          @media (max-width: 950px) {
+            
           }
 
 

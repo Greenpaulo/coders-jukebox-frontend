@@ -49,6 +49,7 @@ const UserSearchbar = ({ placeholder, setFilteredUsers, checkSearchMode, searchI
             display: flex;
             position: relative;
             width: 75%;
+            font: inherit;
           }
 
           #main-searchbar form {

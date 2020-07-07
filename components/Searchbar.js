@@ -44,6 +44,7 @@ const Searchbar = ({ placeholder, submitHandler }) => {
             display: flex;
             position: relative;
             width: 100%;
+            font: inherit;
           }
 
           #main-searchbar input {

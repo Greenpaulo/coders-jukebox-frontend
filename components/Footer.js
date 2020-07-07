@@ -6,16 +6,21 @@ const Footer = () => {
 
   return (
     <footer id="main-footer">
-      <h3>CODETUNES</h3>
-      <h3>&copy; {year}</h3>
+      <h4>CODETUNES</h4>
+      <h4>&copy; {year}</h4>
 
     <style jsx>{`
 
       footer {
-        background: ${colors.reverseGradient};
+        color: white;
         text-align: center;
         padding: 1.2rem;
         margin-top: 2rem;
+        background: ${colors.reverseGradient};
+      }
+
+      h4 {
+        font-weight: normal;
       }
     
     

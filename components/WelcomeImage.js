@@ -55,8 +55,8 @@ const WelcomeImage = () => {
 
 
 
-      <style jsx>{`
-    svg {
+  <style jsx>{`
+      svg {
         height: 800px;
         width: 800px;
         /* margin: 2rem; */
@@ -100,6 +100,19 @@ const WelcomeImage = () => {
           }
         }
       } */
+
+    /* Media queries */
+    @media (max-width: 1024px) {
+      svg#Layer_1 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1150px) {
+      svg {
+        display: none;
+      }
+    }
   
   `}</style>
 

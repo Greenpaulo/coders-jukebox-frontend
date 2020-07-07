@@ -73,19 +73,19 @@ const About = () => {
 
     #about-text {
       padding-bottom: 1rem;
-      width: 70%;
+      width: 75%;
       margin-bottom: 2rem;
       border-bottom: 1px solid ${colors.primary};
     }
 
     p {
       padding: 1rem;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       line-height: 2.5rem;
     }
 
     #profile-link {
-      width: 70%;
+      width: 75%;
       padding-bottom: 4rem;
       border-bottom: 1px solid ${colors.primary};
     }

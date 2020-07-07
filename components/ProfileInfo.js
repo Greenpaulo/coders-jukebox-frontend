@@ -118,7 +118,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         margin: 2rem 0;
         display: flex;
         justify-content: space-between;
-        background: #FF416C;
+        /* background: #FF416C; */
         background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
         background: linear-gradient(to right, #FF4B2B, #FF416C);
         /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
@@ -200,6 +200,35 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         position: absolute;
         top: 9px;
         left: 9.6px;
+      }
+
+      /* Media queries */
+      @media (max-width: 1150px ) {
+        #user {
+          flex-direction: column;
+          background: none;
+          width: 75%;
+          margin: auto;
+        }
+
+        #profile-photo {
+          margin: auto;
+          width: 61%;
+          background: none;
+        }
+
+        .crop {
+          margin: auto;
+          /* width: 80%; */
+        }
+
+        #user-info {
+          background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+          background: linear-gradient(to right, #FF4B2B, #FF416C);
+          margin: auto;
+          width: 80%;
+          border-radius: 10px;
+        }
       }
     
     `}</style>  
