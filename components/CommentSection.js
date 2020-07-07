@@ -110,9 +110,7 @@ const CommentSection = ({ profileUser }) => {
       }
 
       @media (max-width: 768px ) {
-        p {
-          width: 50%;
-        }
+        
       }
     
     `}</style>

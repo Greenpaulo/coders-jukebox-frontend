@@ -58,7 +58,7 @@ const Favourites = () => {
 
       section#favourites {
         width: 80%;
-        margin: auto;
+        margin: 2rem auto;
       }
     }
   

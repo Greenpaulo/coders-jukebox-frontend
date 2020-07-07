@@ -78,6 +78,7 @@ const AddToPlaylist = () => {
 
     h3 {
       padding: 2rem;
+      text-align: center;
     }
   
   `}</style>

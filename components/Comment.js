@@ -206,7 +206,10 @@ const Comment = ({comment}) => {
 
       p {
         margin: 0 1.5rem;
-        overflow: hidden;
+        /* overflow-y: scroll; */
+        /* height: 100px; */
+        /* word-wrap: break-word; */
+        /* width: 600px; */
       }
 
       .date-container {
@@ -291,10 +294,14 @@ const Comment = ({comment}) => {
       .avatar {
         /* display: none; */
       }
+
+      .commenter {
+        border-right: none;
+      }
       
       p {
         overflow: scroll;
-        height: 100px;
+        /* height: 100px; */
         word-wrap: break-word;
         /* width: 100px; */
       }

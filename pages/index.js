@@ -20,7 +20,7 @@ const welcomeTextVariants = {
 
 const Index = () => {
 
-  const { clearProfileUser, authState } = useContext(GlobalContext);
+  const { clearProfileUser, authState, currentUser } = useContext(GlobalContext);
 
   useEffect(() => {
     clearProfileUser();
@@ -48,6 +48,13 @@ const Index = () => {
                   </Link>
                   <Link href="/auth">
                     <a className="login-btn">Login</a>
+                  </Link>
+                </>
+              }
+              {authState.authenticated &&
+                <>
+                  <Link href="/profile/[userId]" as={`/profile/${currentUser.id}`}>
+                    <a className="get-started-btn">Get Started</a>
                   </Link>
                 </>
               }
