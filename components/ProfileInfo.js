@@ -14,16 +14,16 @@ const profileInfoVariants = {
   // }
 }
 
-const infoVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 1.5,
-      delay: 1
-    }
-  }
-}
+// const infoVariants = {
+//   hidden: { opacity: 0, margin: auto },
+//   visible: {
+//     opacity: 1,
+//     transition: {
+//       duration: 1.5,
+//       delay: 1
+//     }
+//   }
+// }
 
 const ProfileInfo = ({setEditMode, editMode}) => {
 
@@ -77,12 +77,12 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       </div>
 
       <div id="user-info">
-        <motion.div id="info" variants={infoVariants}>
+        <div id="info">
           <h1>{profileUser.firstName} {profileUser.lastName}</h1>
           <h2>Job Title: &nbsp; {profileUser.jobTitle}</h2>
           <h2>Location: &nbsp; {profileUser.location}</h2>
           <h2>Languages: &nbsp; {getLanguageString()}</h2>
-        </motion.div>
+        </div>
 
         <div id="buttons">
           {profileUser.id === currentUser.id &&
@@ -229,6 +229,29 @@ const ProfileInfo = ({setEditMode, editMode}) => {
           width: 90%;
           border-radius: 10px;
           padding: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #user-info {
+          position: relative;
+          /* padding: 0; */
+          /* text-align: center; */
+        }
+
+        #info {
+          width: 100%;
+          margin: auto;
+        }
+
+        h1 {
+          text-align: center;
+        }
+        
+        #buttons {
+          position: absolute;
+          right: 21px;
+          top: 21px;
         }
       }
     

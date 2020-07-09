@@ -44,13 +44,16 @@ const Favourites = () => {
     }
 
     #favourite-items {
-      display: flex;
+      display: grid;
+      grid-auto-flow: row;
+      grid-template-columns: repeat(5, 1fr);
       padding: 1rem;
       margin-top: 1rem;
     }
 
     h3 {
       font-weight: normal;
+      /* text-align: center; */
     }
 
     /* Media queries */
@@ -59,6 +62,11 @@ const Favourites = () => {
       section#favourites {
         width: 80%;
         margin: 2rem auto;
+      }
+
+      #favourite-items {
+      grid-template-columns: repeat(4, 1fr);
+
       }
     }
   

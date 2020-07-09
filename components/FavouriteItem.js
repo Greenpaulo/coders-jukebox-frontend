@@ -117,6 +117,10 @@ const FavouriteItem = ({id}) => {
         i:hover {
           color: #e5305a;
         }
+
+        h3 {
+          text-align: center;
+        }
       
       
       `}</style>
