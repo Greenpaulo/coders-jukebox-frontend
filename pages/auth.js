@@ -9,11 +9,18 @@ const Auth = () => {
 
   
   const [ newUserEmail, setNewUserEmail ] = useState('');
+
   const [loginError, setLoginError] = useState({
     status: false,
     message: ''
   });
+
   const [registerError, setRegisterError] = useState({
+    status: false,
+    message: ''
+  });
+
+  const [registerSuccess, setRegisterSuccess] = useState({
     status: false,
     message: ''
   });
@@ -127,7 +134,7 @@ const Auth = () => {
     const response = await register(firstName, lastName, email, password);
 
     //Check for errors
-    if (response.error) {
+    if (response.error.length > 0) {
       setRegisterError({
         status: true,
         message: response.error[0].message
@@ -142,7 +149,7 @@ const Auth = () => {
     }
 
     // Prefill the sign up from with the newly registered email
-    setNewUserEmail(newEmail);
+    setNewUserEmail(response.newUserEmail);
 
     // Clear the register form
     document.getElementById('firstName').value = '';
@@ -153,6 +160,18 @@ const Auth = () => {
 
     // Switch the panels to sign-in form
     container.classList.remove("right-panel-active");
+
+    // Show register success flash message
+    setRegisterSuccess({
+      status: true,
+      message: 'Registration successful!'
+    })
+    setTimeout(() => {
+      setRegisterSuccess({
+        status: false,
+        message: ''
+      })
+    }, 4000);
   };
 
 
@@ -174,7 +193,7 @@ const Auth = () => {
           <form onSubmit={(e) => registerHandler(e)}>
           <h1>Create Account</h1>
           {registerError.status &&
-            <FlashMessage message={registerError.message}/>
+            <FlashMessage message={registerError.message} type="error"/>
           }
           <input type="text" id="firstName" ref={firstNameRef} placeholder="First Name"/>
           <input type="text" id="lastName" ref={lastNameRef} placeholder="Last Name"/>
@@ -188,7 +207,10 @@ const Auth = () => {
         <form onSubmit={(e) => loginHandler(e)}>
           <h1>Sign in</h1>
           {loginError.status &&
-            <FlashMessage message={loginError.message} />
+            <FlashMessage message={loginError.message} type="error" />
+          }
+          {registerSuccess.status &&
+            <FlashMessage message={registerSuccess.message} type="success" />
           }
           <input type="email" id="loginEmail" defaultValue={newUserEmail} ref={loginEmailRef} placeholder="Email"/>
           <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />

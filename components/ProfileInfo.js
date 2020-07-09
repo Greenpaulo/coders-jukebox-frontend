@@ -245,13 +245,23 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         }
 
         h1 {
-          text-align: center;
+          /* text-align: center; */
         }
         
         #buttons {
           position: absolute;
           right: 21px;
           top: 21px;
+        }
+      }
+
+      @media (max-width: 620px ) {
+        #user h1 {
+          margin-top: 2rem;
+        }
+
+        h2 {
+          /* text-align: center; */
         }
       }
     

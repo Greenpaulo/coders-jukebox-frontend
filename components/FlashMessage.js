@@ -1,5 +1,15 @@
 
-const FlashMessage = ({message}) => {
+const FlashMessage = ({message, type}) => {
+  
+  let color;
+  if (type === "error") {
+    color = '#ff4d4d'
+  } else if (type === "success"){
+    color = '#5cd65c'
+  }
+
+  console.log(color)
+  
   return (
     <div id="message">
       <span id="message-text">{message}</span>
@@ -9,7 +19,7 @@ const FlashMessage = ({message}) => {
     
       #message {
         color: white;
-        background-color: #ff4d4d;
+        background-color: ${color};
         border: none;
         padding: 12px 15px;
         margin: 8px 0;
