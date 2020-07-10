@@ -257,6 +257,10 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       }
 
       @media (max-width: 580px ) {
+        #user {
+          width: 100%;
+        }
+        
         #user h1 {
           margin: 2rem 0 3rem 0;
           font-size: 2.5rem 
@@ -281,10 +285,6 @@ const ProfileInfo = ({setEditMode, editMode}) => {
 
         #user-info {
           padding: 2rem;
-        }
-        
-        #user {
-          width: 100%;
         }
         
         #user h1 {

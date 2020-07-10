@@ -33,7 +33,40 @@ const AboutMe = ({profileUser}) => {
         font-size: 1.2rem;
         line-height: 2.5rem;
       }
-    
+
+      /* Media queries */
+      @media (max-width: 900px){
+        section#about-me {
+          width: 90%;
+          padding: 2rem 1rem 2rem 1rem;
+        }
+
+        h2 {
+          margin-left: 1rem;
+        }
+      }
+
+      @media (max-width: 660px){
+        section#about-me {
+          padding-bottom: 1rem;
+        }
+      }
+
+      @media (max-width: 470px){
+        p {
+          padding: 1rem;
+          margin-top: 0.5rem;
+        }
+      }
+
+      @media (max-width: 400px){
+        p {
+          font-size: 1rem;
+          padding: 0.5rem;
+        }
+
+      }
+
     `}</style>
     
     </section>
