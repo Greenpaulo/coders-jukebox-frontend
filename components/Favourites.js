@@ -60,13 +60,11 @@ const Favourites = () => {
 
 
     /* Media queries */
-    @media (max-width: 1230px ) {
+    @media (max-width: 1150px ) {
       #favourite-items {
         grid-template-columns: repeat(3, 1fr);
       }
-    }  
 
-    @media (max-width: 1150px ) {
       section#favourites {
         width: 80%;
         margin: 2rem auto;
@@ -80,15 +78,15 @@ const Favourites = () => {
       }
     }
 
-    @media (max-width: 690px ) {
-      #favourite-items {
-        grid-template-columns: repeat(1, 1fr);
-      }
-    }
-
     @media (max-width: 600px ) {
       section#favourites {
         padding: 1rem;
+      }
+    }
+
+    @media (max-width: 500px ) {
+      #favourite-items {
+        grid-template-columns: repeat(1, 1fr);
       }
     }
 

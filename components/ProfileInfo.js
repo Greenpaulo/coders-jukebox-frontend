@@ -128,6 +128,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       #user h1 {
         font-size: 3rem;
         margin: 1rem 0 4rem 0;
+        line-height: 3rem;
       }
       
       #user h2 {
@@ -255,13 +256,70 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         }
       }
 
-      @media (max-width: 620px ) {
+      @media (max-width: 580px ) {
         #user h1 {
-          margin-top: 2rem;
+          margin: 2rem 0 3rem 0;
+          font-size: 2.5rem 
         }
 
         h2 {
-          /* text-align: center; */
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 470px ) {
+
+        #buttons {
+          position: absolute;
+          right: 14px;
+          top: 14px;
+        }
+
+        #user-info h1 {
+          text-align: center;
+        } 
+
+        #user-info {
+          padding: 2rem;
+        }
+        
+        #user {
+          width: 100%;
+        }
+        
+        #user h1 {
+          font-size: 2rem
+          margin-botto: 1rem; 
+        }
+
+        h2 {
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 370px ) {
+        
+
+        i.favourite {
+          top: 8.7px;
+          left: 10px;
+        }
+
+        .fa-star .fa-2x, .fa-star-o <div className="fa-2x"></div> {
+          font-size: 1.4em
+        }
+
+        button#remove-favourite {
+          height: 41px;
+          width: 41px;
+        }
+
+      }
+
+      @media (max-width: 320px ) {
+        #user h1 {
+          font-size: 2.2rem;
+          margin-bottom: 2rem;
         }
       }
     
