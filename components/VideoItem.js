@@ -99,6 +99,7 @@ const VideoItem = ({ video, mode }) => {
       margin: 0 auto 0 2.7rem;
     }
 
+
     button {
       background-color: ${colors.primary};
       color: white;
@@ -117,6 +118,19 @@ const VideoItem = ({ video, mode }) => {
     }
 
     /* Media queries */
+    @media (max-width: 1080px) {
+      h3 {
+        margin-left: 1.7rem;
+      }
+
+      #buttons {
+        min-width: 20%;
+      }
+
+    }
+
+
+
     @media (max-width: 768px) {
       .video-item {
         text-align: left;
@@ -126,11 +140,52 @@ const VideoItem = ({ video, mode }) => {
         font-size: 0.8rem;
         margin: 0;
         text-align: left;
-
       }
 
       #buttons {
-        width: 20%;
+        width: 10%;
+        min-width: 10%;
+        margin-right: 0.5rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      img {
+        height: 60px;
+        margin-right: 0.3rem;
+      }
+
+      #buttons {
+        width: 13%;
+        min-width: 13%;
+      }
+    }
+
+    @media (max-width: 400px) {
+      #buttons {
+        width: 15%;
+        min-width: 15%;
+      }
+
+      h3 {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .video-item {
+        padding-left: 0.6rem;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .video-item {
+        padding-left: 0.6rem;
+      }
+
+      #buttons {
+        width: 17%;
+        min-width: 17%;
       }
     }
   
