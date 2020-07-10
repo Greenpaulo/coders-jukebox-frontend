@@ -184,11 +184,6 @@ const App = ({ Component, pageProps, router }) => {
       const newUserEmail = (data.data.createUser.email);
       return { newUserEmail: newUserEmail, error: []};
 
-      // Flip the form to Sign In and prefill the email input with the email just used
-
-      // ***** TODO ***********
-
-
     } catch (err) {
       console.log(err);
     }

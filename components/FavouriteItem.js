@@ -76,10 +76,10 @@ const FavouriteItem = ({id}) => {
       
         #favourite-item {
           margin: 0 1rem;
-          border: 2px solid ${colors.primary};
           border-radius: 5px;
           padding: 2rem;
           position: relative;
+          border: 2px solid ${colors.primary};
         }
 
         .crop {
@@ -100,7 +100,7 @@ const FavouriteItem = ({id}) => {
 
         button {
           width: 40px;
-          height: 40px;
+          height: 8px;
           border-radius: 50%;
           position: absolute;
           top: 0px;
@@ -120,6 +120,31 @@ const FavouriteItem = ({id}) => {
 
         h3 {
           text-align: center;
+        }
+
+        @media (max-width: 690px ) {
+          #favourite-item {
+            margin: 0 1rem;
+            padding: 1rem;
+          }
+
+        }
+
+        @media (max-width: 450px ) {
+          .crop {
+            width: 80px;
+            height: 80px;
+          }
+
+          img {
+            width: 80px;
+            /* padding-top: 1rem; */
+          }
+
+          #avatar {
+            margin-top: 1rem;
+          }
+
         }
       
       

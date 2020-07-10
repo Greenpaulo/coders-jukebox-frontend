@@ -7,8 +7,6 @@ const FlashMessage = ({message, type}) => {
   } else if (type === "success"){
     color = '#5cd65c'
   }
-
-  console.log(color)
   
   return (
     <div id="message">
