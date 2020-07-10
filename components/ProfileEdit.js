@@ -246,6 +246,65 @@ const ProfileEdit = ({setEditMode}) => {
           margin-bottom: 2rem;  
         }
 
+        /* Media queries */
+        @media (max-width: 1150px) {
+
+          #profile-edit {
+            width: 90vw;
+            margin: 1rem auto 1rem auto;
+            position: relative;
+          }
+
+          #edit-container {
+            flex-direction: column;
+          }
+
+          /* textarea {
+            width: 95%;
+          } */
+
+          #col1 {
+            padding-bottom: 1rem;
+          }
+
+          #cancel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+          }
+
+          #col2 {
+            margin-top: 0;
+            padding: 0 3rem 3rem 3rem;
+          }
+        }
+
+        @media (max-width: 778px) {
+          #language-input-container {
+            grid-template-columns: repeat(1, 1fr);
+          }
+        }
+
+        @media (max-width: 440px) {
+          #language-input-container label{
+            display: none;
+          }
+
+          #col1 {
+            padding: 2rem 2rem 1rem 2rem;
+          }
+
+          #col2 {
+            padding: 0 2rem 3rem 2rem;
+          }
+        }
+
+        @media (max-width: 360px) {
+          #cancel {
+            top: -5px;
+            right: -5px;
+          }
+        }
       
       `}</style>
 
