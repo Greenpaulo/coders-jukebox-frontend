@@ -138,6 +138,10 @@ const Navbar = () => {
             h1 {
               margin-left: 2rem;
             }
+
+            #nav-menu {
+              width: 35vw;
+            }
           }
 
           @media (max-width: 950px) {

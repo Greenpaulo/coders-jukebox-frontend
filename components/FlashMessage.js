@@ -28,6 +28,12 @@ const FlashMessage = ({message, type}) => {
       #message-text {
         /* font-weight: bold; */
       }
+
+      @media (max-height: 870px) {
+        #message {
+          padding: 2px 15px;
+        }
+      }
     
     
     `}</style>

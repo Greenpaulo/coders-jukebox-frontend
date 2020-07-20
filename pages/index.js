@@ -165,6 +165,10 @@ const Index = () => {
         section#welcome h1 {
           font-size: 6.5rem;
         }
+
+        a {
+          margin: 1rem;
+        }
       }
 
       @media (max-width: 550px) {
@@ -201,6 +205,17 @@ const Index = () => {
         section#welcome h1 {
           font-size: 4rem;
         }
+
+        .auth-btns {
+          display: flex;
+          flex-direction: column;
+          margin-top: 3rem;
+        }
+
+        .signup-btn, .login-btn {
+          width: 50%;
+          margin: 1rem auto;
+        }
       }
 
       @media (max-width: 350px) {
@@ -225,6 +240,7 @@ const Index = () => {
         section#welcome h1 {
           margin-top: 4rem;
         }
+
       }
 
       @media (max-height: 640px) {

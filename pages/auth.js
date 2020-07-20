@@ -176,6 +176,7 @@ const Auth = () => {
 
 
   const signUpButtonHandler = () => {
+    console.log('click')
     container.classList.add("right-panel-active");
   }
 
@@ -186,54 +187,54 @@ const Auth = () => {
   
   return (
     <section id="auth">
-
-    
-    <div className="container" id="container">
-      <div className="form-container sign-up-container">
-          <form onSubmit={(e) => registerHandler(e)}>
-          <h1>Create Account</h1>
-          {registerError.status &&
-            <FlashMessage message={registerError.message} type="error"/>
-          }
-          <input type="text" id="firstName" ref={firstNameRef} placeholder="First Name"/>
-          <input type="text" id="lastName" ref={lastNameRef} placeholder="Last Name"/>
-          <input type="email" id="email" ref={emailRef} placeholder="Email"/>
-          <input type="password" id="password" ref={passwordRef} placeholder="Password"/>
-          <input type="password" id="passwordConfirm" ref={passwordConfirmRef} placeholder="Confirm Password"/>
-            <button type="submit">Sign Up</button>
-        </form>
-      </div>
-      <div className="form-container sign-in-container">
-        <form onSubmit={(e) => loginHandler(e)}>
-          <h1>Sign in</h1>
-          {loginError.status &&
-            <FlashMessage message={loginError.message} type="error" />
-          }
-          {registerSuccess.status &&
-            <FlashMessage message={registerSuccess.message} type="success" />
-          }
-          <input type="email" id="loginEmail" defaultValue={newUserEmail} ref={loginEmailRef} placeholder="Email"/>
-          <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />
-
-          {/* <a href="#">Forgot your password?</a> */}
-          <button type="submit">Sign In</button>
-        </form>
-      </div>
-      <div className="overlay-container">
-        <div className="overlay">
-          <div className="overlay-panel overlay-left">
-            <h1>Welcome Back!</h1>
-            <p>To keep connected with us please login with your personal info</p>
-              <button className="ghost" id="signIn" onClick={signInButtonHandler}>Sign In</button>
+      <div className="container" id="container">
+        <div id="form-parent">
+          <div className="form-container sign-up-container">
+              <form onSubmit={(e) => registerHandler(e)}>
+                <h1>Create Account</h1>
+                {registerError.status &&
+                  <FlashMessage message={registerError.message} type="error"/>
+                }
+                <input type="text" id="firstName" ref={firstNameRef} placeholder="First Name"/>
+                <input type="text" id="lastName" ref={lastNameRef} placeholder="Last Name"/>
+                <input type="email" id="email" ref={emailRef} placeholder="Email"/>
+                <input type="password" id="password" ref={passwordRef} placeholder="Password"/>
+                <input type="password" id="passwordConfirm" ref={passwordConfirmRef} placeholder="Confirm Password"/>
+                <button type="submit">Sign Up</button>
+            </form>
           </div>
-          <div className="overlay-panel overlay-right">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start your journey with us</p>
-            <button className="ghost" id="signUp" onClick={signUpButtonHandler}>Sign Up</button>
+          <div className="form-container sign-in-container">
+            <form onSubmit={(e) => loginHandler(e)}>
+              <h1>Sign in</h1>
+              {loginError.status &&
+                <FlashMessage message={loginError.message} type="error" />
+              }
+              {registerSuccess.status &&
+                <FlashMessage message={registerSuccess.message} type="success" />
+              }
+              <input type="email" id="loginEmail" defaultValue={newUserEmail} ref={loginEmailRef} placeholder="Email"/>
+              <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />
+
+              {/* <a href="#">Forgot your password?</a> */}
+              <button type="submit">Sign In</button>
+            </form>
           </div>
         </div>
-      </div>
-      </div>
+        <div className="overlay-container">
+          <div className="overlay">
+            <div className="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your personal info</p>
+                <button className="ghost" id="signIn" onClick={signInButtonHandler}>Sign In</button>
+            </div>
+            <div className="overlay-panel overlay-right">
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start your journey with us</p>
+              <button className="ghost" id="signUp" onClick={signUpButtonHandler}>Sign Up</button>
+            </div>
+          </div>
+        </div>
+        </div>
 
     
 
@@ -247,8 +248,6 @@ const Auth = () => {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          /* font-family: 'Montserrat', sans-serif; */
-          /* height: 100vh; */
           margin: 5rem 0 50px;
         }
 
@@ -414,7 +413,7 @@ const Auth = () => {
           left: -100%;
           height: 100%;
           width: 200%;
-            transform: translateX(0);
+          transform: translateX(0);
           transition: transform 0.6s ease-in-out;
         }
 
@@ -454,6 +453,234 @@ const Auth = () => {
           transform: translateX(20%);
         }
 
+
+        /* Media queries */
+        @media (max-width: 930px) {
+          .container {
+            max-width: 650px;
+          }
+        }
+
+        @media (max-width: 740px) {
+          #container {
+            display: flex;
+            flex-direction: column;
+            min-height: 800px;
+            max-width: 75vw;
+          }
+
+          .form-container {
+            width: 100%;
+            height: 50%;
+          }
+
+          .overlay-container {
+            top: 50%;
+            width: 100%;
+            left: 0;
+            height: 50%;
+          }
+          
+          .container.right-panel-active .sign-in-container {
+            transform: translateY(100%);
+          }
+
+          .container.right-panel-active .sign-up-container {
+            transform: translateY(90%);
+          }
+
+          .container.right-panel-active .overlay-container{
+            transform: translateY(-100%);
+          }
+
+          .overlay-panel {
+            transform: translateY(0);
+            position: static;
+            width: 100%;
+            min-height: 100%;
+            /* top: 50%; */
+          }
+
+          .overlay {
+            /* transform: translateY(20%); */
+            width: 100%;
+            left: 0%;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .container.right-panel-active .overlay {
+            transform: translateY(-20%);
+          }
+
+          .overlay-left {
+            transform: translateY(-100%);
+          }
+
+          .container.right-panel-active .overlay-left {
+            transform: translateY(10%);
+          }
+
+          .overlay-right {
+            right: 0;
+            transform: translateY(-100%);
+          }
+
+          .container.right-panel-active .overlay-right {
+            transform: translateY(0%);
+          }
+
+          form {
+            width: 75%;
+            margin: auto;
+          }
+
+        }
+
+        @media (max-width: 650px) {
+          form {
+            width: 80%;
+            padding: 0;
+          }
+        }
+
+        @media (max-width: 500px) {
+          #container {
+            max-width: 85vw;
+          }
+        }
+
+        @media (max-height: 1040px) {
+          #container {
+            min-height: 75vh;
+          }
+        }
+
+        @media (max-height: 950px) {
+          #container {
+            min-height: 80vh;
+          }
+
+          section#auth {
+            margin-top: 3rem;
+          }
+        }
+
+        @media (max-height: 900px) {
+          .overlay-left p {
+            display: none;
+          }
+
+          .overlay-left h1 {
+            margin-bottom: 2rem;
+          }
+          
+
+          section#auth {
+            margin-top: 3rem;
+          }
+
+          .container.right-panel-active .sign-up-container{
+            transform: translateY(84%);
+          }
+
+          .container.right-panel-active .overlay {
+            transform: translateY(-32%);
+          }
+
+          .container.right-panel-active .overlay-right {
+            opacity: 0;
+          }
+
+          .container.right-panel-active .overlay-left {
+            transform: translateY(16%);
+          }
+        }
+
+        @media (max-height: 820px) {
+          .overlay-left h1 {
+            margin-bottom: 1.5rem;
+          }
+          
+          .container.right-panel-active .overlay {
+            transform: translateY(-38%);
+          }
+
+          .container.right-panel-active .overlay-left {
+            transform: translateY(18%);
+          }
+        }
+
+        @media (max-height: 810px) {
+          .overlay-left h1 {
+            margin-bottom: 1.5rem;
+          }
+          
+          .container.right-panel-active .overlay {
+            transform: translateY(-45%);
+          }
+
+          .container.right-panel-active .overlay-left {
+            transform: translateY(24%);
+          }
+
+          .container.right-panel-active .sign-up-container{
+            transform: translateY(78%);
+          }
+
+          .container.right-panel-active .sign-in-container {
+            opacity: 0;
+          }
+        }
+
+        @media (max-height: 760px) {
+          section#auth {
+            margin-top: 2rem;
+          }
+
+          .overlay-left h1 {
+            /* display: none; */
+          }
+
+          .container.right-panel-active .sign-in-container {
+            opacity: 0;
+          }
+        }
+
+        @media (max-height: 740px) {
+          section#auth {
+            margin-top: 2rem;
+          }
+        }
+
+        @media (max-height: 710px) {
+          .overlay-left h1 {
+            display: none;
+          }
+
+          .container.right-panel-active .overlay {
+            transform: translateY(-63%);
+          }
+
+          .container.right-panel-active .overlay-left {
+            transform: translateY(32%);
+          }
+
+          .container.right-panel-active .sign-up-container{
+            transform: translateY(69%);
+          }
+        }
+
+        @media (max-height: 660px) {
+
+          section#auth {
+            margin-top: 1rem;
+          }
+
+          #container {
+            min-height: 82vh;
+          }
+        }
         
 
       `}</style>
