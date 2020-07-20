@@ -80,7 +80,42 @@ const AddToPlaylist = () => {
       padding: 2rem;
       text-align: center;
     }
-  
+
+    /* Media queries */
+    @media (max-width: 1100px) {
+      h2 {
+        min-width: 26%;
+        margin-right: 1rem;
+      }
+    }
+
+    @media (max-width: 830px) {
+      #header {
+        flex-direction: column;
+      }
+
+      h2 {
+        margin-bottom: 1.5rem;
+        min-width: 60%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #header {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 355px) {
+      h2 {
+        min-width: 100%;
+      }
+
+      h3 {
+        padding: 1.5rem;
+      }
+    }
+
   `}</style>
 
 

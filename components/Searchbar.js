@@ -26,43 +26,86 @@ const Searchbar = ({ placeholder, submitHandler }) => {
       </form>
 
 
-      <style jsx >{`
+    <style jsx>{`
+      form {
+        width: 68.5%;
+      }
 
-          form {
-            width: 68.5%;
-          }
+      label {
+        position: absolute;
+        top: 8px;
+        left: 12px;
+      }
+      
+      #main-searchbar {
+        /* margin: auto; */
+        /* margin-left: 3.5rem; */
+        display: flex;
+        position: relative;
+        width: 100%;
+        font: inherit;
+      }
 
-          label {
-            position: absolute;
-            top: 8px;
-            left: 12px;
-          }
+      #main-searchbar input {
+        width: 100%;
+        border-radius: 23px;
+        padding: 0.6rem 3rem 0.5rem 2.3rem;
+        font-size: 1.1rem;
+        border: none;
+        background-color: white;
+      }
+
+      #main-searchbar input :focus {
+        outline: none;
+      }
+
+      @media (max-width: 1100px) {
+        #main-searchbar input {
+          width: 130%;
+        }
+      }
+
+      @media (max-width: 830px) {
+        #main-searchbar {
+          width: 90%;
+          margin: auto;
+        }
+
+        #main-searchbar input {
+          margin: auto;
+        }
+
+        form {
+          width: 75.5%;
+        }
+      }
+
+      @media ( max-width: 430px) {
+        #main-searchbar input {
+          font-size: 1rem;
+        }
+
+        label {
+          top: 6px;
+          left: 10px;
+        }
+      }
+
+      @media ( max-width: 360px) {
+        #main-searchbar {
+          width: 100%;
+        }
+
+        #main-searchbar input {
+          font-size: 0.9rem;
+        }
+      }
+
+      
+    
+    `}</style>
+
           
-          #main-searchbar {
-            // margin: auto;
-            // margin-left: 3.5rem;
-            display: flex;
-            position: relative;
-            width: 100%;
-            font: inherit;
-          }
-
-          #main-searchbar input {
-            width: 100%;
-            border-radius: 23px;
-            padding: 0.6rem 3rem 0.5rem 2.3rem;
-            font-size: 1.1rem;
-            border: none;
-            background-color: white;
-          }
-
-          #main-searchbar input :focus {
-            outline: none;
-          }
-  
-  
-  `}</style>
-
     </div>
   )
 }

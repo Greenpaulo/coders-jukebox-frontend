@@ -233,6 +233,13 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         }
       }
 
+      @media (max-width: 800px) {
+        #profile-photo {
+          padding: 0;
+          margin: 3.5rem auto 3rem auto;
+        }
+      }
+
       @media (max-width: 768px) {
         #user-info {
           position: relative;
@@ -254,6 +261,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
           right: 21px;
           top: 21px;
         }
+
       }
 
       @media (max-width: 580px ) {
@@ -294,11 +302,17 @@ const ProfileInfo = ({setEditMode, editMode}) => {
 
         h2 {
           font-size: 1.2rem;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 445px ) {
+        #profile-photo {
+          width: 100%;
         }
       }
 
       @media (max-width: 370px ) {
-        
 
         i.favourite {
           top: 8.7px;

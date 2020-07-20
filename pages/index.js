@@ -155,7 +155,89 @@ const Index = () => {
         box-shadow: 0px 0px 8px rgb(255, 255, 255);
       }
 
-      
+      @media (max-width: 1024px) {
+        #welcome-text {
+          margin-right: 0;
+        }
+      }
+
+      @media (max-width: 680px) {
+        section#welcome h1 {
+          font-size: 6.5rem;
+        }
+      }
+
+      @media (max-width: 550px) {
+        section#welcome h1 {
+          font-size: 5.5rem;
+        }
+      }
+
+      @media (max-width: 500px) {
+        section#welcome h1 {
+          font-size: 4.5rem;
+        }
+
+        section#welcome h3 {
+          width: 80%;
+        }
+
+        a {
+          padding: 10px 35px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        section#welcome h1 {
+          font-size: 4.2rem;
+        }
+
+        a {
+          padding: 10px 35px;
+        }
+      }
+
+      @media (max-width: 370px) {
+        section#welcome h1 {
+          font-size: 4rem;
+        }
+      }
+
+      @media (max-width: 350px) {
+        section#welcome h1 {
+          font-size: 3.7rem;
+        }
+      }
+
+      @media (max-height: 820px) {
+        section#welcome h1 {
+          margin-top: 6rem;
+        }
+      }
+
+      @media (max-height: 740px) {
+        section#welcome h1 {
+          margin-top: 5rem;
+        }
+      }
+
+      @media (max-height: 670px) {
+        section#welcome h1 {
+          margin-top: 4rem;
+        }
+      }
+
+      @media (max-height: 640px) {
+        section#welcome h1 {
+          margin-top: 3rem;
+        }
+      }
+
+      @media (max-height: 590px) {
+        section#welcome h1 {
+          margin-top: 0;
+        }
+      }
     
     
     `}</style>
