@@ -38,13 +38,28 @@ const About = () => {
         <p>If you like this site then check out my others:</p>
           <ul>
             <li className="link">
-              <a href="https://blissful-sinoussi-d8e11c.netlify.app" target="_blank">Portfolio</a>
+              <a href="https://blissful-sinoussi-d8e11c.netlify.app" target="_blank">
+                  <div className="crop">
+                    <img src='/portfolio.png' alt="profile-photo" />
+                  </div>
+                  <h4>Portfolio</h4>
+              </a>
             </li>
             <li className="link">
-              <a href="https://www.journeytodev.org/" target="_blank">JourneyToDev</a>
+              <a href="https://www.journeytodev.org/" target="_blank">
+                <div className="crop">
+                  <img src='/journey_to_dev.png' alt="profile-photo" />
+                </div>
+                <h4>JourneyToDev</h4>
+              </a>
             </li>
             <li className="link">
-              <a href="https://morning-depths-36159.herokuapp.com/" target="_blank">The Herbalist</a>
+              <a href="https://morning-depths-36159.herokuapp.com/" target="_blank">
+                <div className="crop">
+                  <img src='/the_herbalist.png' alt="profile-photo" />
+                </div>
+                <h4>The Herbalist</h4>
+              </a>
             </li>
             
           </ul>
@@ -53,7 +68,7 @@ const About = () => {
       </section>
 
       </div>
-      <Footer />
+      {/* <Footer /> */}
 
 
 
@@ -120,7 +135,7 @@ const About = () => {
 
     ul {
       list-style: none;
-      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
 
     li {
@@ -129,7 +144,66 @@ const About = () => {
     }
 
     li a {
+      display: flex;
+      align-items: center;
+    }
+
+    li a h4 {
       color: ${colors.secondary}
+    }
+
+    .crop {
+      max-width: 56px;
+      max-height: 56px;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 3px solid ${colors.primary}
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      background-position: 50px 50px;
+    }
+
+    .link h4 {
+      margin-left: 1rem;
+      font-weight: normal;
+      font-size: 1.4rem;
+    }
+
+
+    /* Media queries */
+    @media (max-width: 1200px) {
+      section#about {
+        padding: 0 2rem 0 4rem;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      #about-text, #profile-link {
+        width: 85%;
+      }
+    }
+
+    @media (max-width: 800px) {
+      #about-text, #profile-link {
+        width: 100%;
+      }
+
+      section#about {
+        padding: 0 2rem 0 2rem;
+      }
+    }
+
+    @media (max-width: 450px) {
+      p {
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        font-size: 4rem;
+      }
     }
   
   `}</style>

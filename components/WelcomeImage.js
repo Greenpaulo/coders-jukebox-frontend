@@ -57,7 +57,8 @@ const WelcomeImage = () => {
 
   <style jsx>{`
       svg {
-        height: 764px;
+        /* height: 764px; */
+        height: 650px;
         width: 800px;
         /* margin: 2rem; */
         /* padding: 1rem; */

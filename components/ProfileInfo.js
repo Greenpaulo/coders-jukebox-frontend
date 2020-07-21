@@ -296,8 +296,8 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         }
         
         #user h1 {
-          font-size: 2rem
-          margin-botto: 1rem; 
+          font-size: 2rem;
+          margin-bottom: 1rem; 
         }
 
         h2 {
@@ -309,6 +309,11 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       @media (max-width: 445px ) {
         #profile-photo {
           width: 100%;
+        }
+
+        .crop {
+          max-width: 200px;
+          max-height: 200px;
         }
       }
 
@@ -334,6 +339,18 @@ const ProfileInfo = ({setEditMode, editMode}) => {
         #user h1 {
           font-size: 2.2rem;
           margin-bottom: 2rem;
+        }
+      }
+
+      @media (max-height: 820px ) {
+        #profile-photo {
+          margin: 2rem auto;
+        }
+      }
+
+      @media (max-height: 770px ) {
+        #profile-photo {
+          margin: 2rem auto;
         }
       }
     
