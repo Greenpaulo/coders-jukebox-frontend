@@ -40,7 +40,7 @@ const About = () => {
             <li className="link">
               <a href="https://blissful-sinoussi-d8e11c.netlify.app" target="_blank">
                   <div className="crop">
-                    <img src='/portfolio.png' alt="profile-photo" />
+                    <img src='/portfolio.png' />
                   </div>
                   <h4>Portfolio</h4>
               </a>
@@ -48,7 +48,7 @@ const About = () => {
             <li className="link">
               <a href="https://www.journeytodev.org/" target="_blank">
                 <div className="crop">
-                  <img src='/journey_to_dev.png' alt="profile-photo" />
+                  <img src='/journey_to_dev.png' />
                 </div>
                 <h4>JourneyToDev</h4>
               </a>
@@ -56,7 +56,7 @@ const About = () => {
             <li className="link">
               <a href="https://morning-depths-36159.herokuapp.com/" target="_blank">
                 <div className="crop">
-                  <img src='/the_herbalist.png' alt="profile-photo" />
+                  <img src='/the_herbalist.png' />
                 </div>
                 <h4>The Herbalist</h4>
               </a>

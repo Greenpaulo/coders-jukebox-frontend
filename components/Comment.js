@@ -107,6 +107,23 @@ const Comment = ({comment}) => {
           {!editMode && 
               <p>{comment.content}</p>
           }
+
+          {editMode &&
+            <section id="edit-comment">
+              <form id="edit-form" onSubmit={(e) => editCommentSubmitHandler(e)}>
+                <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="5" ref={editedContentRef}></textarea>
+                <div className="edit-btns">
+                  <button type="submit">
+                    <i className="fa fa-pencil"></i>
+                  </button>
+                  <button onClick={editCommentClickHandler}>
+                    <i className="fa fa-window-close"></i>
+                  </button>
+                </div>
+              </form>
+            </section>
+          }
+
         </div>      
 
         {!editMode && 
@@ -129,16 +146,7 @@ const Comment = ({comment}) => {
           </div>
         }  
 
-        {editMode &&
-          <section id="edit-comment">
-            <form id="edit-form" onSubmit={(e) => editCommentSubmitHandler(e)}>
-              <textarea name="edit-comment-input" id="edit-comment-input" defaultValue={comment.content} cols="30" rows="2" ref={editedContentRef}></textarea>
-              <button type="submit">Submit</button>
-            <button onClick={editCommentClickHandler}>Cancel</button>
-
-            </form>
-          </section>
-        }
+        
 
       </div>
 
@@ -250,10 +258,13 @@ const Comment = ({comment}) => {
     }
 
     i {
-      position: absolute;
       color: ${colors.primary};
       font-size: 1.5rem;
       transition: color 0.2s ease-in-out;
+    }
+
+    .comment-btns i {
+      position: absolute;
     }
 
     i.fa-pencil-square-o {
@@ -287,6 +298,23 @@ const Comment = ({comment}) => {
       width: 100%;
       font: inherit;
       padding: 0.5rem;
+    }
+
+    #edit-comment button {
+      height: 50px;
+      padding: 0 0.5rem;
+    }
+
+    .edit-btns {
+      display: flex;
+    }
+
+    i.fa-pencil {
+      margin-left: 0.5rem;
+    }
+
+    i.fa-window-close {
+      margin-right: 0.5rem;
     }
 
     /* Media queries */
@@ -334,6 +362,17 @@ const Comment = ({comment}) => {
         border: none;
       }
 
+      .edit-btns {
+        position: absolute;
+        top: 2px;
+        right: 1px;
+        border: none;
+      }
+
+      textarea {
+        margin-top: 1.4rem;
+      }
+
       .date-time {
         display: none;
       }
@@ -353,6 +392,7 @@ const Comment = ({comment}) => {
         width: 480px;
         margin-top: 1.5rem;
       }
+
       .avatar {
         display: block;
         position: absolute;
@@ -366,6 +406,10 @@ const Comment = ({comment}) => {
 
       .commenter {
         border: none;
+      }
+
+      section#edit-comment {
+        width: 92%;
       }
     }
 
@@ -405,6 +449,20 @@ const Comment = ({comment}) => {
       }
     }
 
+    @media (max-width: 610px) {
+      section#edit-comment {
+        width: 90%;
+      }
+
+      .content {
+        padding-left: 0rem;
+      }
+
+      h3 {
+        padding-left: 0.6rem;
+      }
+    }
+
     @media (max-width: 560px) {
       p {
         /* width: 45vw; */
@@ -417,6 +475,15 @@ const Comment = ({comment}) => {
         width: 65vw;
         /* font-size: 0.9rem; */
       }
+
+      .comment {
+        padding-top: 1rem;
+      }
+
+      .avatar {
+        top: 33px;
+      }
+
     }
 
     @media (max-width: 440px) {
@@ -428,7 +495,7 @@ const Comment = ({comment}) => {
 
     @media (max-width: 420px) {
       p {
-        width: 60vw;
+        width: 69vw;
         /* font-size: 0.9rem; */
       }
     }
