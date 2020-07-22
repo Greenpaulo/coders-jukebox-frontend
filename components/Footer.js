@@ -15,7 +15,7 @@ const Footer = () => {
         color: white;
         text-align: center;
         padding: 1.2rem;
-        margin-top: 2rem;
+        /* margin-top: 2rem; */
         background: ${colors.reverseGradient};
       }
 

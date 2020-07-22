@@ -54,7 +54,7 @@ const VideoPlayer = () => {
     @media (max-width: 1150px ) {
 
       #video-player {
-        width: 92%;
+        width: 90%;
         margin: auto;
       }
 
@@ -63,9 +63,20 @@ const VideoPlayer = () => {
       }
     }
 
-    @media (max-width: 768px ) {
+    @media (max-width: 1000px ) {
       iframe {
-        width: 500;
+        width: 85vw;
+      }
+    }
+
+    @media (max-width: 580px ) {
+      #video-player {
+        width: 91%;
+        /* height: 50%; */
+      }
+
+      iframe {
+        height: 33vh;
       }
     }
   

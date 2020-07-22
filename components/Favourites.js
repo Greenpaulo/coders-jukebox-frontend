@@ -67,7 +67,7 @@ const Favourites = () => {
 
       section#favourites {
         width: 80%;
-        margin: 2rem auto;
+        margin: 3rem auto;
         padding-left: 2rem;
       }
     }
