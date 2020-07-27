@@ -68,6 +68,8 @@ const Auth = () => {
     // Call login action to fetch token from API and change the global state
     const response = await login(email, password);
 
+    console.log(response);
+    
     // Check for errors
     if (response.error) {
       setLoginError({

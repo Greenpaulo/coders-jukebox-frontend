@@ -140,6 +140,9 @@ const App = ({ Component, pageProps, router }) => {
       // Redirect to user's profile page
       Router.push(`/profile/${userId}`);
 
+      // Return item object indicating no errors
+      return {};
+
     } catch (err) {
       console.log(err);
     }

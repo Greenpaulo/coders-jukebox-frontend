@@ -21,6 +21,10 @@ const Navbar = () => {
   const profileNavClickHandler = () => {
     fetchProfileUser(currentUser.id, false);
   }
+
+  const hamburgerHandler = () => {
+    document.getElementById('hamburger').classList.toggle('open');
+  }
   
 
   return (    
@@ -40,7 +44,7 @@ const Navbar = () => {
             <ul id="nav-menu">
             {authState.authenticated && currentUser !== null &&
             <Link href="/profile/[userId]" as={`/profile/${currentUser.id}`}>
-              <a className="nav-item" onClick={profileNavClickHandler}>Hi, {currentUser.firstName}</a>
+              <a className="nav-item" onClick={profileNavClickHandler}>Profile</a>
             </Link>
             }
             <Link href="/about">
@@ -63,6 +67,11 @@ const Navbar = () => {
             }
 
             </ul>
+            <div id="hamburger" onClick={hamburgerHandler}>
+              <div className="line" id="line1"></div>
+              <div className="line" id="line2"></div>
+              <div className="line" id="line3"></div>
+            </div>
           </div>
         </div>
         
@@ -144,9 +153,72 @@ const Navbar = () => {
             }
           }
 
-          @media (max-width: 950px) {
-            
+          @media (max-width: 1100px) {
+            #nav-content {
+              width: 97%;
+            }
           }
+
+          @media (max-width: 950px) {
+            body {
+              overflow-x: hidden;
+              
+            }
+
+            #navbar {
+              position: relative;
+            }
+            
+            #nav-menu {
+              flex-direction: column;
+              position: absolute;
+              top: 100%;
+              right: 0px;
+              width: 33vw;
+              background: ${colors.primary};
+            }
+
+            .nav-item {
+              padding: 2rem 3rem;
+              display: block;
+              text-transform: uppercase;
+              border-bottom: 1px solid #ff6b8d;
+              margin: 0;
+              text-align: center;
+            }
+
+            .nav-item:hover {
+              background: ${colors.secondary};
+            }
+
+            .line {
+              width: 30px;
+              height: 3px;
+              background-color: white;
+              margin: 5px;
+              border-radius: 3px;
+              transition: all ease 0.5s;
+            }
+
+            #hamburger {
+              cursor: pointer;
+            }
+
+            #hamburger.open {
+              /* transform: rotate(45deg); */
+            }
+            #hamburger.open #line1 {
+              transform: rotate(-45deg) translateY(11.5px) scaleX(0.9);
+            }
+            #hamburger.open #line2{
+              opacity: 0;
+            }
+            #hamburger.open #line3{
+              transform: rotate(45deg) translateY(-11.5px) scaleX(0.9);
+            }
+
+           
+          
 
 
         `}</style>

@@ -32,6 +32,7 @@ const Layout = (props) => (
         /* background-color: #fff; */
         background-color: black;
         height: 100vh;
+        /* width: 100vw; */
       }
 
       .container {
