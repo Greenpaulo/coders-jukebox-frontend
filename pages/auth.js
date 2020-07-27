@@ -552,13 +552,13 @@ const Auth = () => {
           }
         }
 
-        @media (max-height: 1040px) {
+        @media (max-width: 740px) and (max-height: 1040px) {
           #container {
             min-height: 75vh;
           }
         }
 
-        @media (max-height: 950px) {
+        @media (max-width: 740px) and (max-height: 950px) {
           #container {
             min-height: 80vh;
           }
@@ -568,7 +568,7 @@ const Auth = () => {
           }
         }
 
-        @media (max-height: 900px) {
+        @media (max-width: 740px) and (max-height: 900px) {
           .overlay-left p {
             display: none;
           }
@@ -599,7 +599,7 @@ const Auth = () => {
           }
         }
 
-        @media (max-height: 820px) {
+        @media (max-width: 740px) and (max-height: 820px) {
           .overlay-left h1 {
             margin-bottom: 1.5rem;
           }
@@ -613,7 +613,7 @@ const Auth = () => {
           }
         }
 
-        @media (max-height: 810px) {
+        @media (max-width: 740px) and (max-height: 810px) {
           .overlay-left h1 {
             margin-bottom: 1.5rem;
           }
@@ -635,7 +635,7 @@ const Auth = () => {
           }
         }
 
-        @media (max-height: 760px) {
+        @media (max-width: 740px) and (max-height: 760px) {
           section#auth {
             margin-top: 2rem;
           }
@@ -649,13 +649,13 @@ const Auth = () => {
           }
         }
 
-        @media (max-height: 740px) {
+        @media (max-width: 740px) and (max-height: 740px) {
           section#auth {
             margin-top: 2rem;
           }
         }
 
-        @media (max-height: 710px) {
+        @media (max-width: 740px) and (max-height: 710px) {
           .overlay-left h1 {
             display: none;
           }
@@ -673,7 +673,7 @@ const Auth = () => {
           }
         }
 
-        @media (max-height: 660px) {
+        @media (max-width: 740px) and (max-height: 660px) {
 
           section#auth {
             margin-top: 1rem;

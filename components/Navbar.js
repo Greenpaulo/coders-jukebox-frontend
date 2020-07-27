@@ -24,6 +24,7 @@ const Navbar = () => {
 
   const hamburgerHandler = () => {
     document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('nav-menu').classList.toggle('dropdown');
   }
   
 
@@ -48,15 +49,15 @@ const Navbar = () => {
             </Link>
             }
             <Link href="/about">
-              <a className="nav-item">About</a>
+              <a className="nav-item" onClick={hamburgerHandler}>About</a>
             </Link>
             {!authState.authenticated && 
             <>
               <Link href="/auth">
-                <a className="nav-item">Login</a>
+                <a className="nav-item" onClick={hamburgerHandler}>Login</a>
               </Link>
               <Link href="/auth">
-                <a className="nav-item">Register</a>
+                <a className="nav-item" onClick={hamburgerHandler}>Register</a>
               </Link>
             </>
             }
@@ -170,12 +171,23 @@ const Navbar = () => {
             }
             
             #nav-menu {
+              z-index: 101;
               flex-direction: column;
               position: absolute;
               top: 100%;
               right: 0px;
               width: 33vw;
+              clip-path: circle(0px at top right);
+              transition: clip-path 0.7s ease;
+              -webkit-box-shadow: -11px 10px 19px -10px rgba(0,0,0,0.27);
+              -moz-box-shadow: -11px 10px 19px -10px rgba(0,0,0,0.27);
+              box-shadow: -11px 10px 19px -10px rgba(0,0,0,0.27);
               background: ${colors.primary};
+              /* opacity: 0.9; */
+            }
+
+            #nav-menu.dropdown {
+              clip-path: circle(150% at top right);
             }
 
             .nav-item {
