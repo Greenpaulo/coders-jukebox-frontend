@@ -45,25 +45,40 @@ const Navbar = () => {
             <ul id="nav-menu">
             {authState.authenticated && currentUser !== null &&
             <Link href="/profile/[userId]" as={`/profile/${currentUser.id}`}>
-              <a className="nav-item" onClick={profileNavClickHandler}>Profile</a>
+              <a className="nav-item" onClick={profileNavClickHandler}>
+                <i className="fa fa-user"></i> 
+                Profile
+              </a>
             </Link>
             }
             <Link href="/about">
-              <a className="nav-item" onClick={hamburgerHandler}>About</a>
+              <a className="nav-item" onClick={hamburgerHandler}>
+                <i className="fa fa-info"></i> 
+                About
+              </a>
             </Link>
             {!authState.authenticated && 
             <>
               <Link href="/auth">
-                <a className="nav-item" onClick={hamburgerHandler}>Login</a>
+                <a className="nav-item" onClick={hamburgerHandler}>
+                  <i className="fa fa-sign-in"></i> 
+                  Login
+                </a>
               </Link>
               <Link href="/auth">
-                <a className="nav-item" onClick={hamburgerHandler}>Register</a>
+                <a className="nav-item" onClick={hamburgerHandler}>
+                  <i className="fa fa-user-plus"></i> 
+                  Register
+                </a>
               </Link>
             </>
             }
             {authState.authenticated &&
               <Link href="/">
-                <a className="nav-item" onClick={logoutHandler}>Logout</a>
+                <a className="nav-item" onClick={logoutHandler}>
+                  <i className="fa fa-sign-out"></i> 
+                  Logout
+                </a>
               </Link>
             }
 
@@ -117,6 +132,10 @@ const Navbar = () => {
 
           .nav-item:hover {
             text-shadow: 0px 0px 8px rgb(255, 255, 255);
+          }
+
+          i {
+            display: none;
           }
 
           #search {
@@ -196,10 +215,21 @@ const Navbar = () => {
               text-transform: uppercase;
               border-bottom: 1px solid #ff6b8d;
               margin: 0;
-              text-align: center;
+              font-size: 1.3rem;
             }
 
-            .nav-item:hover {
+            i {
+              display: inline-block;
+              margin-right: 1rem;
+              width: 1.5rem;
+              font-size: 1.5rem;
+              /* background: black; */
+              text-align: center;
+              height: 100%;
+              padding-top: 0.5rem;
+            }
+
+              .nav-item:hover {
               background: ${colors.secondary};
             }
 
@@ -227,6 +257,36 @@ const Navbar = () => {
             }
             #hamburger.open #line3{
               transform: rotate(45deg) translateY(-11.5px) scaleX(0.9);
+            }
+
+            @media (max-width: 690px) {
+              #nav-menu {
+                width: 40%;
+              }
+            }
+
+            @media (max-width: 570px) {
+              #nav-menu {
+                width: 45%;
+              }
+            }
+
+            @media (max-width: 500px) {
+              #nav-menu {
+                width: 50%;
+              }
+            }
+
+            @media (max-width: 450px) {
+              #nav-menu {
+                width: 60%;
+              }
+            }
+
+            @media (max-width: 375px) {
+              .nav-item {
+                padding: 2rem 2rem;
+              }
             }
 
            
