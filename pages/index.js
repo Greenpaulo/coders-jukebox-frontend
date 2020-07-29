@@ -81,7 +81,7 @@ const Index = () => {
 
       section#welcome{
         display: flex;
-        height: 80vh;
+        height: 70vh;
         margin-top: 4rem;
         overflow: hidden;
         justify-content: center;

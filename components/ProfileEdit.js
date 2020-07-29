@@ -155,7 +155,9 @@ const ProfileEdit = ({setEditMode}) => {
         {/* <button id="cancel" onClick={() => setEditMode(false)}>
           <i className="fa fa-times" aria-hidden="true"></i>
         </button> */}
+        <div id="cancel-btn">
           <i className="fa fa-times-circle fa-2x" id="cancel" aria-hidden="true" onClick={() => setEditMode(false)}></i>
+        </div>
         
       
       </div>
@@ -231,7 +233,11 @@ const ProfileEdit = ({setEditMode}) => {
           margin-top: 1rem;
         }
 
-        i#cancel {
+        #cancel-btn {
+          /* cursor: pointer; */
+        }
+        
+        i {
           margin: 0.85rem;
           cursor: pointer;
         }
@@ -252,11 +258,11 @@ const ProfileEdit = ({setEditMode}) => {
           #profile-edit {
             width: 90vw;
             margin: 1rem auto 1rem auto;
-            position: relative;
           }
 
           #edit-container {
             flex-direction: column;
+            position: relative;
           }
 
           /* textarea {
@@ -269,8 +275,8 @@ const ProfileEdit = ({setEditMode}) => {
 
           #cancel {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 5px;
+            right: 5px;
           }
 
           #col2 {
