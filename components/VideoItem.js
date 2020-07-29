@@ -187,6 +187,10 @@ const VideoItem = ({ video, mode }) => {
         width: 17%;
         min-width: 17%;
       }
+
+      img {
+        height: 40px;
+      }
     }
   
   `}</style>

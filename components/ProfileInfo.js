@@ -320,8 +320,8 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       @media (max-width: 370px ) {
 
         i.favourite {
-          top: 8.7px;
-          left: 10px;
+          top: 4.7px;
+          left: 5.7px;
         }
 
         .fa-star .fa-2x, .fa-star-o <div className="fa-2x"></div> {

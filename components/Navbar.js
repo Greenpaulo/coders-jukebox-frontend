@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { GlobalContext} from '../context/GlobalContext';
 import UserSearch from './UserSearch';
 import colors from '../css-variables/colors'
+import Logo from './Logo';
 
 
 const Navbar = () => {
@@ -20,6 +21,7 @@ const Navbar = () => {
 
   const profileNavClickHandler = () => {
     fetchProfileUser(currentUser.id, false);
+    hamburgerHandler();
   }
 
   const hamburgerHandler = () => {
@@ -32,12 +34,15 @@ const Navbar = () => {
       <nav id="navbar">
         <div className="container">
           <div id="nav-content">
-            <div id="logo">
+            <div id="brand">
               <Link href="/">
                 <a>
                   <h1>CodeTunes</h1>
                 </a>
               </Link>
+            </div>
+            <div id="logo">
+              <Logo/>
             </div>
 
             <UserSearch />
@@ -101,7 +106,6 @@ const Navbar = () => {
             background: ${colors.gradient};
             /* color: white; */
             /* background-color: #93fffb; */
-
           }
         
           #nav-content {
@@ -116,7 +120,7 @@ const Navbar = () => {
             justify-content: space-between;
           }
 
-          #logo h1 {
+          #brand h1 {
             color: white;
             font-size: 2rem;
             text-transform: uppercase;
@@ -152,10 +156,8 @@ const Navbar = () => {
             left: 12px;
           }
           
-          #main-searchbar {
-            margin: auto;
-            display: flex;
-            position: relative;
+          #logo {
+            display: none;
           }
 
           /* Media queries */
@@ -169,7 +171,7 @@ const Navbar = () => {
             }
 
             #nav-menu {
-              width: 35vw;
+              /* width: 35vw; */
             }
           }
 
@@ -182,13 +184,12 @@ const Navbar = () => {
           @media (max-width: 950px) {
             body {
               overflow-x: hidden;
-              
             }
 
             #navbar {
               position: relative;
             }
-            
+
             #nav-menu {
               z-index: 101;
               flex-direction: column;
@@ -229,8 +230,8 @@ const Navbar = () => {
               padding-top: 0.5rem;
             }
 
-              .nav-item:hover {
-              background: ${colors.secondary};
+            .nav-item:hover {
+            background: ${colors.secondary};
             }
 
             .line {
@@ -246,52 +247,75 @@ const Navbar = () => {
               cursor: pointer;
             }
 
-            #hamburger.open {
-              /* transform: rotate(45deg); */
-            }
             #hamburger.open #line1 {
               transform: rotate(-45deg) translateY(11.5px) scaleX(0.9);
             }
+
             #hamburger.open #line2{
               opacity: 0;
             }
+
             #hamburger.open #line3{
               transform: rotate(45deg) translateY(-11.5px) scaleX(0.9);
             }
+          }
 
-            @media (max-width: 690px) {
-              #nav-menu {
-                width: 40%;
-              }
+
+          @media (max-width: 750px) {
+            #main-searchbar {
+              margin: auto;
+            }
+          }
+
+          @media (max-width: 690px) {
+            #main-searchbar {
+              margin: 0;
             }
 
-            @media (max-width: 570px) {
-              #nav-menu {
-                width: 45%;
-              }
+            #nav-menu {
+              width: 40%;
+            }
+          }
+
+          @media (max-width: 600px) {
+            #brand {
+              display: none;
             }
 
-            @media (max-width: 500px) {
-              #nav-menu {
-                width: 50%;
-              }
+            #logo {
+              display: inline;
+            }
+          }
+
+          @media (max-width: 570px) {
+            #nav-menu {
+              width: 45%;
+            }
+          }
+
+          @media (max-width: 500px) {
+            #nav-menu {
+              width: 50%;
             }
 
-            @media (max-width: 450px) {
-              #nav-menu {
-                width: 60%;
-              }
-            }
+          }
 
-            @media (max-width: 375px) {
-              .nav-item {
-                padding: 2rem 2rem;
-              }
+          @media (max-width: 450px) {
+            #nav-menu {
+              width: 60%;
             }
+          }
 
-           
+          @media (max-width: 375px) {
+            .nav-item {
+              padding: 2rem 2rem;
+            }
+          }
+
           
 
+            
+          
 
         `}</style>
       </nav>

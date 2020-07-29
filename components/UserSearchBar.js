@@ -36,7 +36,7 @@ const UserSearchbar = ({ placeholder, setFilteredUsers, checkSearchMode, searchI
       </form>
 
 
-      <style jsx >{`
+      <style jsx>{`
 
           label {
             position: absolute;
@@ -68,6 +68,47 @@ const UserSearchbar = ({ placeholder, setFilteredUsers, checkSearchMode, searchI
           #main-searchbar input :focus {
             outline: none;
           }
+
+          /* Media queries */
+          @media (max-width: 950px){
+            #main-searchbar {
+              margin: 0;
+              width: 90%;
+            }
+          }
+
+          @media (max-width: 660px){
+            #main-searchbar {
+              margin: auto;
+            }
+          }
+
+          @media (max-width: 600px){
+            #main-searchbar {
+              width: 110%;
+            }
+          }
+
+          @media (max-width: 420px) {
+            #main-searchbar {
+              width: 120%;
+            }
+          }
+
+          @media (max-width: 370px) {
+            #main-searchbar {
+              width: 130%;
+            }
+
+            #main-searchbar input {
+              font-size: 0.9rem;
+            }
+
+            label {
+              top: 7px;
+            }
+          }
+          
   
   
   `}</style>
