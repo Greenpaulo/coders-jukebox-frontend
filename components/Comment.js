@@ -80,22 +80,18 @@ const Comment = ({comment}) => {
       <div className="comment" key={comment._id}>
         <div className="content">
           <div className="avatar">
-            <div className="avatar-crop">
               {commentUser.profilePhotoFilename !== null && commentUser.profilePhotoFilename !== '' &&
                 <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
-                  <a onClick={commenterClickHandler}>
-                    <img src={`http://localhost:5000/image/${commentUser.profilePhotoFilename}`} alt="avatar" />
-                  </a>
+                  <div className="crop" onClick={commenterClickHandler}>
+                  </div>
                 </Link>
               }
               {(commentUser.profilePhotoFilename === null || commentUser.profilePhotoFilename === '') &&
                 <Link href="/profile/[userId]" as={`/profile/${commenterId}`}>
-                  <a onClick={commenterClickHandler}>
-                    <img src='/default-avatar.jpg' alt="avatar" />
-                  </a>
+                  <div className="default-crop" onClick={commenterClickHandler}>
+                  </div>
                 </Link>
               }
-            </div>
           </div>
           
           <div className="commenter">
@@ -195,11 +191,23 @@ const Comment = ({comment}) => {
         max-height: 50px;
       }
 
-      .avatar-crop {
-        max-width: 50px;
-        max-height: 50px;
+      .default-crop {
+        width: 50px;
+        height: 50px;
         overflow: hidden;
         border-radius: 50%;
+        background-image: url('/default-avatar.jpg');
+        background-size: cover;
+        cursor: pointer;
+      }
+      .crop {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 50%;
+        background-image: url('http://localhost:5000/image/${commentUser.profilePhotoFilename}');
+        background-size: cover;
+        cursor: pointer;
       }
 
       img {
