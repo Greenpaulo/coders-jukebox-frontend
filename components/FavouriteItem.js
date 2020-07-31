@@ -39,7 +39,7 @@ const FavouriteItem = ({id}) => {
       {/* <h4>Avatar</h4> */}
       <div id="avatar">
         {favUser.profilePhotoFilename === null &&
-        <div className="crop">
+        <div className="default-crop">
           <Link href="/profile/[userId]" as={`/profile/${id}`}>
             <a onClick={favUserClickHandler}>
               <img src="/default-avatar.jpg" alt="avatar" />
@@ -50,13 +50,10 @@ const FavouriteItem = ({id}) => {
         } 
 
         {favUser.profilePhotoFilename !== null && favUser.profilePhotoFilename !== '' && favUser.profilePhotoFilename !== undefined &&
-        <div className="crop">
           <Link href="/profile/[userId]" as={`/profile/${id}`}>
-            <a onClick={favUserClickHandler}>
-              <img src={`http://localhost:5000/image/${favUser.profilePhotoFilename}`} alt="avatar" />
-            </a>
+            <div className="crop" onClick={favUserClickHandler}>
+            </div>
           </Link>
-        </div>
         }
       </div>
 
@@ -83,6 +80,20 @@ const FavouriteItem = ({id}) => {
         }
 
         .crop {
+          /* max-height: 100px; */
+          /* max-width: 100px; */
+          height: 100px;
+          width: 100px;
+          overflow: hidden;
+          border-radius: 50px;
+          margin: 0 auto 0.8rem auto;
+          background: url('http://localhost:5000/image/${favUser.profilePhotoFilename}');
+          /* background-position: center; */
+          background-size: cover;
+          cursor: pointer;
+        }
+
+        .default-crop {
           max-height: 100px;
           max-width: 100px;
           overflow: hidden;
@@ -92,6 +103,7 @@ const FavouriteItem = ({id}) => {
         
         img {
           width: 100px;
+          /* position: cover; */
         }
 
         a {

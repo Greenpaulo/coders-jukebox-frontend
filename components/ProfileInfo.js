@@ -66,7 +66,7 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       <div id="profile-photo">
         {profileUser.profilePhotoFilename !== null && profileUser.profilePhotoFilename !== '' &&
           <div className="crop">
-            <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo" />
+            {/* <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo" /> */}
           </div>
         }
         {(profileUser.profilePhotoFilename === null || profileUser.profilePhotoFilename === '') &&
@@ -185,10 +185,12 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       }
 
       .crop {
-        max-width: 266px;
-        max-height: 266px;
+        width: 266px;
+        height: 266px;
         overflow: hidden;
         border-radius: 50%;
+        background-image: url('http://localhost:5000/image/${profileUser.profilePhotoFilename}');
+        background-size: cover;
       }
       
       img {

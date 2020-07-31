@@ -3,11 +3,12 @@ import { GlobalContext } from '../context/GlobalContext';
 import Router from 'next/router';
 import colors from '../css-variables/colors'
 import FlashMessage from '../components/FlashMessage';
+import Spinner from '../components/Spinner';
 
 const Auth = () => {
 
+  const [ loading, setLoading ] = useState(false);
 
-  
   const [ newUserEmail, setNewUserEmail ] = useState('');
 
   const [loginError, setLoginError] = useState({
@@ -45,6 +46,7 @@ const Auth = () => {
   // Handle login form submit
   const loginHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     
     // Get credentials from refs
     const email = loginEmailRef.current.value;
@@ -62,14 +64,13 @@ const Auth = () => {
           message: ''
         })
       }, 4000);
+      setLoading(false);
       return;
     }
 
     // Call login action to fetch token from API and change the global state
     const response = await login(email, password);
 
-    console.log(response);
-    
     // Check for errors
     if (response.error) {
       setLoginError({
@@ -83,6 +84,7 @@ const Auth = () => {
         })
       }, 4000);
       document.getElementById('loginPassword').value = '';
+      setLoading(false);
       return;
     };
   }
@@ -91,6 +93,7 @@ const Auth = () => {
   // Handle register form submit
   const registerHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     
     // Get credentials from refs
     const firstName = firstNameRef.current.value;
@@ -111,6 +114,7 @@ const Auth = () => {
           message: ''
         })
       }, 4000);
+      setLoading(false);
       return;
     }
 
@@ -128,6 +132,7 @@ const Auth = () => {
       }, 4000);
       document.getElementById('password').value = '';
       document.getElementById('passwordConfirm').value = '';
+      setLoading(false);
       return;
 
     }
@@ -147,6 +152,7 @@ const Auth = () => {
           message: ''
         })
       }, 4000);
+      setLoading(false);
       return;
     }
 
@@ -174,11 +180,11 @@ const Auth = () => {
         message: ''
       })
     }, 4000);
+    setLoading(false);
   };
 
 
   const signUpButtonHandler = () => {
-    console.log('click')
     container.classList.add("right-panel-active");
   }
 
@@ -202,7 +208,7 @@ const Auth = () => {
                 <input type="email" id="email" ref={emailRef} placeholder="Email"/>
                 <input type="password" id="password" ref={passwordRef} placeholder="Password"/>
                 <input type="password" id="passwordConfirm" ref={passwordConfirmRef} placeholder="Confirm Password"/>
-                <button type="submit">Sign Up</button>
+                {!loading ? <button type="submit">Sign Up</button> : <Spinner />}
             </form>
           </div>
           <div className="form-container sign-in-container">
@@ -218,7 +224,8 @@ const Auth = () => {
               <input type="password" id="loginPassword" ref={loginPasswordRef} placeholder="Password" />
 
               {/* <a href="#">Forgot your password?</a> */}
-              <button type="submit">Sign In</button>
+              {!loading ? <button type="submit">Sign In</button> : <Spinner/>}
+              
             </form>
           </div>
         </div>

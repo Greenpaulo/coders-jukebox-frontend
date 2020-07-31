@@ -4,7 +4,6 @@ import colors from '../css-variables/colors'
 
 const VideoItem = ({ video, mode }) => {
 
-  
   const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo, currentUser, profileUser, setAutoplay  } = useContext(GlobalContext);
   
   const addVideoClickHandler = () => {
@@ -49,7 +48,7 @@ const VideoItem = ({ video, mode }) => {
       { mode === 'youtube' &&
         <>
           <img src={video.snippet.thumbnails.default.url} alt="youtube video"/>
-          <h3 className="video-title">{video.snippet.title}</h3>
+        <h3 className="video-title">{video.snippet.title.split("&quot;").join("")}</h3>
           <div id="buttons">
             <button onClick={playButtonHandler}>
               <i className="fa fa-play"></i>
@@ -65,7 +64,7 @@ const VideoItem = ({ video, mode }) => {
       { mode === 'playlist' && 
         <>
           <img src={video.thumbnailURL} alt="youtube video" />
-          <h3 className="video-title">{video.title}</h3>
+        <h3 className="video-title">{video.title.split("&quot;").join("")}</h3>
           <div id="buttons">
             <button onClick={playButtonHandler}>
               <i className="fa fa-play" aria-hidden="true"></i>

@@ -1017,12 +1017,22 @@ const App = ({ Component, pageProps, router }) => {
         return
       }
 
-      // Refresh the profile with the new user data - to update the favourites
-      updateProfileUserFavourites(favourites);
+      // Refresh the currentUser with the new user data - to update the favourites
+      updateCurrentUserFavourites(favourites);
+
+      // If on current user's profile then refresh the favourite section
+      if (currentUser.id === profileUser.id) {
+        updateProfileUserFavourites(favourites);
+      }
 
     } catch (err) {
       console.log(err);
     }
+  }
+
+  const updateCurrentUserFavourites = (favourites) => {
+    // Update the current user's favourites in th global state
+    setCurrentUser({ ...currentUser, favourites })
   }
 
   const updateProfileUserFavourites = (favourites) => {
