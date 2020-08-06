@@ -4,15 +4,17 @@ import colors from '../css-variables/colors'
 
 const VideoItem = ({ video, mode }) => {
 
-  const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo, currentUser, profileUser, setAutoplay  } = useContext(GlobalContext);
-  
+  const { addVideoToPlaylist, removeVideoFromPlaylist, setCurrentVideo, currentUser, profileUser, setAutoplay } = useContext(GlobalContext);
+
   const addVideoClickHandler = () => {
 
     const videoToSave = {
-      title: video.snippet.title,
+      title: video.snippet.title.split("&quot;").join("").split("&#39;").join("'").split("&amp;").join("&"),
       thumbnailURL: video.snippet.thumbnails.default.url,
       videoId: video.id.videoId,
     }
+
+    // console.log(videoToSave)
     addVideoToPlaylist(videoToSave);
   }
 
@@ -45,31 +47,32 @@ const VideoItem = ({ video, mode }) => {
 
   return (
     <div className="video-item">
-      { mode === 'youtube' &&
+      {mode === 'youtube' &&
         <>
-          <img src={video.snippet.thumbnails.default.url} alt="youtube video"/>
-        <h3 className="video-title">{video.snippet.title.split("&quot;").join("")}</h3>
+          <img src={video.snippet.thumbnails.default.url} alt="youtube video" />
+          <h3 className="video-title">{video.snippet.title.split("&quot;").join("").split("&#39;").join("'").split("&amp;").join("&")}</h3>
           <div id="buttons">
+          {profileUser.ownedVideos.length > 0 &&
             <button onClick={playButtonHandler}>
               <i className="fa fa-play"></i>
             </button>
+          }
             <button onClick={addVideoClickHandler}>
               <i className="fa fa-plus"></i>
-
             </button>
           </div>
         </>
       }
 
-      { mode === 'playlist' && 
+      {mode === 'playlist' &&
         <>
           <img src={video.thumbnailURL} alt="youtube video" />
-        <h3 className="video-title">{video.title.split("&quot;").join("")}</h3>
+          <h3 className="video-title">{video.title}</h3>
           <div id="buttons">
             <button onClick={playButtonHandler}>
               <i className="fa fa-play" aria-hidden="true"></i>
             </button>
-            { currentUser.id === profileUser.id &&
+            {currentUser.id === profileUser.id &&
               <button onClick={removeVideoClickHandler}>
                 <i className="fa fa-trash-o" aria-hidden="true"></i>
               </button>
@@ -78,7 +81,7 @@ const VideoItem = ({ video, mode }) => {
         </>
       }
 
-  <style jsx>{`
+      <style jsx>{`
   
     .video-item {
       display: flex;
@@ -128,8 +131,6 @@ const VideoItem = ({ video, mode }) => {
 
     }
 
-
-
     @media (max-width: 768px) {
       .video-item {
         text-align: left;
@@ -142,7 +143,7 @@ const VideoItem = ({ video, mode }) => {
       }
 
       #buttons {
-        width: 10%;
+        /* width: 10%; */
         min-width: 10%;
         margin-right: 0.5rem;
       }

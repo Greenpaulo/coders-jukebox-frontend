@@ -1,5 +1,4 @@
-import Link from 'next/Link';
-import Router from 'next/router';
+import Link from 'next/link';
 import { useContext } from 'react';
 import { GlobalContext} from '../context/GlobalContext';
 import UserSearch from './UserSearch';
@@ -34,15 +33,17 @@ const Navbar = () => {
       <nav id="navbar">
         <div className="container">
           <div id="nav-content">
-            <div id="brand">
-              <Link href="/">
-                <a>
-                  <h1>CodeTunes</h1>
-                </a>
-              </Link>
-            </div>
-            <div id="logo">
-              <Logo/>
+            <div id="logo-container">
+              <div id="logo">
+                <Logo/>
+              </div>
+              <div id="brand">
+                <Link href="/">
+                  <a>
+                    <h1>CodeTunes</h1>
+                  </a>
+                </Link>
+              </div>
             </div>
 
             <UserSearch />
@@ -120,6 +121,11 @@ const Navbar = () => {
             justify-content: space-between;
           }
 
+          #logo-container {
+            display: flex;
+            align-items: center;
+          }
+
           #brand h1 {
             color: white;
             font-size: 2rem;
@@ -156,9 +162,9 @@ const Navbar = () => {
             left: 12px;
           }
           
-          #logo {
+          /* #logo {
             display: none;
-          }
+          } */
 
           /* Media queries */
           @media (max-width: 1150px){
@@ -172,6 +178,12 @@ const Navbar = () => {
 
             #nav-menu {
               /* width: 35vw; */
+            }
+          }
+
+          @media (max-width: 1140px) {
+            #logo-container {
+              margin-left: 1rem;
             }
           }
 
@@ -245,6 +257,7 @@ const Navbar = () => {
 
             #hamburger {
               cursor: pointer;
+              margin-right: 0.5rem;
             }
 
             #hamburger.open #line1 {
@@ -260,6 +273,11 @@ const Navbar = () => {
             }
           }
 
+          @media (max-width: 860px) {
+            #logo-container {
+              margin-left: 0;
+            }
+          }
 
           @media (max-width: 750px) {
             #main-searchbar {
@@ -285,6 +303,7 @@ const Navbar = () => {
             #logo {
               display: inline;
             }
+
           }
 
           @media (max-width: 570px) {

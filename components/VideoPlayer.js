@@ -14,10 +14,12 @@ const VideoPlayer = () => {
     videoSrc = `https://www.youtube.com/embed/${videoState.videoId}?autoplay=1`;
   }
 
+  console.log(videoSrc)
+
   return (
 
     <div id="video-container">
-      {profileUser.ownedVideos.length > 0 && 
+      {profileUser.ownedVideos.length > 0 && videoState.title !== '' &&
         <div id="video-player">
           <iframe width="918" height="567" frameBorder="0" allowFullScreen allow="autoplay" src={videoSrc}></iframe>
           {/* <VideoInfo /> */}
@@ -38,6 +40,13 @@ const VideoPlayer = () => {
       width: 85%;
       margin: 4rem auto;
       padding: 1rem;
+      border: 1px solid ${colors.primary}
+    }
+
+    iframe {
+      padding: 0.5rem;
+      margin: auto;
+      width: 100%;
     }
 
     #video-info {
@@ -65,7 +74,7 @@ const VideoPlayer = () => {
 
     @media (max-width: 1000px ) {
       iframe {
-        width: 85vw;
+        /* width: 85vw; */
       }
     }
 

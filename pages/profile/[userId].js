@@ -30,8 +30,6 @@ const Profile = () => {
   const { userId } = router.query
   fetchProfileUser(userId, true);
 
-  
-  
   useEffect(() => {
       setAutoplay(false);
     }, [])
