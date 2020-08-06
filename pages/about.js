@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import Link from 'next/Link';
+import Link from 'next/link';
 import { GlobalContext } from '../context/GlobalContext';
 import colors from '../css-variables/colors';
 import Footer from '../components/Footer';

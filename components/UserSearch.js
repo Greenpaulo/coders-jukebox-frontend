@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import Link from 'next/Link';
+import Link from 'next/link';
 import UserSearchBar from './UserSearchBar';
 import { GlobalContext } from '../context/GlobalContext';
 

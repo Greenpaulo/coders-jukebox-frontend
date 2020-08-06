@@ -1,4 +1,4 @@
-import Link from 'next/Link';
+import Link from 'next/link';
 import { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import colors from '../css-variables/colors';
