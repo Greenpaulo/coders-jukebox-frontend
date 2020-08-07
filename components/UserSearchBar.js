@@ -91,7 +91,7 @@ const UserSearchbar = ({ placeholder, setFilteredUsers, checkSearchMode, searchI
 
           @media (max-width: 420px) {
             #main-searchbar {
-              width: 120%;
+              width: 112%;
             }
           }
 
@@ -104,9 +104,9 @@ const UserSearchbar = ({ placeholder, setFilteredUsers, checkSearchMode, searchI
               font-size: 0.9rem;
             }
 
-            label {
+            /* label {
               top: 7px;
-            }
+            } */
           }
           
   

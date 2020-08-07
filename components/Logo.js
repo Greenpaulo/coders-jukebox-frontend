@@ -50,14 +50,14 @@ const Logo = () => {
 
       @media (max-width: 490px){
         svg {
-          width: 90px
+          width: 65px
         }
       }
 
-      @media (max-width: 360px){
+      @media (max-width: 370px){
         svg {
           height: 40px;
-          width: 70px;
+          width: 47px;
         }
       }
 

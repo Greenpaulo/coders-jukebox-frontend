@@ -93,9 +93,9 @@ const UserSearch = () => {
 
         /* Media queries */
       @media (max-width: 1150px) {
-        #search-results {
+        /* #search-results {
           width: 400px;
-        }
+        } */
       } 
 
       @media (max-width: 1100px) {
@@ -104,9 +104,15 @@ const UserSearch = () => {
         }
       }
 
+      @media (max-width: 1060px) {
+        #search-results {
+          width: 36vw ;
+        }
+      }
+
       @media (max-width: 950px) {
         #search-results {
-          right: 170px;
+          right: 154px;
           width: 46vw;
         }
       } 
@@ -114,6 +120,9 @@ const UserSearch = () => {
       @media (max-width: 920px) {
         #user-search {
           margin-left: 2.5rem;
+        }
+        #search-results {
+          right: 127px;
         }
       } 
 
@@ -123,16 +132,16 @@ const UserSearch = () => {
           width: 46vw;
         }
       } 
-      
-      /* @media (max-width: 900px) {
+
+      @media (max-width: 870px) {
         #search-results {
-          right: 120px;
+          right: 90px;
         }
-      } */
+      } 
 
       @media (max-width: 740px) {
         #search-results {
-          right: 100px;
+          right: 70px;
         }
       } 
 
@@ -182,8 +191,7 @@ const UserSearch = () => {
 
       @media (max-width: 490px) {
         #user-search {
-          /* width: 60%; */
-          margin-right: 4rem;
+          margin-right: 3rem;
         }
       }
 
@@ -198,10 +206,30 @@ const UserSearch = () => {
           width: 60%;
         }
         #search-results {
+          right: 9vw;
+          width: 76vw;
+        }
+      }
+
+      @media (max-width: 375px) {
+        #search-results {
+          right: 14.5vw;
+          width: 64vw;
+        }
+      }
+
+      @media (max-width: 370px) {
+        #user-search {
+          margin-left: 0.8rem;
+          margin-right: 4rem;
+        }
+        #search-results {
           right: 11vw;
           width: 76vw;
         }
       }
+
+
 
 
       
