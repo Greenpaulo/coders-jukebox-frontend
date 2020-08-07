@@ -275,7 +275,7 @@ const Navbar = () => {
 
           @media (max-width: 860px) {
             #logo-container {
-              margin-left: 0;
+              margin-left: 1rem;
             }
           }
 

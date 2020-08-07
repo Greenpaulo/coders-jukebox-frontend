@@ -5,19 +5,19 @@ import { GlobalContext } from '../context/GlobalContext';
 
 
 const UserSearch = () => {
-  
+
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   const [searchMode, setSearchMode] = useState(false);
-  
+
   const { fetchProfileUser } = useContext(GlobalContext);
 
   const [searchInput, setSearchInput] = useState('');
-  
+
   const userClickHandler = (id) => {
 
     fetchProfileUser(id, false);
-    
+
     // Hide dropdown
     setSearchMode(false)
 
@@ -36,25 +36,25 @@ const UserSearch = () => {
 
   return (
     <div id="user-search">
-      <UserSearchBar checkSearchMode={checkSearchMode} placeholder='Search for user' searchMode='user' setFilteredUsers={setFilteredUsers} searchInput={searchInput} setSearchInput={setSearchInput}/>
-      { searchMode &&
-      <div id="dropdown">
-        <div id="search-results">
-          <ul>
-            {filteredUsers.map(user => (
-              <li key={user.id}>
-                <Link href="/profile/[userId]" as={`/profile/${user.id}`}>
-                  <a onClick={userClickHandler.bind(this, user.id)}>{user.name}</a>
-                </Link>
-              </li>
-            ))}
+      <UserSearchBar checkSearchMode={checkSearchMode} placeholder='Search for user' searchMode='user' setFilteredUsers={setFilteredUsers} searchInput={searchInput} setSearchInput={setSearchInput} />
+      {searchMode &&
+        <div id="dropdown">
+          <div id="search-results">
+            <ul>
+              {filteredUsers.map(user => (
+                <li key={user.id}>
+                  <Link href="/profile/[userId]" as={`/profile/${user.id}`}>
+                    <a onClick={userClickHandler.bind(this, user.id)}>{user.name}</a>
+                  </Link>
+                </li>
+              ))}
 
-            {filteredUsers.length === 0 && 
-              <li>No Users Found</li>
-            }
-          </ul>
+              {filteredUsers.length === 0 &&
+                <li>No Users Found</li>
+              }
+            </ul>
+          </div>
         </div>
-      </div>
       }
 
       <style jsx>{`
@@ -111,18 +111,24 @@ const UserSearch = () => {
         }
       } 
 
+      @media (max-width: 920px) {
+        #user-search {
+          margin-left: 2.5rem;
+        }
+      } 
+
       @media (max-width: 900px) {
         #search-results {
-          right: 140px;
+          right: 120px;
           width: 46vw;
         }
       } 
       
-      @media (max-width: 900px) {
+      /* @media (max-width: 900px) {
         #search-results {
           right: 120px;
         }
-      }
+      } */
 
       @media (max-width: 740px) {
         #search-results {
@@ -130,20 +136,36 @@ const UserSearch = () => {
         }
       } 
 
-      @media (max-width: 660px) {
+      /* @media (max-width: 660px) {
         #search-results {
           right: 70px;
         }
-      } 
 
-      @media (max-width: 600px) {
         #user-search {
-          margin-right: 4rem;
+          margin-left: 0;
+        }
+      }  */
+
+      @media (max-width: 660px) {
+        #user-search {
+          margin-right: 1rem;
+          margin-left: 1rem;
         }
 
         #search-results {
           right: 107px;
           width: 58vw;
+        }
+      }
+
+      @media (max-width: 600px) {
+        #user-search {
+          margin-right: 5rem;
+      }
+
+      @media (max-width: 580px) {
+        #user-search {
+          margin-right: 4.5rem;
         }
       }
 
@@ -160,7 +182,8 @@ const UserSearch = () => {
 
       @media (max-width: 490px) {
         #user-search {
-          width: 60%;
+          /* width: 60%; */
+          margin-right: 4rem;
         }
       }
 

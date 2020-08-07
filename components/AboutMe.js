@@ -2,7 +2,7 @@ import colors from '../css-variables/colors';
 
 const AboutMe = ({profileUser}) => {
   return (
-    <section id="about-me">
+    <section id="about-me" className="animate__animated animate__fadeIn">
       <h2>About {profileUser.firstName}</h2>
       {profileUser.about !== null &&
         <p>
@@ -26,6 +26,10 @@ const AboutMe = ({profileUser}) => {
         padding: 2rem;
         width: 84%;
         margin: 3rem auto;
+      }
+
+      section#about-me.animate__animated.animated_fadeIn {
+        animation-delay: 2.5s;
       }
 
       p {

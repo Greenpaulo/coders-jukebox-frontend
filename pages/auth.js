@@ -194,7 +194,7 @@ const Auth = () => {
 
   
   return (
-    <section id="auth">
+    <section id="auth" className="animate__animated animate__fadeIn">
       <div className="container" id="container">
         <div id="form-parent">
           <div className="form-container sign-up-container">

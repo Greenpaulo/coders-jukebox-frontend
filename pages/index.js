@@ -2,21 +2,7 @@ import { useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { GlobalContext } from '../context/GlobalContext';
 import colors from '../css-variables/colors';
-import { motion, AnimatePresence } from 'framer-motion';
-import Planet from '../components/Planet';
 import WelcomeImage from '../components/WelcomeImage';
-import WelcomeImage2 from '../components/WelcomeImage2';
-
-const welcomeTextVariants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: {
-      duration: 2
-    }
-  },
-  exit: { y: -500, opacity: 1 }
-}
 
 const Index = () => {
 
@@ -27,44 +13,36 @@ const Index = () => {
   }, [])
 
   return (
-    // <AnimatePresence exitBeforeEnter>
     <div className="container">
-      {/* <Planet /> */}
-      
-
-
       <section id="welcome">
-        
-        <motion.div variants={welcomeTextVariants} initial='hidden' animate='visible' exit='exit'>
-          <div id="welcome-text" >
-            <h1>CodeTunes</h1>
-            <h3>A social music app for coders</h3>
-            
-            <div className="auth-btns">
-              {!authState.authenticated &&
-                <>
-                  <Link href="/auth">
-                    <a className="signup-btn">Sign Up</a>
-                  </Link>
-                  <Link href="/auth">
-                    <a className="login-btn">Login</a>
-                  </Link>
-                </>
-              }
-              {authState.authenticated &&
-                <>
-                  <Link href="/profile/[userId]" as={`/profile/${currentUser.id}`}>
-                    <a className="get-started-btn">Get Started</a>
-                  </Link>
-                </>
-              }
-            </div>
+
+        <div id="welcome-text" className="animate__animated animate__fadeIn">
+          <h1>CodeTunes</h1>
+          <h3>A social music app for coders</h3>
+
+          <div className="auth-btns">
+            {!authState.authenticated &&
+              <>
+                <Link href="/auth">
+                  <a className="signup-btn">Sign Up</a>
+                </Link>
+                <Link href="/auth">
+                  <a className="login-btn">Login</a>
+                </Link>
+              </>
+            }
+            {authState.authenticated &&
+              <>
+                <Link href="/profile/[userId]" as={`/profile/${currentUser.id}`}>
+                  <a className="get-started-btn">Get Started</a>
+                </Link>
+              </>
+            }
           </div>
-          
-        </motion.div>
+        </div>
 
         <WelcomeImage />
-          
+
 
 
         {/* <div id="welcome-img">
@@ -77,7 +55,7 @@ const Index = () => {
 
 
 
-    <style jsx>{`
+      <style jsx>{`
 
       section#welcome{
         display: flex;

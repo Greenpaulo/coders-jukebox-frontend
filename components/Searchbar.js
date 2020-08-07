@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 
 const Searchbar = ({ placeholder, submitHandler }) => {
 
@@ -26,14 +26,14 @@ const Searchbar = ({ placeholder, submitHandler }) => {
       </form>
 
 
-    <style jsx>{`
+      <style jsx>{`
       form {
         width: 68.5%;
       }
 
       label {
         position: absolute;
-        top: 8px;
+        top: 11px;
         left: 12px;
       }
       
@@ -43,7 +43,6 @@ const Searchbar = ({ placeholder, submitHandler }) => {
         display: flex;
         position: relative;
         width: 100%;
-        font: inherit;
       }
 
       #main-searchbar input {
@@ -53,6 +52,7 @@ const Searchbar = ({ placeholder, submitHandler }) => {
         font-size: 1.1rem;
         border: none;
         background-color: white;
+        font: inherit;
       }
 
       #main-searchbar input :focus {
@@ -105,7 +105,7 @@ const Searchbar = ({ placeholder, submitHandler }) => {
     
     `}</style>
 
-          
+
     </div>
   )
 }

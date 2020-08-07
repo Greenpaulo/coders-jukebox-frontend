@@ -2,7 +2,7 @@ import colors from '../css-variables/colors';
 
 const WelcomeImage = () => {
   return (
-      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="50 50 270 260" x="0" y="0">
+      <svg id="Layer_1" className="animate__animated animate__fadeIn" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="50 50 270 260" x="0" y="0">
       
         <path className="st0" d="M147.1,14.2c-35,0-63.6,27.9-63.6,62.1v1.3c0,7.5,0,16,2.7,23l-0.7,0.7c-2,1.7-2.4,5.1-1.1,8.1L97.5,141
 		c1.1,2.9,3.7,4.8,6.1,4.8c0.1,0,0.3,0,0.4,0l17.7-1.6c1.6-0.1,2.8-1,3.7-2.3c1.1-1.9,1.1-4.5,0.1-6.9l-17.5-42.3
@@ -68,39 +68,11 @@ const WelcomeImage = () => {
       .st0 {
         fill: ${colors.primary};
       }
-
-      /* path {
-
-        fill: ${colors.primary};
-
-        filter: url(#f2);
-
-        box-shadow:
-          0 0 20px #fff,
-          -20px 0 80px #f0f,
-          20px 0 80px #0ff,
-          inset 0 0 50px #fff,
-          inset 50px 0 80px #f0f,
-          inset -50px 0 80px #0ff,
-          inset 50px 0 300px #f0f,
-          inset -50px 0 300px #0ff;
-        animation: pulsate 6s linear infinite;
       
+      svg.animate__animated.animate__fadeIn {
+        /* animation-delay: 0.5s; */
+      }
 
-        @keyframes pulsate {
-          50% {
-            box-shadow:
-              0 0 20px #fff,
-              20px 0 80px #f0f,
-              -20px 0 80px #0ff,
-              inset 0 0 50px #fff,
-              inset -50px 0 80px #f0f,
-              inset 50px 0 80px #0ff,
-              inset -50px 0 300px #f0f,
-              inset 50px 0 300px #0ff;
-          }
-        }
-      } */
 
     /* Media queries */
     @media (max-width: 1024px) {

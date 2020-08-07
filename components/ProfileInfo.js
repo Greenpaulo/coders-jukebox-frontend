@@ -65,12 +65,12 @@ const ProfileInfo = ({setEditMode, editMode}) => {
       <section id="user">
       <div id="profile-photo">
         {profileUser.profilePhotoFilename !== null && profileUser.profilePhotoFilename !== '' &&
-          <div className="crop">
+            <div className="crop animate__animated animate__fadeIn">
             {/* <img src={`http://localhost:5000/image/${profileUser.profilePhotoFilename}`} alt="profile-photo" /> */}
           </div>
         }
         {(profileUser.profilePhotoFilename === null || profileUser.profilePhotoFilename === '') &&
-          <div className="crop">
+            <div className="crop animate__animated animate__fadeIn">
             <img src='/default-avatar.jpg' alt="profile-photo" />
           </div>
         }
